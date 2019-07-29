@@ -37,7 +37,6 @@ public:
 
 	//Input (Keyboard-Controller) Operations
 	virtual void Take_Inputs() = 0;
-	virtual void Set_Mouse_Mode(MOUSE_INPUT_MODE mode) = 0;
 };
 
 		//WINDOW OPERATIONs

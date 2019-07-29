@@ -16,18 +16,6 @@ enum V_SYNC : unsigned char {
 	V_SYNC_ON = 1
 };
 
-enum MOUSE_INPUT_MODE : unsigned char {
-	//Creates a unlimited surface to take every motion input of mouse!
-	//This means, your mouse input positions will not be limited to window size!
-	MOUSE_INPUT_UNLIMITED = 0,
-	//Window size based input mode, but cursor is hidden!
-	//It is same thing as normal, but only hidden!
-	MOUSE_INPUT_HIDDEN = 1,
-	//Default input mode, window size based input mode!
-	//Cursor can be seen and input surface is limited to window size!
-	MOUSE_INPUT_NORMAL = 2
-};
-
 enum TEXTURE_DIMENSION : unsigned char {
 	GFX_TEXTURE_2D = 0,
 	/*For now, other texture dimensions aren't allowed!

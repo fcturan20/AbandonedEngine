@@ -74,7 +74,7 @@ void Camera::Take_Inputs() {
 		//If it wasn't not pressed last frame, start recording position offsets!
 		if (!ACTIONs_ACTIVE) {
 			mouse_position_offset = vec2(0);
-			mouse_last_position = Mouse_Controller::Start_Position_Recording();
+			mouse_last_position = Mouse_Controller::Start_Position_Recording(MOUSE_INPUT_UNLIMITED);
 			ACTIONs_ACTIVE = true;
 		}
 		//If it was pressed last frame or even before, get position offset!
@@ -91,7 +91,7 @@ void Camera::Take_Inputs() {
 		//If it was pressed last frame, stop actions!
 		if (ACTIONs_ACTIVE) {
 			mouse_position_offset = vec2(0);
-			Mouse_Controller::Stop_Position_Recording(mouse_last_position);
+			Mouse_Controller::Stop_Position_Recording(mouse_last_position, MOUSE_INPUT_UNLIMITED);
 			ACTIONs_ACTIVE = false;
 		}
 	}

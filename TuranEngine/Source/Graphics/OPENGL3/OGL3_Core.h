@@ -53,7 +53,6 @@ public:
 
 	//Input (Keyboard-Controller) Operations
 	virtual void Take_Inputs();
-	virtual void Set_Mouse_Mode(MOUSE_INPUT_MODE mode);
 
 	//Resource Destroy Operations
 	virtual void Destroy_GFX_Resources();
@@ -240,6 +239,8 @@ void OGL3_SYS::Take_Inputs() {
 	if(!ShouldApplication_Close)
 	//For each key, set key pressed status with GLFW check!
 	{
+			//KEYBOARD INPUT HANDLING
+
 		for (KEYBOARD_KEYs key : Keyboard_Controller::Return_ALL_Keys()) {
 			if (glfwGetKey(glfwGetCurrentContext(), Convert_Key_to_GLFW_Key(key)) == GLFW_PRESS) {
 				Keyboard_Controller::Set_Key_is_Pressed(key, true);
@@ -251,6 +252,22 @@ void OGL3_SYS::Take_Inputs() {
 			}
 		}
 
+			//MOUSE INPUT HANDLING
+
+		switch (Mouse_Controller::CURSOR_MODE) {
+		case MOUSE_INPUT_UNLIMITED:
+			glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+			break;
+		case MOUSE_INPUT_HIDDEN:
+			glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+			break;
+		case MOUSE_INPUT_NORMAL:
+			glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+			break;
+
+		default:
+			cout << "Unsupported Cursor Mode in Mouse_Controller class!\n";
+		}
 		for (MOUSE_BUTTONs button : Mouse_Controller::Return_ALL_Buttons()) {
 			if (glfwGetMouseButton(glfwGetCurrentContext(), Convert_MouseButton_to_GLFW_Key(button)) == GLFW_PRESS) {
 				Mouse_Controller::Set_Button_is_Pressed(button, true);
@@ -262,24 +279,14 @@ void OGL3_SYS::Take_Inputs() {
 			}
 		}
 
+
 		double xpos, ypos;
 		glfwGetCursorPos(glfwGetCurrentContext(), &xpos, &ypos);
-		Mouse_Controller::mouse_current_position = vec2(xpos, ypos);
+		Mouse_Controller::MOUSE_CURRENT_POSITION = vec2(xpos, ypos);
+		
 	}
 }
 
-//Set mouse mode for current window!
-void OGL3_SYS::Set_Mouse_Mode(MOUSE_INPUT_MODE mode) {
-	if (mode == MOUSE_INPUT_UNLIMITED) {
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-	}
-	if (mode == MOUSE_INPUT_HIDDEN) {
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-	}
-	if (mode == MOUSE_INPUT_NORMAL) {
-		glfwSetInputMode(glfwGetCurrentContext(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
-	}
-}
 
 		//GFX Resource Destroy Operations
 void OGL3_SYS::Destroy_GFX_Resources() {
