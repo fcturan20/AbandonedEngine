@@ -156,3 +156,23 @@ int Convert_MouseButton_to_GLFW_Key(MOUSE_BUTTONs Mouse_Button) {
 		return GLFW_MOUSE_BUTTON_1;
 	}
 }
+
+int Find_GFX_DepthTest_Mode(GFX_DEPTH_TEST depth_test) {
+	switch (depth_test) {
+	case GFX_DEPTH_ALWAYS:
+		return GL_ALWAYS;
+	case GFX_DEPTH_GEQUAL:
+		return GL_GEQUAL;
+	case GFX_DEPTH_GREATER:
+		return GL_GREATER;
+	case GFX_DEPTH_LEQUAL:
+		return GL_LEQUAL;
+	case GFX_DEPTH_LESS:
+		return GL_LESS;
+	case GFX_DEPTH_NEVER:
+		return GL_NEVER;
+	default:
+		cout << "Error: Intended Depth Test Mode can't be found! GL_NEVER is returned!\n";
+		return GL_NEVER;
+	}
+}

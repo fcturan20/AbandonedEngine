@@ -37,6 +37,9 @@ protected:
 	//Framebuffer stores render targets too, see the code
 	GFX_Framebuffer* FRAMEBUFFER;
 	string NAME;
+	GFX_DEPTH_TEST DEPTHTEST_MODE;
+	GFX_DEPTH_MODE DEPTHBUFFER_MODE;
+	GFX_STENCIL_TEST STENCILTEST_MODE;
 
 
 	//Every Draw_Pass should store a Draw_Resource!
@@ -55,6 +58,7 @@ protected:
 	virtual void Create_RenderTarget(unsigned int width, unsigned int height, TEXTURE_DIMENSION dimension, TEXTURE_FORMAT format, TEXTURE_ATTACHMENT attachment, TEXTURE_FORMAT_VALUETYPE value_type) = 0;
 	virtual void Attach_RenderTargets_to_Framebuffer() = 0;
 	virtual void Check_Framebuffer_Status() = 0;
+	virtual void Set_Depth_and_StencilTest() = 0;
 
 public:
 

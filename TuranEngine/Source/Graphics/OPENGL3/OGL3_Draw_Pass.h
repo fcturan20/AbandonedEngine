@@ -13,6 +13,7 @@ protected:
 	virtual void Create_RenderTarget(unsigned int width, unsigned int height, TEXTURE_DIMENSION dimension, TEXTURE_FORMAT format, TEXTURE_ATTACHMENT attachment, TEXTURE_FORMAT_VALUETYPE value_type);
 	virtual void Attach_RenderTargets_to_Framebuffer();
 	virtual void Check_Framebuffer_Status();
+	virtual void Set_Depth_and_StencilTest();
 
 public:
 	virtual void Creation(Scene* scene) = 0;
@@ -88,5 +89,22 @@ void OGL3_Draw_Pass::Check_Framebuffer_Status() {
 	}
 	if (status == GL_FRAMEBUFFER_UNSUPPORTED) {
 		cout << "Error: Draw Pass: " << NAME << "'s framebuffer has unsupported type of attachment!\n";
+	}
+}
+
+void OGL3_Draw_Pass::Set_Depth_and_StencilTest() {
+	//Set Depth Func at start!
+	glDepthFunc(Find_GFX_DepthTest_Mode(DEPTHTEST_MODE));
+	if (DEPTHBUFFER_MODE == GFX_DEPTH_OFF) {
+		cout << "Depth Test is closed!\n";
+		glDisable(GL_DEPTH_TEST);
+	}
+	if (DEPTHBUFFER_MODE == GFX_DEPTH_READ_ONLY) {
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(GL_FALSE);
+	}
+	if (DEPTHBUFFER_MODE == GFX_DEPTH_READ_WRITE) {
+		glEnable(GL_DEPTH_TEST);
+		glDepthMask(GL_TRUE);
 	}
 }

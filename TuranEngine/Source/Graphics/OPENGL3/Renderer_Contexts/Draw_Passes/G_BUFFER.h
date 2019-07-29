@@ -65,6 +65,10 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 	virtual void Creation(Scene* scene) {
 		NAME = "G-Buffer";
 		SCENE = scene;
+		//Set depth modes!
+		DEPTHBUFFER_MODE = GFX_DEPTH_READ_WRITE;
+		DEPTHTEST_MODE = GFX_DEPTH_LEQUAL;
+
 
 		FRAMEBUFFER->WIDTH = 1280;
 		FRAMEBUFFER->HEIGHT = 720;
@@ -82,6 +86,8 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 
 	virtual void Render_Loop() {
 		cout << "G-Buffer Render Loop is started to run!\n";
+
+		Set_Depth_and_StencilTest();
 
 		mat4 view_matrix = CAMERA->Return_View_Matrix();
 		mat4 projection_matrix = CAMERA->Return_Projection_Matrix();

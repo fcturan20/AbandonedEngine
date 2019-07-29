@@ -46,3 +46,26 @@ enum TEXTURE_FILTERING : unsigned char {
 enum TEXTURE_WRAPPING : unsigned char {
 
 };
+
+enum GFX_DEPTH_TEST : unsigned char {
+	GFX_DEPTH_ALWAYS = 0,
+	GFX_DEPTH_NEVER = 1,
+	GFX_DEPTH_LESS = 2,
+	GFX_DEPTH_LEQUAL = 3,
+	GFX_DEPTH_GREATER = 4,
+	GFX_DEPTH_GEQUAL = 5
+};
+
+//Define Depth mode as Read&Write, Read-Only, Off
+//Off means no Depth Testing will perform!
+//Read-Only means Depth Test will perform and discard fragments, but won't change Depth Buffer!
+//Read&Write means Depth Test will perform and change Depth Buffer!
+enum GFX_DEPTH_MODE : unsigned char {
+	GFX_DEPTH_READ_WRITE = 0,
+	GFX_DEPTH_READ_ONLY = 1,
+	GFX_DEPTH_OFF = 2
+};
+
+enum GFX_STENCIL_TEST : unsigned char {
+
+};
