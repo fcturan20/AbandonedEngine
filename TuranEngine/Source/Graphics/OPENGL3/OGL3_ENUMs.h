@@ -109,6 +109,8 @@ KEYBOARD_KEYs Convert_Key_to_Engine(int GLFW_Key) {
 		return KEYBOARD_NP_6;
 	case GLFW_KEY_KP_8:
 		return KEYBOARD_NP_8;
+	case GLFW_KEY_C:
+		return KEYBOARD_C;
 
 	default:
 		"Error: Intended key isn't supported, returns KEYBOARD_A!\n";
@@ -134,6 +136,8 @@ int Convert_Key_to_GLFW_Key(KEYBOARD_KEYs Keyboard_Key) {
 		return GLFW_KEY_KP_6;
 	case KEYBOARD_NP_8:
 		return GLFW_KEY_KP_8;
+	case KEYBOARD_C:
+		return GLFW_KEY_C;
 
 	default:
 		cout << "Error: Intended key isn't supported, return GLFW_KEY_A!\n";

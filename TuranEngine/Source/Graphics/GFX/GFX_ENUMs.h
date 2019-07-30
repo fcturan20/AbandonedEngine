@@ -65,7 +65,3 @@ enum GFX_DEPTH_MODE : unsigned char {
 	GFX_DEPTH_READ_ONLY = 1,
 	GFX_DEPTH_OFF = 2
 };
-
-enum GFX_STENCIL_TEST : unsigned char {
-
-};

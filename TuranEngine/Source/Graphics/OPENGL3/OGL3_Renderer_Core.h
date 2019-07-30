@@ -71,6 +71,10 @@ void OGL3_Renderer::Start_Creation() {
 //After BindFramebuffer(0), you should render a quad with sending the render target you want to display
 //After rendering, you can continue by other window!
 void OGL3_Renderer::New_Frame() {
+	if (Keyboard_Controller::Is_Key_Pressed(KEYBOARD_C)) {
+		cout << "Key is pressed and shaders are compiling!\n";
+		OGL3_Shader::Compile_All_Shaders();
+	}
 	//Run each scene, this means run every scene's gameplay codes! These will probably update the render contexts, so run RenderGraphs later!
 	for (Scene* SCENE : Scene::ALL_SCENEs) {
 		SCENE->Run_Scene();

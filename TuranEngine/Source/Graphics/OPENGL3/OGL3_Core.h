@@ -185,7 +185,8 @@ void OGL3_SYS::Refresh_Windows() {
 		GFX_RenderGraph* Main_Scene_RenderGraph = (GFX_RenderGraph*)Scene::ALL_SCENEs[0]->Return_RenderGraph();
 		GFX_Framebuffer* Framebuffer = ((OGL3_RenderGraph*)Main_Scene_RenderGraph)->DRAW_PASSes[0]->Get_Framebuffer();
 		//We know that framebuffer's first RT is Color RT
-		unsigned int Color_RT = Framebuffer->BOUND_RTs[0]->ID;
+		unsigned int Color_RT;
+		Color_RT = Framebuffer->BOUND_RTs[0]->ID;
 
 		GFX_Shader* PostProcessShader = GFX_Shader::Find_Shader_byName("PostProcess_Shader");
 		glUseProgram(PostProcessShader->Return_Shader_ID());

@@ -12,19 +12,24 @@ protected:
 	static vector<GFX_Shader*> ALL_SHADERs;
 	GFX_Shader_Resource* RESOURCEs;
 	string VERTEX_SOURCE, FRAGMENT_SOURCE;
+	string VERTEX_DISK_PATH, FRAGMENT_DISK_PATH;
 	string NAME;
+	bool Is_Compiled = false;
 
 	//IDs of Shader Stages!
 	unsigned int VERTEX_ID, FRAGMENT_ID, PROGRAM_ID;
 
 	//Read the Shader Code File and Convert it to a String
-	string ReadShader(const string &shaderPath_string);
+	static string ReadShader(const string &shaderPath_string);
 
 public:
 	GFX_Shader(string name, string vertex_shader_path, string fragment_shader_path)
 		: NAME(name) {
 		VERTEX_SOURCE = ReadShader(vertex_shader_path);
 		FRAGMENT_SOURCE = ReadShader(fragment_shader_path);
+
+		VERTEX_DISK_PATH = vertex_shader_path;
+		FRAGMENT_DISK_PATH = fragment_shader_path;
 		ALL_SHADERs.push_back(this);
 	}
 

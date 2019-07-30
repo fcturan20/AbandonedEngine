@@ -31,11 +31,33 @@ void OGL3_Shader::Compile_All_Shaders() {
 }
 
 void OGL3_Shader::Compile_Shader(GFX_Shader* shader) {
-	GLuint vertexShader_o = glCreateShader(GL_VERTEX_SHADER);
+	GLuint vertexShader_o, fragmentShader_o, shaderProgram;
+	//If shader isn't compiled before!
+	if (shader->Is_Compiled == false) {
+		//Create shader objects to compile in them!
+		vertexShader_o = glCreateShader(GL_VERTEX_SHADER);
+		fragmentShader_o = glCreateShader(GL_FRAGMENT_SHADER);;
+		shaderProgram = glCreateProgram();
+
+		shader->VERTEX_ID = vertexShader_o;
+		shader->FRAGMENT_ID = fragmentShader_o;
+		shader->PROGRAM_ID = shaderProgram;
+	}
+	//If shader is compiled before!
+	else {
+		shader->VERTEX_SOURCE = GFX_Shader::ReadShader(shader->VERTEX_DISK_PATH);
+		shader->FRAGMENT_SOURCE = GFX_Shader::ReadShader(shader->FRAGMENT_DISK_PATH);
+
+		vertexShader_o = shader->VERTEX_ID;
+		fragmentShader_o = shader->FRAGMENT_ID;
+		shaderProgram = shader->PROGRAM_ID;
+	}
+
 	//Compile vertex shader and set ID!
 	const char* vertex_source = shader->VERTEX_SOURCE.c_str();
 	glShaderSource(vertexShader_o, 1, &vertex_source, NULL);
 	glCompileShader(vertexShader_o);
+	shader->Is_Compiled = true;
 
 	//Check compile issues!
 	int success;
@@ -46,10 +68,8 @@ void OGL3_Shader::Compile_Shader(GFX_Shader* shader) {
 		cout << vertex_source << endl << "Error: Vertex Shader couldn't compile!\n" << infolog << endl;
 	}
 
-	shader->VERTEX_ID = vertexShader_o;
 
 
-	GLuint fragmentShader_o = glCreateShader(GL_FRAGMENT_SHADER);
 
 	//Compile fragment shader and set ID!
 	const char* fragment_source = shader->FRAGMENT_SOURCE.c_str();
@@ -65,10 +85,8 @@ void OGL3_Shader::Compile_Shader(GFX_Shader* shader) {
 		cout << fragment_source << endl << "Error: Fragment Shader couldn't compile!\n" << frag_infolog << endl;
 	}
 
-	shader->FRAGMENT_ID = fragmentShader_o;
 
 	//Link Vertex and Fragment Shader to Shader Program and set ID
-	GLuint shaderProgram = glCreateProgram();
 	glAttachShader(shaderProgram, vertexShader_o);
 	glAttachShader(shaderProgram, fragmentShader_o);
 	glLinkProgram(shaderProgram);
@@ -81,8 +99,6 @@ void OGL3_Shader::Compile_Shader(GFX_Shader* shader) {
 		glGetProgramInfoLog(shaderProgram, 512, NULL, link_infolog);
 		cout << "Error: Shader Program couldn't link!\n" << link_infolog << endl;
 	}
-
-	shader->PROGRAM_ID = shaderProgram;
 }
 
 OGL3_Shader First_Shader("First_Shader", "Source/Graphics/OPENGL3/Shaders/Main.vert", "Source/Graphics/OPENGL3/Shaders/Main.frag");

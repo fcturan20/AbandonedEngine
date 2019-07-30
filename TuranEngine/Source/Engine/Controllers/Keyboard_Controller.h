@@ -9,7 +9,8 @@ enum KEYBOARD_KEYs : unsigned char {
 	KEYBOARD_NP_2 = 4,
 	KEYBOARD_NP_4 = 5,
 	KEYBOARD_NP_6 = 6,
-	KEYBOARD_NP_8 = 7
+	KEYBOARD_NP_8 = 7,
+	KEYBOARD_C = 8
 };
 
 /*To define a Keyboard Key to TuranEngine, you should do these:
@@ -47,6 +48,7 @@ public:
 		ALL_KEYs.push_back(KEYBOARD_NP_4); IS_KEY_PRESSED.push_back(false);
 		ALL_KEYs.push_back(KEYBOARD_NP_6); IS_KEY_PRESSED.push_back(false);
 		ALL_KEYs.push_back(KEYBOARD_NP_8); IS_KEY_PRESSED.push_back(false);
+		ALL_KEYs.push_back(KEYBOARD_C); IS_KEY_PRESSED.push_back(false);
 	}
 
 	static void Set_Key_is_Pressed(KEYBOARD_KEYs KEY, bool is_Key_Pressed) {

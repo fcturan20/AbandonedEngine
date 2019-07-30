@@ -39,7 +39,6 @@ protected:
 	string NAME;
 	GFX_DEPTH_TEST DEPTHTEST_MODE;
 	GFX_DEPTH_MODE DEPTHBUFFER_MODE;
-	GFX_STENCIL_TEST STENCILTEST_MODE;
 
 
 	//Every Draw_Pass should store a Draw_Resource!
