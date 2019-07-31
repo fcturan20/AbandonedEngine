@@ -2,7 +2,7 @@
 out vec4 Fragment_Color;
 
 float near = 0.1; 
-float far  = 10000.0; 
+float far  = 1000.0; 
   
 float LinearizeDepth(float depth) 
 {
@@ -12,10 +12,11 @@ float LinearizeDepth(float depth)
 
 void main() {
 	float depth = LinearizeDepth(gl_FragCoord.z) / far;
+	gl_FragDepth = depth;
 
 	//Final Fragment Color
 	//Fragment_Color = vec4(normal, 1.0f);
-	Fragment_Color = vec4(depth);
+	Fragment_Color = vec4(gl_FragDepth);
 	//Fragment_Color = vec4(depth);
 
 }
