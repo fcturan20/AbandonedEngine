@@ -15,12 +15,12 @@ private:
 
 	unsigned int WIDTH, HEIGHT, REFRESH_RATE;
 	GFX_MONITOR* DISPLAY_MONITOR;
-	WINDOW_MODE DISPLAY_MODE;
+	GFX_ENUM DISPLAY_MODE;
 	string WINDOW_NAME;
-	V_SYNC VSYNC_MODE;
+	GFX_ENUM VSYNC_MODE;
 	void* WINDOW;
 
-	GFX_WINDOW(unsigned int width, unsigned int height, WINDOW_MODE display_mode, GFX_MONITOR* display_monitor, unsigned int refresh_rate, string window_name, V_SYNC v_sync)
+	GFX_WINDOW(unsigned int width, unsigned int height, GFX_ENUM display_mode, GFX_MONITOR* display_monitor, unsigned int refresh_rate, string window_name, GFX_ENUM v_sync)
 		: WIDTH(width), HEIGHT(height), DISPLAY_MODE(display_mode), REFRESH_RATE(refresh_rate), DISPLAY_MONITOR(display_monitor), WINDOW_NAME(window_name), VSYNC_MODE(v_sync)
 	{}
 
@@ -39,14 +39,14 @@ public:
 	//	1) Change the window's display mode (Fullscreen, Windowed, Borderless Window etc.)
 	//	2) Or change to intended refresh rate or monitor
 	//	3) No resolution changing in this function, window's active resolution is used
-	void Change_DisplayMode(WINDOW_MODE display_mode, const GFX_MONITOR* display_monitor, unsigned int refresh_rate) {}
+	void Change_DisplayMode(GFX_ENUM display_mode, const GFX_MONITOR* display_monitor, unsigned int refresh_rate) {}
 
 	void Set_Focus(bool focus_active) {
 		cout << "Error: Set focus isn't coded, don't use it!\n";
 	}
 	
 	//Settings of window
-	void Window_Settings(V_SYNC vsync_type, bool window_resizable) {}
+	void Window_Settings(GFX_ENUM vsync_type, bool window_resizable) {}
 
 	void* Get_Window_ID() const {
 		return WINDOW;

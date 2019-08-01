@@ -10,7 +10,7 @@
 #include <GLFW/glfw3.h>
 
 
-int Find_Texture_Attachment_Type(TEXTURE_ATTACHMENT attachment) {
+int Find_Texture_Attachment_Type(GFX_ENUM attachment) {
 	switch (attachment) {
 	case GFX_TEXTURE_COLOR0_ATTACHMENT:
 		return GL_COLOR_ATTACHMENT0;
@@ -23,7 +23,7 @@ int Find_Texture_Attachment_Type(TEXTURE_ATTACHMENT attachment) {
 	}
 }
 
-int Find_Texture_Dimension(TEXTURE_DIMENSION dimension) {
+int Find_Texture_Dimension(GFX_ENUM dimension) {
 	switch (dimension) {
 	case GFX_TEXTURE_2D:
 		return GL_TEXTURE_2D;
@@ -34,7 +34,7 @@ int Find_Texture_Dimension(TEXTURE_DIMENSION dimension) {
 	}
 }
 
-int Find_Texture_Format(TEXTURE_FORMAT format) {
+int Find_Texture_Format(GFX_ENUM format) {
 	switch (format) {
 	case GFX_COLORTEXTURE_FORMAT:
 		return GL_RGB;
@@ -47,7 +47,7 @@ int Find_Texture_Format(TEXTURE_FORMAT format) {
 	}
 }
 
-int Find_Texture_Channel_Type(TEXTURE_FORMAT texture_format) {
+int Find_Texture_Channel_Type(GFX_ENUM texture_format) {
 	switch (texture_format) {
 	case GFX_COLORTEXTURE_FORMAT:
 		return GL_RGB;
@@ -60,12 +60,13 @@ int Find_Texture_Channel_Type(TEXTURE_FORMAT texture_format) {
 	}
 }
 
-int Find_Texture_Value_Type(TEXTURE_FORMAT_VALUETYPE value_type) {
+int Find_Texture_Value_Type(GFX_ENUM value_type) {
 	switch (value_type) {
-	case 0:
+	case GFX_UNSIGNED_BYTE:
 		return GL_UNSIGNED_BYTE;
-	case 1:
+	case GFX_FLOAT:
 		return GL_FLOAT;
+
 	default:
 		cout << "Error: Intended Texture Value Type isn't supported for now!\n";
 		return NULL;
@@ -161,7 +162,7 @@ int Convert_MouseButton_to_GLFW_Key(MOUSE_BUTTONs Mouse_Button) {
 	}
 }
 
-int Find_GFX_DepthTest_Mode(GFX_DEPTH_TEST depth_test) {
+int Find_GFX_DepthTest_Mode(GFX_ENUM depth_test) {
 	switch (depth_test) {
 	case GFX_DEPTH_ALWAYS:
 		return GL_ALWAYS;

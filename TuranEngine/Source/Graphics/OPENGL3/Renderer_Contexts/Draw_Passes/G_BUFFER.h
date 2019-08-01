@@ -6,11 +6,13 @@
 #include "Engine/EngineComponents/Static_Model_Instance.h"
 
 #include "Graphics/GFX/Renderer/GFX_Shader.h"
+#include "Graphics/GFX/Renderer/GFXI_Material.h"
 #include "Graphics/GFX/Renderer/GFX_Draw_Pass.h"
 
 #include "Graphics/OPENGL3/OGL3_ENUMs.h"
 #include "Graphics/OPENGL3/OGL3_Mesh.h"
 #include "Graphics/OPENGL3/OGL3_Shader.h"
+#include "Graphics/OPENGL3/OGL3_Material.h"
 #include "Graphics/OPENGL3/OGL3_Draw_Pass.h"
 
 class G_BUFFER_DrawResource : public GFXI_Draw_Resource {
@@ -20,8 +22,7 @@ class G_BUFFER_DrawResource : public GFXI_Draw_Resource {
 	vector<unsigned int> Static_Vertex_Numbers;
 	vector<unsigned int> Static_Indice_Numbers;
 	vector<int> Static_EBOs;
-	vector<GFX_Shader*> Static_Shaders;
-	vector<mat4> Static_World_Transforms;
+	vector<GFXI_Material*> Static_Materials;
 
 	G_BUFFER_DrawResource(Scene* scene) {
 		SCENE = scene;
@@ -43,19 +44,19 @@ class G_BUFFER_DrawResource : public GFXI_Draw_Resource {
 	void Add_Static_Model(Static_Model_Instance* model) {
 		unsigned int mesh_number = model->Access_Model()->Meshes_of_Model.size();
 		for (unsigned int mesh_index = 0; mesh_index < mesh_number; mesh_index++) {
-			GFXI_MESH* mesh_data = (GFXI_MESH*)model->Access_Model()->Meshes_of_Model[mesh_index]->Get_GFXI_Mesh();
-
+			GFXI_MESH* mesh_data = (GFXI_MESH*)model->Access_Model()->Meshes_of_Model[mesh_index]->MESH_INFO->Get_GFXI_Mesh();
+			
 			//Find Shader ID for each mesh of the model and add it to IDs vector!
 			//For now, a model only has one shader so this implementation is bad but I don't have time for that!
 			//Because it is easy to access the vector with mesh index, in rendering!
-			Static_Shaders.push_back(
-				GFX_Shader::Find_Shader_byName(model->Return_Shader_Name())
+			Static_Materials.push_back(
+				//Access pattern is changed!
+				model->Access_Model()->Meshes_of_Model[mesh_index]->MATERIAL
 			);
 			
 			Static_VAOs.push_back(mesh_data->Return_VAO());
 			Static_Vertex_Numbers.push_back(mesh_data->Return_Vertex_Number());
 			Static_Indice_Numbers.push_back(mesh_data->Return_Indices_Number());
-			Static_World_Transforms.push_back(model->Return_World_Transform());
 			Static_EBOs.push_back(mesh_data->Return_EBO());
 		}
 	}
@@ -89,8 +90,6 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 
 		Set_Depth_and_StencilTest();
 
-		mat4 view_matrix = CAMERA->Return_View_Matrix();
-		mat4 projection_matrix = CAMERA->Return_Projection_Matrix();
 
 		glBindFramebuffer(GL_FRAMEBUFFER, FRAMEBUFFER->ID);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
@@ -100,15 +99,11 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 		G_BUFFER_DrawResource* gbuffer_resource = (G_BUFFER_DrawResource*)DRAW_RESOURCE;
 		unsigned int RenderMesh_Number = gbuffer_resource->Static_VAOs.size();
 		for (unsigned int mesh_index = 0; mesh_index < RenderMesh_Number; mesh_index++) {
-			//Find shader ID to bind!
-			GFX_Shader* Shader = gbuffer_resource->Static_Shaders[mesh_index];
-			unsigned int SHADER_ID = Shader->Return_Shader_ID();
-			glUseProgram(SHADER_ID);
-			Check_OpenGL_Errors("After binding mesh's shader in G-Buffer Draw Pass!");
+			//Find Material to bind!
+			GFXI_Material* Material = gbuffer_resource->Static_Materials[mesh_index];
 
-			//Send Transform Matrixes!
-			glUniformMatrix4fv(glGetUniformLocation(SHADER_ID, "projection_matrix"), 1, GL_FALSE, value_ptr(projection_matrix));
-			glUniformMatrix4fv(glGetUniformLocation(SHADER_ID, "view_matrix"), 1, GL_FALSE, value_ptr(view_matrix));
+			//Shader is already compiled in Creation() and uniforms has defined (if they are not initialized, they will use default values. Not a debug value!).
+			OGL3_Material::Bind_Material(Material);
 			Check_OpenGL_Errors("After binding uniforms of a mesh in G-Buffer Draw Pass!");
 
 			glBindVertexArray(gbuffer_resource->Static_VAOs[mesh_index]);

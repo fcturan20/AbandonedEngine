@@ -3,9 +3,11 @@
 
 #include "GFX_Shader_Resource.h"
 
+/* You can create a GFX_Shader, but you have to define shader's source code in disk and have to define its GFX API!
+
+*/
 class GFX_Shader {
 protected:
-	//I don't know why, but OGL3_Shader can't access a GFX_Shader object's protected member, so I made it friend!
 	friend class OGL3_Shader;
 	friend class GFXI_Draw_Resource;
 
@@ -14,6 +16,7 @@ protected:
 	string VERTEX_SOURCE, FRAGMENT_SOURCE;
 	string VERTEX_DISK_PATH, FRAGMENT_DISK_PATH;
 	string NAME;
+	GFX_ENUM TYPE;
 	bool Is_Compiled = false;
 
 	//IDs of Shader Stages!
@@ -23,13 +26,16 @@ protected:
 	static string ReadShader(const string &shaderPath_string);
 
 public:
-	GFX_Shader(string name, string vertex_shader_path, string fragment_shader_path)
+	GFX_Shader(string name, GFX_ENUM type, string vertex_shader_path, string fragment_shader_path)
 		: NAME(name) {
 		VERTEX_SOURCE = ReadShader(vertex_shader_path);
 		FRAGMENT_SOURCE = ReadShader(fragment_shader_path);
 
 		VERTEX_DISK_PATH = vertex_shader_path;
 		FRAGMENT_DISK_PATH = fragment_shader_path;
+		if (type == OPENGL_3) {
+			TYPE = OPENGL_3;
+		}
 		ALL_SHADERs.push_back(this);
 	}
 
@@ -47,6 +53,10 @@ public:
 
 	unsigned int Return_Shader_ID() {
 		return PROGRAM_ID;
+	}
+
+	string Return_Name() {
+		return NAME;
 	}
 };
 
@@ -70,3 +80,6 @@ string GFX_Shader::ReadShader(const string &shaderPath_string) {
 		return "Error";
 	}
 }
+
+GFX_Shader Surface_Shader("Surface_Shader", OPENGL_3, "Source/Graphics/OPENGL3/Shaders/Main.vert", "Source/Graphics/OPENGL3/Shaders/Main.frag");
+GFX_Shader PostProcess_Shader("PostProcess_Shader", OPENGL_3, "Source/Graphics/OPENGL3/Shaders/Post_Process.vert", "Source/Graphics/OPENGL3/Shaders/Post_Process.frag");

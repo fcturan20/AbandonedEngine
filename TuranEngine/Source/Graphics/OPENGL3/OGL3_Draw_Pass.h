@@ -10,7 +10,7 @@
 class OGL3_Draw_Pass : public GFX_Draw_Pass {
 protected:
 	virtual void Change_Resolution(unsigned int width, unsigned int height);
-	virtual void Create_RenderTarget(unsigned int width, unsigned int height, TEXTURE_DIMENSION dimension, TEXTURE_FORMAT format, TEXTURE_ATTACHMENT attachment, TEXTURE_FORMAT_VALUETYPE value_type);
+	virtual void Create_RenderTarget(unsigned int width, unsigned int height, GFX_ENUM dimension, GFX_ENUM format, GFX_ENUM attachment, GFX_ENUM value_type);
 	virtual void Attach_RenderTargets_to_Framebuffer();
 	virtual void Check_Framebuffer_Status();
 	virtual void Set_Depth_and_StencilTest();
@@ -34,7 +34,7 @@ void OGL3_Draw_Pass::Change_Resolution(unsigned int width, unsigned int height) 
 }
 
 //Each Render Target Texture is in linear filter mode!
-void OGL3_Draw_Pass::Create_RenderTarget(unsigned int width, unsigned int height, TEXTURE_DIMENSION dimension, TEXTURE_FORMAT format, TEXTURE_ATTACHMENT attachment, TEXTURE_FORMAT_VALUETYPE value_type) {
+void OGL3_Draw_Pass::Create_RenderTarget(unsigned int width, unsigned int height, GFX_ENUM dimension, GFX_ENUM format, GFX_ENUM attachment, GFX_ENUM value_type) {
 	GFX_Render_Target* gfx_rt = new GFX_Render_Target;
 	//Note: Wrapping isn't supported for Render Target Textures
 	gfx_rt->ATTACHMENT = attachment;

@@ -12,7 +12,7 @@ protected:
 	const string NAME;
 	unsigned int WIDTH, HEIGHT, COLOR_BITES, REFRESH_RATE;
 	int PHYSICAL_WIDTH, PHYSICAL_HEIGHT;	//milimeters
-	WINDOW_MODE DESKTOP_MODE;
+	GFX_ENUM DESKTOP_MODE;
 
 
 	void Set_Physical_Size(unsigned int physical_width, unsigned int physical_height) {

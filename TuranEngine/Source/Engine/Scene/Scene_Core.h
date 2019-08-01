@@ -59,6 +59,15 @@ vector<Scene*> Scene::ALL_SCENEs = vector<Scene*>();
 void Scene::Run_Scene() {
 	//Update EngineComponents of the Scene!
 	CAMERAs[0]->Take_Inputs();
+	mat4* view_matrix = CAMERAs[0]->Return_View_Matrix();
+	mat4* proj_matrix = CAMERAs[0]->Return_Projection_Matrix();
+
+	for (Static_Model_Instance* model : MODELs) {
+		for (Mesh_Instance* mesh : model->Access_Model()->Meshes_of_Model) {
+			mesh->MATERIAL->Set_Uniform_Data("view_matrix", value_ptr(*view_matrix));
+			mesh->MATERIAL->Set_Uniform_Data("projection_matrix", value_ptr(*proj_matrix));
+		}
+	}
 }
 
 Scene First_Scene("First_Scene", Static_Model_Instance::Get_All_Model_Instances(), vector<Camera*>{new Camera(vec3(0, 0, -30))});

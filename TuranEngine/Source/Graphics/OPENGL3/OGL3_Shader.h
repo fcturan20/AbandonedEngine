@@ -6,9 +6,11 @@
 #include "Graphics/GFX/Renderer/GFX_Shader.h"
 
 
-class OGL3_Shader : public GFX_Shader {
+class OGL3_Shader {
 public:
 	static void Compile_All_Shaders();
+	static GFX_ENUM Find_Shader_Type(GFX_Shader* shader);
+
 
 	//There is a Compile_All_Shaders(), don't forget it!
 	//Compile a shader program
@@ -16,17 +18,18 @@ public:
 	//So, this is a feature for future
 	//For now, all shaders will be compiled at once when application starts!
 	static void Compile_Shader(GFX_Shader* shader);
-
-	OGL3_Shader(string name, string vertex_shader_path, string fragment_shader_path) : GFX_Shader(name, vertex_shader_path, fragment_shader_path) {
-
-	}
-
 };
 
+GFX_ENUM OGL3_Shader::Find_Shader_Type(GFX_Shader* shader) {
+	return shader->TYPE;
+}
+
 void OGL3_Shader::Compile_All_Shaders() {
-	for (GFX_Shader* shader : ALL_SHADERs) {
-		Compile_Shader(shader);
-		cout << "Compiled SHADER_ID: " << shader->PROGRAM_ID << endl;
+	for (GFX_Shader* shader : GFX_Shader::ALL_SHADERs) {
+		if (shader->TYPE == OPENGL_3) {
+			Compile_Shader(shader);
+			cout << "Compiled SHADER_ID: " << shader->PROGRAM_ID << endl;
+		}
 	}
 }
 
@@ -100,6 +103,3 @@ void OGL3_Shader::Compile_Shader(GFX_Shader* shader) {
 		cout << "Error: Shader Program couldn't link!\n" << link_infolog << endl;
 	}
 }
-
-OGL3_Shader First_Shader("First_Shader", "Source/Graphics/OPENGL3/Shaders/Main.vert", "Source/Graphics/OPENGL3/Shaders/Main.frag");
-OGL3_Shader PostProcess_Shader("PostProcess_Shader", "Source/Graphics/OPENGL3/Shaders/Post_Process.vert", "Source/Graphics/OPENGL3/Shaders/Post_Process.frag");

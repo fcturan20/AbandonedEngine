@@ -17,7 +17,7 @@ public:
 		return ALL_MODELs;
 	}
 
-	vector<Mesh_Data*> Meshes_of_Model;
+	vector<Mesh_Instance*> Meshes_of_Model;
 };
 
 vector<Static_Model*> Static_Model::ALL_MODELs = vector<Static_Model*>();

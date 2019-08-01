@@ -37,8 +37,8 @@ protected:
 	//Framebuffer stores render targets too, see the code
 	GFX_Framebuffer* FRAMEBUFFER;
 	string NAME;
-	GFX_DEPTH_TEST DEPTHTEST_MODE;
-	GFX_DEPTH_MODE DEPTHBUFFER_MODE;
+	GFX_ENUM DEPTHTEST_MODE;
+	GFX_ENUM DEPTHBUFFER_MODE;
 
 
 	//Every Draw_Pass should store a Draw_Resource!
@@ -54,7 +54,7 @@ protected:
 
 	//Set every render target (That means, framebuffer resolution will change) to same resolution
 	virtual void Change_Resolution(unsigned int width, unsigned int height) = 0;
-	virtual void Create_RenderTarget(unsigned int width, unsigned int height, TEXTURE_DIMENSION dimension, TEXTURE_FORMAT format, TEXTURE_ATTACHMENT attachment, TEXTURE_FORMAT_VALUETYPE value_type) = 0;
+	virtual void Create_RenderTarget(unsigned int width, unsigned int height, GFX_ENUM dimension, GFX_ENUM format, GFX_ENUM attachment, GFX_ENUM value_type) = 0;
 	virtual void Attach_RenderTargets_to_Framebuffer() = 0;
 	virtual void Check_Framebuffer_Status() = 0;
 	virtual void Set_Depth_and_StencilTest() = 0;

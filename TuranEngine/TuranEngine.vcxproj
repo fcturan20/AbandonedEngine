@@ -74,6 +74,7 @@
     <ClInclude Include="Source\Graphics\GFX\GFX_ENUMs.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Framebuffer.h" />
     <ClInclude Include="Source\Graphics\GFX\GFX_Monitor.h" />
+    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Material.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_RenderGraph.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Render_Target.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader.h" />
@@ -81,6 +82,7 @@
     <ClInclude Include="Source\Graphics\GFX\GFX_Window.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Renderer.h" />
     <ClInclude Include="Source\Graphics\GRAPHICS_HEADER.h" />
+    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Material.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\Draw_Passes.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\G_BUFFER.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Callbacks.h" />
@@ -91,6 +93,7 @@
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Renderer_Core.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_RenderGraph.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Shader.h" />
+    <ClInclude Include="Source\Graphics\GFX\Materials\Surface_Material.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\Main_RenderGraph.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\RenderGraphs.h" />
     <ClInclude Include="Source\Graphics\SYSTEM_INSPECTOR.h" />
@@ -103,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
+    <None Include="nsight_profiler.cfg" />
     <None Include="Source\assimp.dll" />
     <None Include="Source\Graphics\OPENGL3\Shaders\Main.frag" />
     <None Include="Source\Graphics\OPENGL3\Shaders\Main.vert" />

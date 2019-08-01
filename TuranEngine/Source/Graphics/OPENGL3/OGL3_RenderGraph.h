@@ -31,7 +31,7 @@ void OGL3_RenderGraph::Update_GPU_Mesh_Buffers() {
 		//Send each mesh part of the model to GPU! 
 		//Note: Each mesh has a different material according to .obj
 		for (unsigned int mesh_index_in_model = 0; mesh_index_in_model < model_instance->MODEL->Meshes_of_Model.size(); mesh_index_in_model++) {
-			Mesh_Data* mesh = model_instance->MODEL->Meshes_of_Model[mesh_index_in_model];
+			Mesh_Data* mesh = model_instance->MODEL->Meshes_of_Model[mesh_index_in_model]->MESH_INFO;
 
 			//If mesh is sent to GPU before, skip!
 			if (mesh->Get_GFXI_Mesh() != nullptr) {

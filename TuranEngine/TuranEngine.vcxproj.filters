@@ -153,6 +153,15 @@
     <ClInclude Include="Source\Engine\Controllers\Mouse_Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Graphics\GFX\Materials\Surface_Material.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Main.cpp">
@@ -169,5 +178,6 @@
     <None Include="assimp.dll" />
     <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.frag" />
     <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.vert" />
+    <None Include="nsight_profiler.cfg" />
   </ItemGroup>
 </Project>

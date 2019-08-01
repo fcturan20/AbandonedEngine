@@ -40,12 +40,12 @@ public:
 		Update_Camera_Matrixes();
 	}
 
-	mat4 Return_View_Matrix() {
-		return VIEW_MATRIX;
+	mat4* Return_View_Matrix() {
+		return &VIEW_MATRIX;
 	}
 	
-	mat4 Return_Projection_Matrix() {
-		return PROJECTION_MATRIX;
+	mat4* Return_Projection_Matrix() {
+		return &PROJECTION_MATRIX;
 	}
 
 	void Take_Inputs();
@@ -102,8 +102,8 @@ void Camera::Take_Inputs() {
 		Do_ACTIONs();
 		Calculate_Camera_Direction();
 		//After doing all of the camera actions, update camera matrixes!
-		Update_Camera_Matrixes();
 	}
+	Update_Camera_Matrixes();
 }
 
 

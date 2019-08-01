@@ -1,6 +1,7 @@
 #pragma once
 #include "Includes.h"
 
+#include "Graphics/GFX/Renderer/GFXI_Material.h"
 
 enum MESH_TYPE : unsigned char {
 	MESH_STATIC = 0,
@@ -82,4 +83,11 @@ public:
 	void Set_GFXI_Mesh(void* gfx_mesh) {
 		GFX_MESH = gfx_mesh;
 	}
+};
+
+//This class is used to support rendering each Mesh with different material without changing any other Mesh's Material that uses same Geometry Data
+class Mesh_Instance {
+public:
+	Mesh_Data* MESH_INFO;
+	GFXI_Material* MATERIAL;
 };

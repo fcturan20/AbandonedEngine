@@ -45,10 +45,6 @@ public:
 		return MODEL;
 	}
 
-	string Return_Shader_Name() {
-		return SHADER_NAME;
-	}
-
 	vector<string> Get_Draw_Pass_Names() {
 		return DRAW_PASSes_NAMEs;
 	}
@@ -60,5 +56,4 @@ public:
 
 vector<Static_Model_Instance*> Static_Model_Instance::ALL_Model_Instances = vector<Static_Model_Instance*>();
 
-Static_Model_Instance First_Model_Instance(Static_Model::Get_All_Models()[0], "First_Shader", vector<string>{"G-Buffer"});
-//Static_Model_Instance Second_Model_Instance(Static_Model::Get_All_Models()[1], "First_Shader", vector<string>{"G-Buffer"});
+Static_Model_Instance First_Model_Instance(Static_Model::Get_All_Models()[0], "Surface_Material", vector<string>{"G-Buffer"});

@@ -19,8 +19,6 @@ int main() {
 	while (!ShouldApplication_Close) {
 		double time = glfwGetTime();
 		cout << "\n\nNew Loop!\n";
-		//Take inputs by GFX API specific library that supports input (For now, just GLFW for OpenGL3) and send it to Engine!
-		GFX->Take_Inputs();
 		//Call all RenderGraphs to render!
 		GFX->New_Frame();
 		//Refresh window contents (Generally, render textures that provided by Renderer to windows' default framebuffers!)
@@ -32,10 +30,13 @@ int main() {
 		double timing_in_ms = glfwGetTime() - time;
 		cout << "Frame is: " << timing_in_ms * 1000 << " ms!" << endl;
 
-		
-		while ((glfwGetTime() - time) * 1000 < 16) {
-			//Do a infinity loop until the frame takes 16ms to finish!
+
+		while ((glfwGetTime() - time) * 1000 < 15) {
+			//Do an infinity loop to wait for the next frame!
 		}
+
+		//Take inputs by GFX API specific library that supports input (For now, just GLFW for OpenGL3) and send it to Engine!
+		GFX->Take_Inputs();
 	}
 
 	cout << "Application exited from the frame loop\n";

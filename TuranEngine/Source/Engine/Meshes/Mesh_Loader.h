@@ -1,9 +1,13 @@
 #pragma once
 #include "Includes.h"
 
+#include "Graphics/GFX/Renderer/GFXI_Material.h"
+#include "Graphics/GFX/Materials/Surface_Material.h"
+
 #include "Mesh_Data_Class.h"
 #include "Static_Model_Class.h"
 #include "MESH_OBJs.h"
+
 
 class Mesh_Loader {
 private:
@@ -87,7 +91,9 @@ void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsign
 	//For each material index in model, create a StaticMesh and fill with data!
 	for (unsigned int meshlist_index = 0; meshlist_index < MeshList_per_Material->size(); meshlist_index++) {
 		vector<unsigned int> MeshList = (*MeshList_per_Material)[meshlist_index];
-		Mesh_Data* mesh = new Mesh_Data;
+		Mesh_Instance* mesh = new Mesh_Instance;
+		Mesh_Data* mesh_data = new Mesh_Data;
+		mesh->MESH_INFO = mesh_data;
 
 		//Get total number of vertices and indices to allocate memory!
 		unsigned int mesh_total_numvertices = 0;
@@ -98,8 +104,8 @@ void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsign
 			mesh_total_numindices += assimp_mesh->mNumFaces * 3;
 		}
 		
-		mesh->VERTEX_NUMBER = mesh_total_numvertices;
-		mesh->INDICEs_LENGTH = mesh_total_numindices;
+		mesh_data->VERTEX_NUMBER = mesh_total_numvertices;
+		mesh_data->INDICEs_LENGTH = mesh_total_numindices;
 
 		vec3* Positions_Array = new vec3[mesh_total_numvertices];
 		vec2* TextCoords_Array = new vec2[mesh_total_numvertices];
@@ -108,15 +114,15 @@ void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsign
 		vec3* Bitangents_Array = new vec3[mesh_total_numvertices];
 		unsigned int* Indices_Array = new unsigned int[mesh_total_numindices];
 		
-		mesh->POSITIONs = Positions_Array;
-		mesh->TEXTCOORDs = TextCoords_Array;
-		mesh->NORMALs = Normals_Array;
-		mesh->TANGENTs = Tangents_Array;
-		mesh->BITANGENTs = Bitangents_Array;
-		mesh->INDICEs = Indices_Array;
+		mesh_data->POSITIONs = Positions_Array;
+		mesh_data->TEXTCOORDs = TextCoords_Array;
+		mesh_data->NORMALs = Normals_Array;
+		mesh_data->TANGENTs = Tangents_Array;
+		mesh_data->BITANGENTs = Bitangents_Array;
+		mesh_data->INDICEs = Indices_Array;
 
 		//For each created mesh, name meshes as "(Mesh_object name)0", "(Mesh_object name)1" etc.!
-		mesh->NAME = name + to_string(meshlist_index);
+		mesh_data->NAME = name + to_string(meshlist_index);
 
 		//Get mesh datas from assimp meshes!
 		for (unsigned int meshlist_meshindex = 0; meshlist_meshindex < MeshList.size(); meshlist_meshindex++) {
@@ -172,6 +178,11 @@ void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsign
 				}
 			}
 		}
+
+		//Upload Textures, Create a Material and Set it to Mesh!
+		GFXI_Material* material = new Surface_Material;
+		mesh->MATERIAL = material;
+
 
 		Imported_Model->NAME = name;
 		Imported_Model->Meshes_of_Model.push_back(mesh);

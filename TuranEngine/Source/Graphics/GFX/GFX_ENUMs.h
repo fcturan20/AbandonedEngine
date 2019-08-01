@@ -5,63 +5,43 @@
 //In GL specific [GFX_API]_ENUMs.h, these data types have to be converted to GL specific data types
 //For example; GFX_TEXTURE_2D data type here, should be converted to GL_TEXTURE_2D in OGL3_ENUMs.h
 
+enum GFX_ENUM : unsigned short {
+	GFX_NULL = 0,
 
-enum WINDOW_MODE : unsigned char {
-	GFX_FULLSCREEN = 0,
-	GFX_WINDOWED = 1
-};
+	GFX_FULLSCREEN = 1,
+	GFX_WINDOWED,
 
-enum V_SYNC : unsigned char {
-	V_SYNC_OFF = 0,
-	V_SYNC_ON = 1
-};
+	V_SYNC_OFF,
+	V_SYNC_ON,
 
-enum TEXTURE_DIMENSION : unsigned char {
-	GFX_TEXTURE_2D = 0,
-	/*For now, other texture dimensions aren't allowed!
-	GFX_TEXTURE_1D = 1,
-	GFX_TEXTURE_3D = 2*/
-};
+	GFX_TEXTURE_2D,
 
-enum TEXTURE_FORMAT : unsigned char {
 	//This format should use RGBA channels in Turan Engine
-	GFX_COLORTEXTURE_FORMAT = 0,
-	GFX_DEPTHTEXTURE_FORMAT = 1
-};
+	GFX_COLORTEXTURE_FORMAT,
+	GFX_DEPTHTEXTURE_FORMAT,
 
-enum TEXTURE_ATTACHMENT : unsigned char {
-	GFX_TEXTURE_COLOR0_ATTACHMENT = 0,
-	GFX_TEXTURE_DEPTH_ATTACHMENT = 1
-};
 
-enum TEXTURE_FORMAT_VALUETYPE : unsigned char {
-	GFX_UNSIGNED_BYTE = 0,
-	GFX_FLOAT = 1
-};
+	GFX_TEXTURE_COLOR0_ATTACHMENT,
+	GFX_TEXTURE_DEPTH_ATTACHMENT,
 
-enum TEXTURE_FILTERING : unsigned char {
+	GFX_UNSIGNED_BYTE,
+	GFX_SIGNED_BYTE,
+	GFX_UNSIGNED_INT,
+	GFX_SIGNED_INT,
+	GFX_FLOAT,
+	GFX_MAT4x4,
 
-};
 
-enum TEXTURE_WRAPPING : unsigned char {
+	GFX_DEPTH_ALWAYS,
+	GFX_DEPTH_NEVER,
+	GFX_DEPTH_LESS,
+	GFX_DEPTH_LEQUAL,
+	GFX_DEPTH_GREATER,
+	GFX_DEPTH_GEQUAL,
 
-};
+	GFX_DEPTH_READ_WRITE,
+	GFX_DEPTH_READ_ONLY,
+	GFX_DEPTH_OFF,
 
-enum GFX_DEPTH_TEST : unsigned char {
-	GFX_DEPTH_ALWAYS = 0,
-	GFX_DEPTH_NEVER = 1,
-	GFX_DEPTH_LESS = 2,
-	GFX_DEPTH_LEQUAL = 3,
-	GFX_DEPTH_GREATER = 4,
-	GFX_DEPTH_GEQUAL = 5
-};
-
-//Define Depth mode as Read&Write, Read-Only, Off
-//Off means no Depth Testing will perform!
-//Read-Only means Depth Test will perform and discard fragments, but won't change Depth Buffer!
-//Read&Write means Depth Test will perform and change Depth Buffer!
-enum GFX_DEPTH_MODE : unsigned char {
-	GFX_DEPTH_READ_WRITE = 0,
-	GFX_DEPTH_READ_ONLY = 1,
-	GFX_DEPTH_OFF = 2
+	OPENGL_3
 };
