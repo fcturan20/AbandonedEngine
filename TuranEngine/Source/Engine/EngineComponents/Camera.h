@@ -19,7 +19,7 @@ class Camera : public EngineComponent {
 
 	vec3 POSITION, FRONT_VECTOR, RIGHT_VECTOR, UP_VECTOR, TARGET;
 	mat4 VIEW_MATRIX;
-	float FOV_in_RADIANS = 45.0f, ASPECT_RATIO = float(1920 / 1080), NEAR_FRUSTUM = 0.1f, FAR_FRUSTUM = 1000.0f;
+	float FOV_in_ANGLES = 45.0f, ASPECT_RATIO = float(1920 / 1080), NEAR_FRUSTUM = 0.1f, FAR_FRUSTUM = 10000.0f;
 	mat4 PROJECTION_MATRIX;
 
 	//Mouse Entegration variables!
@@ -61,7 +61,7 @@ void Camera::Update_Camera_Matrixes() {
 	VIEW_MATRIX = view;
 	VIEW_MATRIX = lookAt(POSITION, FRONT_VECTOR + POSITION, world_up);
 
-	PROJECTION_MATRIX = perspective(radians(FOV_in_RADIANS), ASPECT_RATIO, NEAR_FRUSTUM, FAR_FRUSTUM);
+	PROJECTION_MATRIX = perspective(radians(FOV_in_ANGLES), ASPECT_RATIO, NEAR_FRUSTUM, FAR_FRUSTUM);
 }
 
 void Camera::Take_Inputs() {

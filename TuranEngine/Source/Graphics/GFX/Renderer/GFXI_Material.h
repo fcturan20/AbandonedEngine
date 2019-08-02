@@ -7,7 +7,7 @@
 struct Material_Uniform {
 	string VARIABLE_NAME;
 	GFX_ENUM VARIABLE_TYPE;
-	const float* DATA = nullptr;
+	void* DATA = nullptr;
 	Material_Uniform(string variable_name, GFX_ENUM variable_type) : VARIABLE_NAME(variable_name), VARIABLE_TYPE(variable_type){}
 };
 
@@ -34,7 +34,7 @@ protected:
 	}
 
 public:
-	void Set_Uniform_Data(string uniform_name, const float* pointer_to_data) {
+	void Set_Uniform_Data(string uniform_name, void* pointer_to_data) {
 		Material_Uniform* uniform = &UNIFORM_LIST[Find_Uniform_byName(uniform_name)];
 		if (pointer_to_data == nullptr) {
 			cout << "Error: Couldn't set GPU uniform data, because data is nullptr!\n";

@@ -15,5 +15,6 @@ public:
 		//UNIFORM_LIST.push_back(Material_Uniform("model_transform", GFX_MAT4x4));
 		UNIFORM_LIST.push_back(Material_Uniform("view_matrix", GFX_MAT4x4));
 		UNIFORM_LIST.push_back(Material_Uniform("projection_matrix", GFX_MAT4x4));
+		UNIFORM_LIST.push_back(Material_Uniform("texture_diffuse", GFX_TEXTURE_2D));
 	}
 };

@@ -19,7 +19,7 @@ int Find_Texture_Attachment_Type(GFX_ENUM attachment) {
 
 	default:
 		cout << "Error: Intended Texture Attachment isn't supported for now\n";
-		return NULL;
+		return -1;
 	}
 }
 
@@ -30,7 +30,7 @@ int Find_Texture_Dimension(GFX_ENUM dimension) {
 
 	default:
 		cout << "Error: Intended Texture Dimension isn't supported for now\n";
-		return NULL;
+		return -1;
 	}
 }
 
@@ -43,7 +43,7 @@ int Find_Texture_Format(GFX_ENUM format) {
 
 	default:
 		cout << "Error: Intended Texture Format isn't supported for now!\n";
-		return NULL;
+		return -1;
 	}
 }
 
@@ -53,10 +53,14 @@ int Find_Texture_Channel_Type(GFX_ENUM texture_format) {
 		return GL_RGB;
 	case GFX_DEPTHTEXTURE_FORMAT:
 		return GL_DEPTH_COMPONENT;
+	case GFX_TEXTURE_RGB:
+		return GL_RGB;
+	case GFX_TEXTURE_RGBA:
+		return GL_RGBA;
 
 	default:
 		cout << "Error: Intended texture format isn't supported by Find_Texture_Channel_Type()\n";
-		return NULL;
+		return -1;
 	}
 }
 
@@ -69,7 +73,39 @@ int Find_Texture_Value_Type(GFX_ENUM value_type) {
 
 	default:
 		cout << "Error: Intended Texture Value Type isn't supported for now!\n";
-		return NULL;
+		return -1;
+	}
+}
+
+int Find_Texture_Wrapping(GFX_ENUM wrapping) {
+	switch (wrapping) {
+	case GFX_REPEAT:
+		return GL_REPEAT;
+	case GFX_MIRRORED_REPEAT:
+		return GL_MIRRORED_REPEAT;
+	case GFX_CLAMP_TO_EDGE:
+		return GL_CLAMP_TO_EDGE;
+
+	default:
+		cout << "Error: Unsupported wrapping type!\n";
+		return -1;
+	}
+}
+
+int Find_Texture_Mipmap_Filtering(GFX_ENUM mipmap_filter) {
+	switch (mipmap_filter) {
+	case GFX_LINEAR_FROM_1MIP:
+		return GL_LINEAR_MIPMAP_NEAREST;
+	case GFX_LINEAR_FROM_2MIP:
+		return GL_LINEAR_MIPMAP_LINEAR;
+	case GFX_NEAREST_FROM_1MIP:
+		return GL_NEAREST_MIPMAP_NEAREST;
+	case GFX_NEAREST_FROM_2MIP:
+		return GL_NEAREST_MIPMAP_LINEAR;
+
+	default:
+		cout << "Error: Unsupported mipmap filtering type!\n";
+		return -1;
 	}
 }
 

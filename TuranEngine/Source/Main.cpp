@@ -34,6 +34,7 @@ int main() {
 		while ((glfwGetTime() - time) * 1000 < 15) {
 			//Do an infinity loop to wait for the next frame!
 		}
+		
 
 		//Take inputs by GFX API specific library that supports input (For now, just GLFW for OpenGL3) and send it to Engine!
 		GFX->Take_Inputs();

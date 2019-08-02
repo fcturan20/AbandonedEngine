@@ -1,6 +1,7 @@
 #pragma once
 #include "Includes.h"
 
+#include "Graphics/GFX/Renderer/GFX_Texture.h"
 #include "Graphics/GFX/Renderer/GFXI_Material.h"
 #include "Graphics/GFX/Materials/Surface_Material.h"
 
@@ -13,7 +14,7 @@ class Mesh_Loader {
 private:
 	static void Load_All_Static_Meshes();
 	static void Process_Node(const aiScene* Scene, aiNode* Node, vector<vector<unsigned int>>* mesh_ptr);
-	static void Create_Meshes(const aiScene* Scene, const vector<vector<unsigned int>>* MeshList_per_Material, Static_Model* Imported_Model, string name);
+	static void Create_Meshes(const aiScene* Scene, const vector<vector<unsigned int>>* MeshList_per_Material, Static_Model* Imported_Model, string name, string Directory);
 public:
 
 	static void Load_All_Meshes();
@@ -64,7 +65,10 @@ void Mesh_Loader::Load_All_Static_Meshes() {
 		//Set per material mesh_list vector!
 		Process_Node(Scene, Scene->mRootNode, &MeshList_per_Material);
 
-		Create_Meshes(Scene, &MeshList_per_Material, Loaded_Model, mesh_file->NAME);
+		//Find directory to load textures!
+		string Directory = mesh_file->PATH.substr(0, mesh_file->PATH.find_last_of('/'));
+
+		Create_Meshes(Scene, &MeshList_per_Material, Loaded_Model, mesh_file->NAME, Directory);
 
 		//Add imported mesh to ALL_Static_Meshes vector!
 		ALL_Static_Models.push_back(Loaded_Model);
@@ -87,7 +91,7 @@ void Mesh_Loader::Process_Node(const aiScene* Scene, aiNode* Node, vector<vector
 	}
 }
 
-void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsigned int>>* MeshList_per_Material, Static_Model* Imported_Model, string name) {
+void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsigned int>>* MeshList_per_Material, Static_Model* Imported_Model, string name, string Directory) {
 	//For each material index in model, create a StaticMesh and fill with data!
 	for (unsigned int meshlist_index = 0; meshlist_index < MeshList_per_Material->size(); meshlist_index++) {
 		vector<unsigned int> MeshList = (*MeshList_per_Material)[meshlist_index];
@@ -183,8 +187,47 @@ void Mesh_Loader::Create_Meshes(const aiScene* Scene, const vector<vector<unsign
 		GFXI_Material* material = new Surface_Material;
 		mesh->MATERIAL = material;
 
+		aiMaterial *assimp_material = Scene->mMaterials[meshlist_index];
+
+		//If there is any diffuse texture!
+		if (assimp_material->GetTextureCount(aiTextureType_DIFFUSE) > 0) {
+			aiString file_name;
+			assimp_material->GetTexture(aiTextureType_DIFFUSE, 0, &file_name);
+			
+
+			const char* path = (Directory + '/' + (string)file_name.C_Str()).c_str();
+			int width, height, number_of_channels;
+			stbi_set_flip_vertically_on_load(false);
+			unsigned char* data = stbi_load(path, &width, &height, &number_of_channels, 0);
+			if(!data)
+			{
+					std::cout << "Failed to load texture" << std::endl;
+					return;
+			}
+
+
+			GFX_Texture* texture = new GFX_Texture;
+			switch (number_of_channels) {
+			case 3:
+				texture->CHANNEL_TYPE = GFX_TEXTURE_RGB;
+				break;
+			case 4:
+				texture->CHANNEL_TYPE = GFX_TEXTURE_RGBA;
+			}
+			texture->DIMENSION = GFX_TEXTURE_2D;
+			texture->FORMAT_VALUETYPE = GFX_UNSIGNED_BYTE;
+			texture->MIPMAP_FILTERING = GFX_LINEAR_FROM_1MIP;
+			texture->WRAPPING = GFX_REPEAT;
+			texture->PATH = path;
+			texture->DATA = data;
+			texture->WIDTH = width;
+			texture->HEIGHT = height;
+			material->Set_Uniform_Data("texture_diffuse", (void*)&texture->ID);
+		}
+
 
 		Imported_Model->NAME = name;
 		Imported_Model->Meshes_of_Model.push_back(mesh);
 	}
+	cout << "Mesh number: " << Imported_Model->Meshes_of_Model.size() << endl;
 }

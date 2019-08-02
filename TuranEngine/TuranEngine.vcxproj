@@ -81,8 +81,10 @@
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader_Resource.h" />
     <ClInclude Include="Source\Graphics\GFX\GFX_Window.h" />
     <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Renderer.h" />
+    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Texture.h" />
     <ClInclude Include="Source\Graphics\GRAPHICS_HEADER.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Material.h" />
+    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Texture.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\Draw_Passes.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\G_BUFFER.h" />
     <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Callbacks.h" />

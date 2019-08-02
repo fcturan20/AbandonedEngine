@@ -30,6 +30,8 @@
 //OpenGL 3.0 related classes
 #include "OGL3_ENUMs.h"
 #include "OGL3_Shader.h"
+#include "OGL3_Material.h"
+#include "OGL3_Texture.h"
 #include "OGL3_Mesh.h"
 #include "OGL3_Draw_Pass.h"
 #include "Renderer_Contexts/Draw_Passes/Draw_Passes.h"
@@ -55,6 +57,8 @@ void OGL3_Renderer::Start_Creation() {
 	//Compile all shader at Creation() because we don't want to get OpenGL initialization errors
 	OGL3_Shader::Compile_All_Shaders();
 	cout << "Compiled all shaders!\n\n";
+	OGL3_Texture::Send_Textures_to_GPU();
+	cout << "Send textures to GPU!\n\n";
 
 	//Create render source (Framebuffer etc.) of every draw pass for each scene!
 	for (Scene* SCENE : Scene::ALL_SCENEs) {

@@ -8,21 +8,32 @@
 enum GFX_ENUM : unsigned short {
 	GFX_NULL = 0,
 
+	//Window modes
+
 	GFX_FULLSCREEN = 1,
 	GFX_WINDOWED,
+
+	//V-Sync Modes
 
 	V_SYNC_OFF,
 	V_SYNC_ON,
 
+	//Texture Dimensions
+
 	GFX_TEXTURE_2D,
+
+	//Texture Formats
 
 	//This format should use RGBA channels in Turan Engine
 	GFX_COLORTEXTURE_FORMAT,
 	GFX_DEPTHTEXTURE_FORMAT,
 
+	//Render Target Attachments
 
 	GFX_TEXTURE_COLOR0_ATTACHMENT,
 	GFX_TEXTURE_DEPTH_ATTACHMENT,
+
+	//Parameter types
 
 	GFX_UNSIGNED_BYTE,
 	GFX_SIGNED_BYTE,
@@ -31,6 +42,7 @@ enum GFX_ENUM : unsigned short {
 	GFX_FLOAT,
 	GFX_MAT4x4,
 
+	//Depth Test Functions
 
 	GFX_DEPTH_ALWAYS,
 	GFX_DEPTH_NEVER,
@@ -39,9 +51,31 @@ enum GFX_ENUM : unsigned short {
 	GFX_DEPTH_GREATER,
 	GFX_DEPTH_GEQUAL,
 
+	//Depth Mode
+
 	GFX_DEPTH_READ_WRITE,
 	GFX_DEPTH_READ_ONLY,
 	GFX_DEPTH_OFF,
 
-	OPENGL_3
+	//GFX APIs
+
+	OPENGL_3,
+
+	//Texture Wrapping
+
+	GFX_REPEAT,
+	GFX_MIRRORED_REPEAT,
+	GFX_CLAMP_TO_EDGE,
+
+	//Texture Filtering
+
+	GFX_NEAREST_FROM_1MIP,
+	GFX_LINEAR_FROM_1MIP,
+	GFX_NEAREST_FROM_2MIP,
+	GFX_LINEAR_FROM_2MIP,
+
+	//Texture Channels
+
+	GFX_TEXTURE_RGB,
+	GFX_TEXTURE_RGBA
 };
