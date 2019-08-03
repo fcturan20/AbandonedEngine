@@ -36,10 +36,12 @@ public:
 			glTexParameteri(texture_D, GL_TEXTURE_MIN_FILTER, Mipmap_Filtering);
 			glTexParameteri(texture_D, GL_TEXTURE_MAG_FILTER, Upscale_filtering);
 			Check_OpenGL_Errors("After setting Wrapping and Filtering!\n");
-
+			cout << "Set wrapping!\n";
 			glTexImage2D(texture_D, 0, Channel_Type, texture->WIDTH, texture->HEIGHT, 0, Channel_Type, Value_Type, texture->DATA);
 			glGenerateMipmap(texture_D);
+			//glGenerateMipmap(texture_D);
 			Check_OpenGL_Errors("After sending model texture: " + to_string(i) + "!\n");
+			cout << "TexImage2D is finished!\n";
 			i++;
 		}
 		cout << "Sent Texture Number: " << i << endl;

@@ -15,8 +15,8 @@ class Main_RenderGraph : public OGL3_RenderGraph {
 
 void Main_RenderGraph::Create_RenderGraph_Resources() {
 	Update_GPU_Mesh_Buffers();
-
 	cout << "Created GPU Mesh Buffers!\n" << endl;
+
 	DRAW_PASSes.push_back(new G_BUFFER_DrawPass);
 	//We know here that 0 is G-Buffer pass!
 	DRAW_PASSes[0]->Creation(SCENE);

@@ -22,3 +22,4 @@ vector<Mesh_File*> Mesh_File::ALL_OBJs = vector<Mesh_File*>();
 
 Mesh_File Nanosuit_File{ "Nanosuit", "C:/Users/furka/Desktop/Çalýþmalar/Modeller/Nanosuit/nanosuit.obj", MESH_STATIC };
 //Mesh_File Sponza_File{ "Sponza", "C:/Users/furka/Desktop/Çalýþmalar/Modeller/Sponza Scene/sponza.obj", MESH_STATIC };
+//Mesh_File Chair_File{ "Sponza", "C:/Users/furka/Desktop/bmw.obj", MESH_STATIC };

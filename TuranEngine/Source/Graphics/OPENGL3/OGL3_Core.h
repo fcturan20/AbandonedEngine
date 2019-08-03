@@ -42,8 +42,8 @@ public:
 	//Window Operations
 	virtual void Create_Window(string name);
 	virtual void Close_Window(GFX_WINDOW* window);
-	virtual void Change_Window_Resolution(GFX_WINDOW* window, unsigned int width, unsigned int height){}
-	virtual void Set_Window_Focus(GFX_WINDOW* window, bool is_focused){}
+	virtual void Change_Window_Resolution(GFX_WINDOW* window, unsigned int width, unsigned int height);
+	virtual void Set_Window_Focus(GFX_WINDOW* window, bool is_focused);
 
 	//Renderer Operations
 	virtual void Creation();
@@ -62,6 +62,27 @@ public:
 		glfwTerminate();
 	}
 };
+
+void OGL3_SYS::Change_Window_Resolution(GFX_WINDOW* window, unsigned int width, unsigned int height) {
+	window->WIDTH = width;
+	window->HEIGHT = height;
+	glViewport(0, 0, width, height);
+}
+
+void OGL3_SYS::Set_Window_Focus(GFX_WINDOW* window, bool is_focused) {
+	if (is_focused) {
+		for (unsigned int i = 0; i < ONSCREEN_Windows.size(); i++) {
+			if (window->Get_Window_ID() == ONSCREEN_Windows[i]->Get_Window_ID()) {
+				FOCUSED_WINDOW_index = i;
+				return;
+			}
+		}
+		cout << "Error: Intended focus window can't be found! That means there is a bug in the system!\n";
+	}
+	else {
+
+	}
+}
 
 void OGL3_SYS::GFX_Error_Callback(int error_code, const char* description) {
 	cout << "\n\n\nERROR: CODE: " << error_code << endl;
@@ -116,7 +137,7 @@ void OGL3_SYS::Create_Window(string name) {
 	GLFWwindow* window_id = glfwCreateWindow(1280, 720, name.c_str(), NULL, (GLFWwindow*)RENDERER->Renderer_Context);
 	GFX_WINDOW* gfx_window = new GFX_WINDOW(1280, 720, GFX_WINDOWED, CONNECTED_Monitors[0], CONNECTED_Monitors[0]->REFRESH_RATE, name, V_SYNC_OFF);
 	gfx_window->WINDOW = window_id;
-	glfwSetWindowMonitor(window_id, NULL, 0, 0, 1280, 720, 60);
+	glfwSetWindowMonitor(window_id, NULL, 0, 0, gfx_window->WIDTH, gfx_window->HEIGHT, 60);
 
 	//Check and Report if GLFW fails
 	if (window_id == NULL) {
@@ -180,8 +201,10 @@ void OGL3_SYS::New_Frame() {
 void OGL3_SYS::Refresh_Windows() {
 	//Display G-Buffer Color Texture on focused window!
 	{
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		Check_OpenGL_Errors("Before Refreshing windows!");
+
+		glDisable(GL_DEPTH_TEST);
+		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 		GFX_RenderGraph* Main_Scene_RenderGraph = (GFX_RenderGraph*)Scene::ALL_SCENEs[0]->Return_RenderGraph();
 		GFX_Framebuffer* Framebuffer = ((OGL3_RenderGraph*)Main_Scene_RenderGraph)->DRAW_PASSes[0]->Get_Framebuffer();
 		//We know that framebuffer's first RT is Color RT

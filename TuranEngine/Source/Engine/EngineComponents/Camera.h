@@ -19,7 +19,7 @@ class Camera : public EngineComponent {
 
 	vec3 POSITION, FRONT_VECTOR, RIGHT_VECTOR, UP_VECTOR, TARGET;
 	mat4 VIEW_MATRIX;
-	float FOV_in_ANGLES = 45.0f, ASPECT_RATIO = float(1920 / 1080), NEAR_FRUSTUM = 0.1f, FAR_FRUSTUM = 10000.0f;
+	float FOV_in_ANGLES = 45.0f, ASPECT_RATIO = float(float(1920) / float(1080)), NEAR_FRUSTUM = 0.1f, FAR_FRUSTUM = 1000000.0f;
 	mat4 PROJECTION_MATRIX;
 
 	//Mouse Entegration variables!

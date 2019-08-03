@@ -39,6 +39,10 @@ void OGL3_Material::Bind_Uniform(GFXI_Material* material, unsigned int uniform_l
 		cout << "Error: Intended uniform: " << uniform->VARIABLE_NAME << " can't be found by OGL3_Material::Send_Uniform!\n";
 		return;
 	}
+	if (uniform->DATA == nullptr) {
+		cout << "Error: Uniform: " << uniform->VARIABLE_NAME << " data isn't set!\n";
+		return;
+	}
 
 	unsigned int texture_id = *(unsigned int*)uniform->DATA;
 	switch (uniform->VARIABLE_TYPE) {
@@ -47,7 +51,7 @@ void OGL3_Material::Bind_Uniform(GFXI_Material* material, unsigned int uniform_l
 		break;
 
 	case GFX_TEXTURE_2D:
-		cout << "Texture ID: " << texture_id << endl;
+		//cout << "Texture ID: " << texture_id << endl;
 		glActiveTexture(GL_TEXTURE0);
 		Check_OpenGL_Errors("After activating texture!\n");
 		glBindTexture(GL_TEXTURE_2D, texture_id);

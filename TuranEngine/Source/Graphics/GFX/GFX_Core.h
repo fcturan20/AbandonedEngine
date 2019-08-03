@@ -12,6 +12,7 @@ protected:
 	vector<GFX_MONITOR*> CONNECTED_Monitors;
 
 	GFX_Renderer* RENDERER;
+	unsigned int FOCUSED_WINDOW_index;
 
 	virtual void Initialization() = 0;
 	virtual void Save_Monitors() = 0;

@@ -45,7 +45,8 @@ void Mesh_Loader::Load_All_Static_Meshes() {
 		double time = glfwGetTime();
 		Assimp::Importer import;
 		const aiScene* Scene = import.ReadFile(mesh_file->PATH, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_CalcTangentSpace
-			| aiProcess_JoinIdenticalVertices | aiProcess_ValidateDataStructure | aiProcess_ImproveCacheLocality | aiProcess_FindInvalidData | aiProcess_RemoveRedundantMaterials);
+			| aiProcess_JoinIdenticalVertices | aiProcess_ValidateDataStructure | aiProcess_ImproveCacheLocality | aiProcess_FindInvalidData | aiProcess_RemoveRedundantMaterials
+		);
 
 		//Store mesh parts in a Model!
 		Static_Model* Loaded_Model = new Static_Model;
