@@ -61,7 +61,8 @@ void Camera::Update_Camera_Matrixes() {
 	VIEW_MATRIX = view;
 	VIEW_MATRIX = lookAt(POSITION, FRONT_VECTOR + POSITION, world_up);
 
-	PROJECTION_MATRIX = perspective(radians(FOV_in_ANGLES), ASPECT_RATIO, NEAR_FRUSTUM, FAR_FRUSTUM);
+	//Reversed depth!
+	PROJECTION_MATRIX = perspective(radians(FOV_in_ANGLES), ASPECT_RATIO, FAR_FRUSTUM, NEAR_FRUSTUM);
 }
 
 void Camera::Take_Inputs() {

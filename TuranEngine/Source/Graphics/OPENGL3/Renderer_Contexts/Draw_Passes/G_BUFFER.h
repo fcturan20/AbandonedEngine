@@ -68,7 +68,7 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 		SCENE = scene;
 		//Set depth modes!
 		DEPTHBUFFER_MODE = GFX_DEPTH_READ_WRITE;
-		DEPTHTEST_MODE = GFX_DEPTH_LESS;
+		DEPTHTEST_MODE = GFX_DEPTH_GREATER;		 //Reversed depth!
 		glEnable(GL_CULL_FACE);
 		glCullFace(GL_BACK);
 
@@ -96,7 +96,7 @@ class G_BUFFER_DrawPass : public OGL3_Draw_Pass {
 		glBindFramebuffer(GL_FRAMEBUFFER, FRAMEBUFFER->ID);
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		glClearDepth(1.0f);
+		glClearDepth(0.0f);		//Reversed Depth!
 
 		//For each mesh in the Draw Pass!
 		G_BUFFER_DrawResource* gbuffer_resource = (G_BUFFER_DrawResource*)DRAW_RESOURCE;
