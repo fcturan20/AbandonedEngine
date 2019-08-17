@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{75CAD0CE-263C-46D2-AD5D-5878CB8A3F08}</ProjectGuid>
+    <RootNamespace>TuranEditor</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>$(SolutionDir)3rdPartyLibraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)TuranAPI;$(SolutionDir)GFX_API;$(SolutionDir)OpenGL3;$(SolutionDir)$(ProjectName);$(SolutionDir)TuranEngine</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS10_FORENGINE;EDITOR_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>opengl32.lib</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Content\Materials\PostProcess_Material.cpp" />
+    <ClCompile Include="Content\Materials\Surface_Material.cpp" />
+    <ClCompile Include="EditorSource\Editor.cpp" />
+    <ClCompile Include="EditorSource\ResourceCompiler\DataFormats\Model_Data_Format.cpp" />
+    <ClCompile Include="EditorSource\ResourceCompiler\EditorFileSystem\EditorFileSystem_Core.cpp" />
+    <ClCompile Include="EditorSource\ResourceCompiler\ResourceLoaders\Mesh_Loader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Content\Materials\Materials.h" />
+    <ClInclude Include="Content\Materials\PostProcess_Material.h" />
+    <ClInclude Include="Content\Materials\Shaders\Shaders.h" />
+    <ClInclude Include="Content\Materials\Surface_Material.h" />
+    <ClInclude Include="Content\Model_DiskFiles.h" />
+    <ClInclude Include="Content\Scene.h" />
+    <ClInclude Include="EditorSource\Editor.h" />
+    <ClInclude Include="EditorSource\Editor_Includes.h" />
+    <ClInclude Include="EditorSource\ResourceCompiler\DataFormats\ALL_DATA_FORMATs.h" />
+    <ClInclude Include="EditorSource\ResourceCompiler\DataFormats\Model_Data_Format.h" />
+    <ClInclude Include="EditorSource\ResourceCompiler\EditorFileSystem\EditorFileSystem_Core.h" />
+    <ClInclude Include="EditorSource\ResourceCompiler\ResourceLoaders\Mesh_Loader.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GFX_API\GFX_API.vcxproj">
+      <Project>{3859b6ef-aec4-48d8-b0bc-66b8d9f81b88}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenGL3\OpenGL3.vcxproj">
+      <Project>{72926232-e64b-485e-9b9d-84ba815d0324}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TuranAPI\TuranAPI.vcxproj">
+      <Project>{914f0aa8-3d8f-44de-a2bf-a3a93b8a858e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TuranEngine\TuranEngine.vcxproj">
+      <Project>{2d4d9bd7-3cdd-4672-a2f5-2951457d4f0d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\Files\EditorSpecific\File_List.bin" />
+    <None Include="Content\Materials\Shaders\Main.frag" />
+    <None Include="Content\Materials\Shaders\Main.vert" />
+    <None Include="Content\Materials\Shaders\Post_Process.frag" />
+    <None Include="Content\Materials\Shaders\Post_Process.vert" />
+    <None Include="File_List.enginecont" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

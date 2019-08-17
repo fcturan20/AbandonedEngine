@@ -1,0 +1,18 @@
+// First try to write a Flatbuffer
+
+namespace Editor.FileList;
+
+enum File_Type:ubyte { ERROR = 0, Camera = 1, Static_Model = 2, Scene = 3}
+
+table File{
+    PATH: string;
+    TYPE: File_Type;
+    ID: uint;
+}
+
+table FileList{
+    FILE_LIST: [File];
+    LAST_ID: uint;
+}
+
+root_type FileList;

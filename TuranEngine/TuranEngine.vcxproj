@@ -10,13 +10,13 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{2D4D9BD7-3CDD-4672-A2F5-2951457D4F0D}</ProjectGuid>
     <RootNamespace>TuranEngine</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
@@ -30,8 +30,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(SolutionDir)Includes;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)Libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)3rdPartyLibraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdPartyLibraries\Libs;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -41,79 +43,72 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)TuranEngine\Source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)TuranAPI;$(SolutionDir)$(ProjectName)\EngineSource;$(SolutionDir)GFX_API;$(SolutionDir)OpenGL3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WINDOWS10_FORENGINE;ENGINE_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalDependencies>opengl32.lib;assimp.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEditor" /Y</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Engine\Controllers\Controller_Center.h" />
-    <ClInclude Include="Source\Engine\Controllers\Gamepad_Controller.h" />
-    <ClInclude Include="Source\Engine\Controllers\Keyboard_Controller.h" />
-    <ClInclude Include="Source\Engine\Controllers\Mouse_Controller.h" />
-    <ClInclude Include="Source\Engine\EngineComponents\Camera.h" />
-    <ClInclude Include="Source\Engine\EngineComponents\EngineComponent.h" />
-    <ClInclude Include="Source\Engine\EngineComponents\Static_Model_Instance.h" />
-    <ClInclude Include="Source\Engine\ENGINE_HEADER.h" />
-    <ClInclude Include="Source\Engine\Meshes\Mesh_HEADER.h" />
-    <ClInclude Include="Source\Engine\Meshes\Mesh_Data_Class.h" />
-    <ClInclude Include="Source\Engine\Meshes\Mesh_Loader.h" />
-    <ClInclude Include="Source\Engine\Meshes\MESH_OBJs.h" />
-    <ClInclude Include="Source\Engine\Meshes\Static_Model_Class.h" />
-    <ClInclude Include="Source\Engine\Scene\Object_Viewer_Scene.h" />
-    <ClInclude Include="Source\Engine\Scene\Scene_Core.h" />
-    <ClInclude Include="Source\Engine\Scene\World_Scene.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Draw_Resource.h" />
-    <ClInclude Include="Source\Graphics\GFX\GFX_Core.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_MESH_REPRESENTATION.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Render_Node.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Draw_Pass.h" />
-    <ClInclude Include="Source\Graphics\GFX\GFX_ENUMs.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Framebuffer.h" />
-    <ClInclude Include="Source\Graphics\GFX\GFX_Monitor.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Material.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_RenderGraph.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Render_Target.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader_Resource.h" />
-    <ClInclude Include="Source\Graphics\GFX\GFX_Window.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Renderer.h" />
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Texture.h" />
-    <ClInclude Include="Source\Graphics\GRAPHICS_HEADER.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Material.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Texture.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\Draw_Passes.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\G_BUFFER.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Callbacks.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Core.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Draw_Pass.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_ENUMs.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Mesh.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Renderer_Core.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_RenderGraph.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Shader.h" />
-    <ClInclude Include="Source\Graphics\GFX\Materials\Surface_Material.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\Main_RenderGraph.h" />
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\RenderGraphs.h" />
-    <ClInclude Include="Source\Graphics\SYSTEM_INSPECTOR.h" />
-    <ClInclude Include="Source\Includes.h" />
-    <ClInclude Include="Source\Main.h" />
+    <ClInclude Include="EngineSource\Engine\Controllers\Controller_Center.h" />
+    <ClInclude Include="EngineSource\Engine\Controllers\Gamepad_Controller.h" />
+    <ClInclude Include="EngineSource\Engine\Controllers\Keyboard_Controller.h" />
+    <ClInclude Include="EngineSource\Engine\Controllers\Mouse_Controller.h" />
+    <ClInclude Include="EngineSource\Engine\GameObject\GameObject.h" />
+    <ClInclude Include="EngineSource\ENGINE_ENUMs.h" />
+    <ClInclude Include="EngineSource\Engine\EngineComponents\Camera.h" />
+    <ClInclude Include="EngineSource\Engine\EngineComponents\EngineComponent.h" />
+    <ClInclude Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.h" />
+    <ClInclude Include="EngineSource\Engine\ENGINE_HEADER.h" />
+    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_HEADER.h" />
+    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_Data_Class.h" />
+    <ClInclude Include="EngineSource\Engine\Meshes\MESH_OBJs.h" />
+    <ClInclude Include="EngineSource\Engine\Meshes\Static_Model_Class.h" />
+    <ClInclude Include="EngineSource\Engine\Scene\Scene_Core.h" />
+    <ClInclude Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.h" />
+    <ClInclude Include="EngineSource\Graphics\SYSTEM_INSPECTOR.h" />
+    <ClInclude Include="EngineSource\Engine_Includes.h" />
+    <ClInclude Include="EngineSource\TuranEngine.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Graphics\OPENGL3\glad.c" />
-    <ClCompile Include="Source\Main.cpp" />
+    <ClCompile Include="EngineSource\Engine\Controllers\Controller_Center.cpp" />
+    <ClCompile Include="EngineSource\Engine\Controllers\Gamepad_Controller.cpp" />
+    <ClCompile Include="EngineSource\Engine\Controllers\Keyboard_Controller.cpp" />
+    <ClCompile Include="EngineSource\Engine\Controllers\Mouse_Controller.cpp" />
+    <ClCompile Include="EngineSource\Engine\EngineComponents\Camera.cpp" />
+    <ClCompile Include="EngineSource\Engine\EngineComponents\EngineComponent.cpp" />
+    <ClCompile Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.cpp" />
+    <ClCompile Include="EngineSource\Engine\GameObject\GameObject.cpp" />
+    <ClCompile Include="EngineSource\Engine\Meshes\Mesh_Data_Class.cpp" />
+    <ClCompile Include="EngineSource\Engine\Meshes\MESH_FILEs.cpp" />
+    <ClCompile Include="EngineSource\Engine\Meshes\Static_Model_Class.cpp" />
+    <ClCompile Include="EngineSource\Engine\Scene\Scene_Core.cpp" />
+    <ClCompile Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.cpp" />
+    <ClCompile Include="EngineSource\Graphics\SYSTEM_INSPECTOR.cpp" />
+    <ClCompile Include="EngineSource\TuranEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="assimp.dll" />
+    <None Include="File_List.enginecont" />
     <None Include="nsight_profiler.cfg" />
-    <None Include="Source\assimp.dll" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Main.frag" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Main.vert" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.frag" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GFX_API\GFX_API.vcxproj">
+      <Project>{3859b6ef-aec4-48d8-b0bc-66b8d9f81b88}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenGL3\OpenGL3.vcxproj">
+      <Project>{72926232-e64b-485e-9b9d-84ba815d0324}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TuranAPI\TuranAPI.vcxproj">
+      <Project>{914f0aa8-3d8f-44de-a2bf-a3a93b8a858e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

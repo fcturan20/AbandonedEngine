@@ -1,0 +1,83 @@
+//File types of Game Content!
+
+namespace GameContent;
+
+struct Vec3{
+    x: float;
+    y: float;
+    z: float;
+}
+
+struct Vec2{
+    x: float;
+    y: float;
+}
+
+enum TEXTURE_TYPE : ubyte {
+    DIFFUSE_TEXTURE = 0,
+    SPECULAR_TEXTURE,
+    NORMAL_TEXTURE
+}
+
+enum TEXTURE_CHANNELS : ubyte {
+    TEXTURE_RGB = 0,
+    TEXTURE_RGBA,
+    TEXTURE_DEPTH
+}
+
+table TEXTURE{
+    TYPE: TEXTURE_TYPE;
+    CHANNELS: TEXTURE_CHANNELS;
+}
+
+enum GFX_APIs: ubyte {
+    OPENGL3 = 0
+}
+
+//Material Type stores Shader Pipeline resources!
+table MATERIAL_TYPE{
+    GFX_API: GFX_APIs;
+    VERTEX_SHADER: string;
+    FRAGMENT_SHADER: string;
+}
+
+//Material Instance only stores needed resources like Textures, Uniforms etc.!
+//MATERIAL_TYPE_ID stores used Shader Stage's (Vertex and Fragment Shader) ID!
+table MATERIAL_INSTANCE{
+    MATERIAL_TYPE_ID: ushort;
+    TEXTUREs: [TEXTURE];
+}
+
+//Each Mesh will store vertex attributes and material index to reference!
+//Material index is index in the Model's MATERIALs vector
+table MESH{
+	Positions: [Vec3];
+    TextCoords: [Vec2];
+	Normals: [Vec3];
+	Tangents: [Vec3];
+	Bitangents: [Vec3];
+    Indices: [uint];
+    Material_Index: uint;
+}
+
+table STATIC_MODEL{
+    MESHes: [MESH];
+    MATERIALs: [MATERIAL_INSTANCE];
+}
+
+table SCENE{
+    NAME: string;
+}
+
+union Resource_Type {
+    Material_Type: MATERIAL_TYPE,
+    Texture: TEXTURE,
+    Static_Model: STATIC_MODEL,
+    Scene: SCENE
+}
+
+table Resource{
+    TYPE: Resource_Type;
+}
+
+root_type Resource;

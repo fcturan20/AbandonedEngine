@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{914F0AA8-3D8F-44DE-A2BF-A3A93B8A858E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>TuranAPI</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)</IntDir>
+    <IncludePath>$(SolutionDir)3rdPartyLibraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdPartyLibraries\Libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WINDOWS10_FORENGINE;TURANAPI_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\GFX_API" /Y
+xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\OpenGL3" /Y
+xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEngine" /Y
+xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEditor" /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="TuranAPI\API_ENUMs.h" />
+    <ClInclude Include="TuranAPI\API_includes.h" />
+    <ClInclude Include="TuranAPI\API_ALL.h" />
+    <ClInclude Include="TuranAPI\FileSystem\DataFormats\File_List_generated.h" />
+    <ClInclude Include="TuranAPI\FileSystem\DataFormats\GameResource_generated.h" />
+    <ClInclude Include="TuranAPI\FileSystem\FileSystem_Core.h" />
+    <ClInclude Include="TuranAPI\API_FileSystem.h" />
+    <ClInclude Include="TuranAPI\FileSystem\Resource_Types\Material_Type_Resource.h" />
+    <ClInclude Include="TuranAPI\FileSystem\Resource_Types\Model_Resource.h" />
+    <ClInclude Include="TuranAPI\FileSystem\Resource_Types\Resource_Type.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="TuranAPI\FileSystem\FileSystem_Core.cpp" />
+    <ClCompile Include="TuranAPI\FileSystem\Resource_Loaders\Load_Material_Type.cpp" />
+    <ClCompile Include="TuranAPI\FileSystem\Resource_Loaders\Load_Model.cpp" />
+    <ClCompile Include="TuranAPI\FileSystem\Resource_Types\Material_Type_Resource.cpp" />
+    <ClCompile Include="TuranAPI\FileSystem\Resource_Types\Model_Resource.cpp" />
+    <ClCompile Include="TuranAPI\FileSystem\Resource_Types\Resource_Type.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="TuranAPI\FileSystem\DataFormats\File_List.fbs" />
+    <None Include="TuranAPI\FileSystem\DataFormats\flatc.exe" />
+    <None Include="TuranAPI\FileSystem\DataFormats\GameResource.fbs" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -1,0 +1,410 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(437,5): warning MSB8004: Intermediate Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Intermediate Directory.
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(438,5): warning MSB8004: Output Directory does not end with a trailing slash.  This build instance will add the slash as it is required to allow proper evaluation of the Output Directory.
+  GFX_Core.cpp
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Monitor.h(11,19): warning C4251:  'GFX_MONITOR::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'GFX_MONITOR'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Window.h(19,20): warning C4251:  'GFX_WINDOW::WINDOW_NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_WINDOW'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:  'GFX_Framebuffer::BOUND_RTs': class 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of struct 'GFX_Framebuffer'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :  see declaration of 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:  'GFX_Draw_Pass::Draw_Passes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(32,13): warning C4251:  'GFX_Draw_Pass::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:  'GFX_RenderGraph::DRAW_PASSes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_RenderGraph'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:  'GFX_Texture::ALL_TEXTUREs': class 'std::vector<GFX_Texture *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Texture'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :  see declaration of 'std::vector<GFX_Texture *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(7,22): warning C4251:  'Material_Uniform::VARIABLE_NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'Material_Uniform'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:  'GFX_Material::ALL_Materials': class 'std::vector<GFX_Material *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :  see declaration of 'std::vector<GFX_Material *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:  'GFX_Material::UNIFORM_LIST': class 'std::vector<Material_Uniform,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :  see declaration of 'std::vector<Material_Uniform,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11,45): warning C4251:  'GFX_API::ONSCREEN_Windows': class 'std::vector<GFX_WINDOW *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_API'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11,45): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11,45): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11,45): warning C4251:             _Ty=GFX_WINDOW *
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11,45): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11): message :  see declaration of 'std::vector<GFX_WINDOW *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11): message :             _Ty=GFX_WINDOW *
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(11): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12,48): warning C4251:  'GFX_API::CONNECTED_Monitors': class 'std::vector<GFX_MONITOR *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_API'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12,48): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12,48): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12,48): warning C4251:             _Ty=GFX_MONITOR *
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12,48): warning C4251:         ]
+  GFX_Monitor.cpp
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12): message :  see declaration of 'std::vector<GFX_MONITOR *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12): message :             _Ty=GFX_MONITOR *
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Core.h(12): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Monitor.h(11,19): warning C4251:  'GFX_MONITOR::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'GFX_MONITOR'
+  GFX_Window.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Monitor.h(11,19): warning C4251:  'GFX_MONITOR::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'GFX_MONITOR'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\GFX_Window.h(19,20): warning C4251:  'GFX_WINDOW::WINDOW_NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_WINDOW'
+  GFXI_Draw_Resource.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+  GFXI_Material.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(7,22): warning C4251:  'Material_Uniform::VARIABLE_NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'Material_Uniform'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:  'GFX_Material::ALL_Materials': class 'std::vector<GFX_Material *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :  see declaration of 'std::vector<GFX_Material *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:  'GFX_Material::UNIFORM_LIST': class 'std::vector<Material_Uniform,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         ]
+  GFXI_MESH_REPRESENTATION.cpp
+  GFX_Draw_Pass.cpp
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :  see declaration of 'std::vector<Material_Uniform,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:  'GFX_Framebuffer::BOUND_RTs': class 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of struct 'GFX_Framebuffer'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :  see declaration of 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:  'GFX_Draw_Pass::Draw_Passes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(32,13): warning C4251:  'GFX_Draw_Pass::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+  GFX_Renderer.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:  'GFX_Framebuffer::BOUND_RTs': class 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of struct 'GFX_Framebuffer'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :  see declaration of 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:  'GFX_Draw_Pass::Draw_Passes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(32,13): warning C4251:  'GFX_Draw_Pass::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:  'GFX_RenderGraph::DRAW_PASSes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_RenderGraph'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:  'GFX_Texture::ALL_TEXTUREs': class 'std::vector<GFX_Texture *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Texture'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :  see declaration of 'std::vector<GFX_Texture *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(7,22): warning C4251:  'Material_Uniform::VARIABLE_NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of struct 'Material_Uniform'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:  'GFX_Material::ALL_Materials': class 'std::vector<GFX_Material *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16,44): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :  see declaration of 'std::vector<GFX_Material *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :             _Ty=GFX_Material *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:  'GFX_Material::UNIFORM_LIST': class 'std::vector<Material_Uniform,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Material'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22,39): warning C4251:         ]
+  GFX_RenderGraph.cpp
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :  see declaration of 'std::vector<Material_Uniform,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :             _Ty=Material_Uniform
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFXI_Material.h(22): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:  'GFX_Framebuffer::BOUND_RTs': class 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of struct 'GFX_Framebuffer'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16,38): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :  see declaration of 'std::vector<GFX_Render_Target *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :             _Ty=GFX_Render_Target *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Framebuffer.h(16): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:  'GFX_Draw_Pass::Draw_Passes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27,43): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(32,13): warning C4251:  'GFX_Draw_Pass::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Draw_Pass'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:  'GFX_RenderGraph::DRAW_PASSes': class 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_RenderGraph'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_RenderGraph.h(9,36): warning C4251:         ]
+  GFX_Shader.cpp
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :  see declaration of 'std::vector<GFX_Draw_Pass *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :             _Ty=GFX_Draw_Pass *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Draw_Pass.h(27): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:  'GFX_Shader::ALL_SHADERs': class 'std::vector<GFX_Shader *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14,40): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :  see declaration of 'std::vector<GFX_Shader *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :             _Ty=GFX_Shader *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(14): message :         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,22): warning C4251:  'GFX_Shader::VERTEX_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(16,39): warning C4251:  'GFX_Shader::FRAGMENT_SOURCE': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,25): warning C4251:  'GFX_Shader::VERTEX_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(17,45): warning C4251:  'GFX_Shader::FRAGMENT_DISK_PATH': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Shader.h(18,13): warning C4251:  'GFX_Shader::NAME': class 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>' needs to have dll-interface to be used by clients of class 'GFX_Shader'
+  GFX_Texture.cpp
+C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.22.27905\include\xstring(4343): message :  see declaration of 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:  'GFX_Texture::ALL_TEXTUREs': class 'std::vector<GFX_Texture *,std::allocator<_Ty>>' needs to have dll-interface to be used by clients of class 'GFX_Texture'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8,42): warning C4251:         ]
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :  see declaration of 'std::vector<GFX_Texture *,std::allocator<_Ty>>'
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         with
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         [
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :             _Ty=GFX_Texture *
+C:\dev\TuranEngine\GFX_API\GFXSource\Renderer\GFX_Texture.h(8): message :         ]
+     Creating library C:\dev\TuranEngine\bin\GFX_API\GFX_API.lib and object C:\dev\TuranEngine\bin\GFX_API\GFX_API.exp
+  Generating code
+  1 of 642 functions ( 0.2%) were compiled, the rest were copied from previous compilation.
+    1 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  GFX_API.vcxproj -> C:\dev\TuranEngine\bin\GFX_API\GFX_API.dll
+  C:\dev\TuranEngine\bin\GFX_API\GFX_API.dll
+  1 File(s) copied
+  C:\dev\TuranEngine\bin\GFX_API\GFX_API.dll
+  1 File(s) copied
+  C:\dev\TuranEngine\bin\GFX_API\GFX_API.dll
+  1 File(s) copied

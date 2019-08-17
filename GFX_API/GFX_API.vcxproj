@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <ProjectGuid>{3859B6EF-AEC4-48D8-B0BC-66B8D9F81B88}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>GFXAPI</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v142</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(ProjectName)</OutDir>
+    <IntDir>$(SolutionDir)bin-int\$(ProjectName)</IntDir>
+    <IncludePath>$(SolutionDir)3rdPartyLibraries\Includes;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdPartyLibraries\Libs;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WINDOWS10_FORENGINE;GFX_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeaderFile>
+      </PrecompiledHeaderFile>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <AdditionalIncludeDirectories>$(SolutionDir)TuranAPI;$(SolutionDir)$(ProjectName)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\OpenGL3" /Y
+xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEngine" /Y
+xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEditor" /Y</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="GFXSource\GFX_Core.h" />
+    <ClInclude Include="GFXSource\GFX_ENUMs.h" />
+    <ClInclude Include="GFXSource\GFX_Includes.h" />
+    <ClInclude Include="GFXSource\GFX_Monitor.h" />
+    <ClInclude Include="GFXSource\GFX_Window.h" />
+    <ClInclude Include="GFXSource\Renderer\GFXI_Draw_Resource.h" />
+    <ClInclude Include="GFXSource\Renderer\GFXI_Material.h" />
+    <ClInclude Include="GFXSource\Renderer\GFXI_MESH_REPRESENTATION.h" />
+    <ClInclude Include="GFXSource\Renderer\GFXI_Render_Node.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Draw_Pass.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Framebuffer.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Renderer.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_RenderGraph.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Render_Target.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Shader.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Shader_Resource.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GFXSource\GFX_Core.cpp" />
+    <ClCompile Include="GFXSource\GFX_Monitor.cpp" />
+    <ClCompile Include="GFXSource\GFX_Window.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFXI_Draw_Resource.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFXI_Material.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFXI_MESH_REPRESENTATION.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Draw_Pass.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Renderer.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_RenderGraph.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Shader.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Texture.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TuranAPI\TuranAPI.vcxproj">
+      <Project>{914f0aa8-3d8f-44de-a2bf-a3a93b8a858e}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

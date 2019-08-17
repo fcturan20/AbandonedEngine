@@ -15,175 +15,114 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\Main.h">
+    <ClInclude Include="EngineSource\Engine\Controllers\Controller_Center.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\SYSTEM_INSPECTOR.h">
+    <ClInclude Include="EngineSource\Engine\Controllers\Gamepad_Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GRAPHICS_HEADER.h">
+    <ClInclude Include="EngineSource\Engine\Controllers\Keyboard_Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Includes.h">
+    <ClInclude Include="EngineSource\Engine\Controllers\Mouse_Controller.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\GFX_Core.h">
+    <ClInclude Include="EngineSource\Engine\EngineComponents\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Core.h">
+    <ClInclude Include="EngineSource\Engine\EngineComponents\EngineComponent.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\Meshes\Mesh_HEADER.h">
+    <ClInclude Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Engine\ENGINE_HEADER.h">
+    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_Data_Class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\GFX_Monitor.h">
+    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_HEADER.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\GFX_Window.h">
+    <ClInclude Include="EngineSource\Engine\Meshes\MESH_OBJs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Callbacks.h">
+    <ClInclude Include="EngineSource\Engine\Meshes\Static_Model_Class.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Mesh.h">
+    <ClInclude Include="EngineSource\Engine\Scene\Scene_Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Renderer_Core.h">
+    <ClInclude Include="EngineSource\Engine\ENGINE_HEADER.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\GFX_ENUMs.h">
+    <ClInclude Include="EngineSource\Graphics\SYSTEM_INSPECTOR.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Renderer.h">
+    <ClInclude Include="EngineSource\Engine_Includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Draw_Pass.h">
+    <ClInclude Include="EngineSource\TuranEngine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Framebuffer.h">
+    <ClInclude Include="EngineSource\ENGINE_ENUMs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Render_Target.h">
+    <ClInclude Include="EngineSource\Engine\GameObject\GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader_Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Draw_Resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Controllers\Controller_Center.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Controllers\Gamepad_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Scene\World_Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Scene\Object_Viewer_Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Scene\Scene_Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_RenderGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_RenderGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Draw_Pass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Render_Node.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\EngineComponents\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\EngineComponents\EngineComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Meshes\Mesh_Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_MESH_REPRESENTATION.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_ENUMs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Meshes\MESH_OBJs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Meshes\Mesh_Data_Class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Meshes\Static_Model_Class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\EngineComponents\Static_Model_Instance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\Draw_Passes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\Draw_Passes\G_BUFFER.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\Main_RenderGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\Renderer_Contexts\RenderGraphs\RenderGraphs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Controllers\Keyboard_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Engine\Controllers\Mouse_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFXI_Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Materials\Surface_Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\GFX\Renderer\GFX_Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\Graphics\OPENGL3\OGL3_Texture.h">
+    <ClInclude Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\Main.cpp">
+    <ClCompile Include="EngineSource\Engine\Controllers\Controller_Center.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\Graphics\OPENGL3\glad.c">
+    <ClCompile Include="EngineSource\Engine\Controllers\Gamepad_Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Controllers\Keyboard_Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Controllers\Mouse_Controller.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\EngineComponents\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Meshes\Mesh_Data_Class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Meshes\MESH_FILEs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Meshes\Static_Model_Class.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\Scene\Scene_Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Graphics\SYSTEM_INSPECTOR.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\TuranEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\EngineComponents\EngineComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Engine\GameObject\GameObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Source\Graphics\OPENGL3\Shaders\Main.frag" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Main.vert" />
-    <None Include="Source\assimp.dll" />
     <None Include="assimp.dll" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.frag" />
-    <None Include="Source\Graphics\OPENGL3\Shaders\Post_Process.vert" />
     <None Include="nsight_profiler.cfg" />
+    <None Include="File_List.enginecont" />
   </ItemGroup>
 </Project>
