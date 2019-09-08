@@ -37,8 +37,6 @@ Game: An empty project, just to remind myself that I want to make a Game Engine.
 
 ## TuranEditor:
 1) TuranAPI's IMGUI is used to create Editor's UI. Editor UI only supports Content Browser properly for now. Other windows are Scene Editor, Properties, dear IMGUI's Demo and Metrics windows.
-Content Browser:
-(Resim)
 2) ResourceCompiler folder has classes to import 3rd party resources (.obj, .vert,.frag etc). Then, these classes sends the imported resources to FileSystem to compile data into Flatbuffer-Binary format and store the data in specified folder.
 
 
