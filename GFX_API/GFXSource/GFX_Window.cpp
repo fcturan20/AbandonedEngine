@@ -26,6 +26,6 @@ void GFX_WINDOW::Set_Focus(bool focus_active) {
 //Settings of window
 void GFX_WINDOW::Window_Settings(GFX_ENUM vsync_type, bool window_resizable) {}
 
-void* GFX_WINDOW::Get_Window_ID() const {
-	return WINDOW;
+void* GFX_WINDOW::Get_Window_GPU_ContentID() const {
+	return GPU_CONTEXT;
 }

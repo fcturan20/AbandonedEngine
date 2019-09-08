@@ -10,8 +10,10 @@ private:
 	friend class OGL3_Renderer;
 	
 	unsigned int ID;
-	GFX_ENUM DIMENSION;
+	TuranAPI::TuranAPI_ENUMs DIMENSION;
 	GFX_ENUM FORMAT;
 	GFX_ENUM ATTACHMENT;
-	GFX_ENUM FORMAT_VALUETYPE;
+	TuranAPI::TuranAPI_ENUMs FORMAT_VALUETYPE;
+public:
+	unsigned int Get_ID();
 };

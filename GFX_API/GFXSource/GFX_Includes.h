@@ -1,6 +1,5 @@
 #pragma once
 #include "TuranAPI/API_includes.h"
-using namespace TuranAPI;
 #include "GFX_ENUMs.h"
 
 #ifdef WINDOWS10_FORENGINE

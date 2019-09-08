@@ -1,5 +1,9 @@
 #include "TuranEngine.h"
 #include "TuranAPI/API_FileSystem.h"
+#include "TuranAPI/API_IMGUI.h"
+
+#include "GFXSource/GFX_Core.h"
+#include "Graphics/RenderContext/Game_RenderGraph.h"
 
 /*
 		Turan Engine Running Process:
@@ -29,34 +33,50 @@ Note: Load resources later by another function!
 void TuranEngine::Start_Engine() {
 	cout << "Engine is starting!\n";
 	SYSTEM_INSPECTOR::Detect_Computer_Specs();
-	
-	File_System::FileSystem::Start_FileSystem();
+	Start_GFX();
+	cout << endl;
+
+	GFX->Bind_RenderGraph(new Game_RenderGraph);
 }
 
 void TuranEngine::Start_GFX() {
-	TuranAPI_ENUMs Best_GFX_API = SYSTEM_INSPECTOR::Return_best_GFX_API();
-	switch (Best_GFX_API) {
-	case OPENGL3:
-		GFX = new OGL3_SYS;
-		break;
-	default:
-		cout << "Best GFX_API isn't supported or returned ENGINE_ENUMs is wrong! GFX_API's value is: << " << Best_GFX_API << "\n";
-	}
+	GFX = SYSTEM_INSPECTOR::Create_Best_GFX_API();
 }
+
 
 void TuranEngine::Close_Engine(string reason) {
 	ApplicationClose_Reason = reason;
 	ShouldApplicationClose = true;
 }
 
+//In final product, Input Handling will use OS functionality, not GLFW!
+void TuranEngine::Take_Inputs() {
+	GFX->Take_Inputs();
+	if (GFX->Get_Window_List().size() == 0) {
+		ShouldApplicationClose = true;
+		ApplicationClose_Reason = "GFX_API is closed because of no window is active!\n";
+	}
+}
+
+void Engine_Closing_Operations();
+
+//Check if something called to Close_Engine() or check predefined circumstances!
 bool TuranEngine::ShouldEngine_Close() {
 	if (!ShouldApplicationClose) {
 		//There is no crashing error so far, so check all of the engine to see if there is an close event!
 		//If close event, return true to close the app!
 
+		if (!TuranAPI::IMGUI::IMGUI::Is_IMGUI_Open) {
+			ShouldApplicationClose = true;
+			ApplicationClose_Reason = "IMGUI main window is closed!";
+			Engine_Closing_Operations();
+			return true;
+		}
+
 		//If there isn't any window, close the application!
 		if (GFX->Get_Window_List().size() == 0) {
 			ApplicationClose_Reason = "All windows are closed!";
+			Engine_Closing_Operations();
 			return true;
 		}
 
@@ -64,10 +84,16 @@ bool TuranEngine::ShouldEngine_Close() {
 		return false;
 	}
 	else {
+		Engine_Closing_Operations();
 		return true;
 	}
 }
 
 string TuranEngine::Why_Engine_Closed() {
 	return ApplicationClose_Reason;
+}
+
+void Engine_Closing_Operations() {
+	//IMGUI, GLFW and GLAD resources are destroyed by GFX!
+	TuranEngine::GFX->Destroy_GFX_Resources();
 }

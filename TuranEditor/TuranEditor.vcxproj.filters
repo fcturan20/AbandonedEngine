@@ -15,39 +15,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Content\Materials\PostProcess_Material.cpp">
+    <ClCompile Include="EditorSource\Editors\Content_Browser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Content\Materials\Surface_Material.cpp">
+    <ClCompile Include="EditorSource\Editors\Main_Window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\Editors\Status_Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EditorSource\Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\ResourceCompiler\DataFormats\Model_Data_Format.cpp">
+    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Material_Type_Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\ResourceCompiler\EditorFileSystem\EditorFileSystem_Core.cpp">
+    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Model_Loader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\ResourceCompiler\ResourceLoaders\Mesh_Loader.cpp">
+    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Texture_Loader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\FileSystem\EditorFileSystem_Core.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\MaterialInstance_Import.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\Editors\IMGUI_DEFAULT_WINDOWs.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\Editors\Scene_Editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorSource\Editors\Properties_Window.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Content\Model_DiskFiles.h">
+    <ClInclude Include="EditorSource\Editors\Content_Browser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Content\Scene.h">
+    <ClInclude Include="EditorSource\Editors\EDITORs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Content\Materials\PostProcess_Material.h">
+    <ClInclude Include="EditorSource\Editors\Main_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Content\Materials\Surface_Material.h">
+    <ClInclude Include="EditorSource\Editors\Properties_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Content\Materials\Materials.h">
+    <ClInclude Include="EditorSource\Editors\Status_Window.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EditorSource\Editor.h">
@@ -56,30 +74,34 @@
     <ClInclude Include="EditorSource\Editor_Includes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Content\Materials\Shaders\Shaders.h">
+    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Material_Type_Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditorSource\ResourceCompiler\DataFormats\ALL_DATA_FORMATs.h">
+    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Model_Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditorSource\ResourceCompiler\DataFormats\Model_Data_Format.h">
+    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Texture_Loader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditorSource\ResourceCompiler\EditorFileSystem\EditorFileSystem_Core.h">
+    <ClInclude Include="EditorSource\FileSystem\EditorFileSystem_Core.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EditorSource\ResourceCompiler\ResourceLoaders\Mesh_Loader.h">
+    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\MaterialInstance_Import.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSource\Editors\IMGUI_DEFAULT_WINDOWs.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EditorSource\Editors\Scene_Editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\Materials\Shaders\Main.frag" />
-    <None Include="Content\Materials\Shaders\Main.vert" />
-    <None Include="Content\Materials\Shaders\Post_Process.frag" />
-    <None Include="Content\Materials\Shaders\Post_Process.vert" />
     <None Include="Content\Files\EditorSpecific\File_List.bin">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="assimp.dll" />
     <None Include="File_List.enginecont" />
+    <None Include="imgui.ini" />
   </ItemGroup>
 </Project>

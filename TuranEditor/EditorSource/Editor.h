@@ -1,12 +1,10 @@
 #pragma once
 #include "Editor_Includes.h"
+#include "EngineSource/TuranEngine.h"
+#include "TuranAPI/API_IMGUI.h"
 
-//Contents of Editor!
+//Include editor file system to run file I/O operations
+#include "FileSystem/EditorFileSystem_Core.h"
 
-#include "Content/Materials/Shaders/Shaders.h"
-#include "Content/Materials/Materials.h"
-#include "Content/Model_DiskFiles.h"
-#include "Content/Scene.h"
-
-//Source of Editor!
-#include "EditorSource/ResourceCompiler/EditorFileSystem/EditorFileSystem_Core.h"
+//Include all of the editors (Content Browser, Property Editor, Material Editor etc.)
+#include "Editors/EDITORs.h"

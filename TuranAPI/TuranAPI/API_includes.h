@@ -4,6 +4,8 @@
 3) STD libraries
 4) Image read/write
 5) Run-time Type Introspection (Just enable in VS 2019, no specific code!)
+6) IMGUI (Needs to be implemented for each GFX_API)
+7) Basic profiler (Only calculates time)
 
 	Future supports:
 1) Multi-thread, ECS, Job
@@ -45,6 +47,15 @@ using namespace glm;
 #error "TuranEngine only supports Windows 10 for now!"
 #endif // _WINDOWS_
 
+namespace TuranAPI {
+	//Stop the application and ask the user to close or continue!
+	//I'm using this to remind myself there are problems while I'm working on another thing!
+	void TURANAPI Breakpoint();
+
+	template<typename T>
+	unsigned int TURANAPI Delete_Items_from_Vector(vector<T>* Vector_to_EraseSomething, vector<bool>* ShouldErase_forEachIndex, unsigned int start_index);
+}
 
 //Some basic functionality to do debugging!
 #define GET_VARIABLE_NAME(Variable) (#Variable)
+#define SLEEP_THREAD(Variable) std::this_thread::sleep_for(chrono::seconds(Variable));

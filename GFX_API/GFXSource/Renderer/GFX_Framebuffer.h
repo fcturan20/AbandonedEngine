@@ -17,4 +17,5 @@ public:
 
 	unsigned int MSAA_spp;
 	unsigned int WIDTH, HEIGHT;
+	GFX_Framebuffer(unsigned int width, unsigned int height);
 };

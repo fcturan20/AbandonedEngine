@@ -18,7 +18,7 @@ private:
 	GFX_ENUM DISPLAY_MODE;
 	string WINDOW_NAME;
 	GFX_ENUM VSYNC_MODE;
-	void* WINDOW;
+	void* GPU_CONTEXT;
 
 	GFX_WINDOW(unsigned int width, unsigned int height, GFX_ENUM display_mode, GFX_MONITOR* display_monitor, unsigned int refresh_rate, string window_name, GFX_ENUM v_sync);
 
@@ -38,5 +38,5 @@ public:
 	
 	//Settings of window
 	void Window_Settings(GFX_ENUM vsync_type, bool window_resizable);
-	void* Get_Window_ID() const;
+	void* Get_Window_GPU_ContentID() const;
 };

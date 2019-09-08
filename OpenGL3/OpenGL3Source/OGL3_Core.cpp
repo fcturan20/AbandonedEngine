@@ -1,4 +1,6 @@
 #include "OGL3_Core.h"
+#include "IMGUI/IMGUI_OGL3.h"
+using namespace TuranAPI::IMGUI;
 
 OGL3_SYS::OGL3_SYS() {
 	//Set static GFX_API variable to created OGL3_SYS, because there will only one GFX_API in run-time
@@ -14,9 +16,13 @@ OGL3_SYS::OGL3_SYS() {
 	//Create main window for Turan Engine
 	Create_Window("Turan Engine");
 
-	//Set current context as main window (Turan Engine)!
-	glfwMakeContextCurrent((GLFWwindow*)ONSCREEN_Windows[0]->Get_Window_ID());
+	FileSystem = new OGL3_FileSystem;
+	FileSystem->Load_GFX_Contents_fromDisk();
+
+	IMGUI::GFX_IMGUI = new IMGUI_OGL3;
+	IMGUI::Create_Context(ONSCREEN_Windows[0]->GPU_CONTEXT);
 }
+
 
 	//WINDOW OPERATIONs
 
@@ -29,7 +35,7 @@ void OGL3_SYS::Change_Window_Resolution(GFX_WINDOW* window, unsigned int width, 
 void OGL3_SYS::Set_Window_Focus(GFX_WINDOW* window, bool is_focused) {
 	if (is_focused) {
 		for (unsigned int i = 0; i < ONSCREEN_Windows.size(); i++) {
-			if (window->Get_Window_ID() == ONSCREEN_Windows[i]->Get_Window_ID()) {
+			if (window->Get_Window_GPU_ContentID() == ONSCREEN_Windows[i]->Get_Window_GPU_ContentID()) {
 				FOCUSED_WINDOW_index = i;
 				return;
 			}
@@ -41,8 +47,21 @@ void OGL3_SYS::Set_Window_Focus(GFX_WINDOW* window, bool is_focused) {
 	}
 }
 
+void OGL3_SYS::Close_Window(GFX_WINDOW* window) {
+	//First, destroy window and its resources with glfwDestroyWindow
+	glfwDestroyWindow((GLFWwindow*)window->GPU_CONTEXT);
+
+	//Then delete it from global GFX_WINDOW vector
+	int window_list_index;
+	for (int i = 0; i < ONSCREEN_Windows.size(); i++) {
+		if (window == ONSCREEN_Windows[i])
+			window_list_index = i;
+	}
+	ONSCREEN_Windows.erase(ONSCREEN_Windows.begin() + window_list_index);
+}
+
 void OGL3_SYS::GFX_Error_Callback(int error_code, const char* description) {
-	cout << "\n\n\nERROR: CODE: " << error_code << endl;
+	cout << "\n\n\nGLFW ERROR: CODE: " << error_code << endl;
 	cout << "Description: " << description << endl;
 	this_thread::sleep_for(chrono::seconds(10));
 }
@@ -93,8 +112,8 @@ void OGL3_SYS::Create_Window(string name) {
 	//Create window as it will share resources with Renderer Context to get display texture!
 	GLFWwindow* window_id = glfwCreateWindow(1280, 720, name.c_str(), NULL, (GLFWwindow*)RENDERER->Renderer_Context);
 	GFX_WINDOW* gfx_window = new GFX_WINDOW(1280, 720, GFX_WINDOWED, CONNECTED_Monitors[0], CONNECTED_Monitors[0]->REFRESH_RATE, name, V_SYNC_OFF);
-	gfx_window->WINDOW = window_id;
-	glfwSetWindowMonitor(window_id, NULL, 0, 0, gfx_window->WIDTH, gfx_window->HEIGHT, 60);
+	gfx_window->GPU_CONTEXT = window_id;
+	glfwSetWindowMonitor(window_id, NULL, 100, 100, gfx_window->WIDTH, gfx_window->HEIGHT, 60);
 
 	//Check and Report if GLFW fails
 	if (window_id == NULL) {
@@ -103,18 +122,17 @@ void OGL3_SYS::Create_Window(string name) {
 	}
 
 	glfwMakeContextCurrent(window_id);
-	glfwSwapInterval(0);
+	glfwSwapInterval(1);
 	//GLAD is already loaded, so send Quad Mesh to context because we will render the texture given by Renderer in GFX->Refresh_Windows()!
 	((OGL3_Renderer*)RENDERER)->Send_Quad_to_GPU();
 
-
 	ONSCREEN_Windows.push_back(gfx_window);
-	Set_Window_Callbacks();
 }
 
 void OGL3_SYS::Create_Renderer() {
 	//Create renderer class!
 	RENDERER = new OGL3_Renderer;
+	RENDERER->Renderer_OBJ = RENDERER;
 
 	//Create offscreen renderer window to render everything!
 	glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -134,19 +152,30 @@ void OGL3_SYS::Create_Renderer() {
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		cout << "We failed to create the window because of GLAD" << endl;
 	}
+
+	//Set IMGUI's main renderer to IMGUI_OGL3!
+	//All of the IMGUI contexts will use IMGUI's functionality to specify their rendering data!
+	//But IMGUI will always use this class to render these datas!
+	//So, GFX_IMGUI shouldn't be Window Context specific!
+	IMGUI::IMGUI::GFX_IMGUI = new IMGUI_OGL3;
+	if (!IMGUI::IMGUI::Check_IMGUI_Version()) {
+		cout << "Error: IMGUI version check error!\n";
+	}
 }
 
+//Delete this function!
 void OGL3_SYS::Set_Window_Callbacks() {
+	
 	for (const GFX_WINDOW* WINDOW : Get_Window_List()) {
-		GLFWwindow* window = (GLFWwindow*)(WINDOW->Get_Window_ID());
+		GLFWwindow* window = (GLFWwindow*)(WINDOW->Get_Window_GPU_ContentID());
 
 		glfwMakeContextCurrent(window);
-		glfwSetFramebufferSizeCallback(window, OGL3_SYS::framebuffer_size_callback);
-		glfwSetWindowFocusCallback(window, OGL3_SYS::window_focus_callback);
-		glfwSetWindowCloseCallback(window, OGL3_SYS::window_close_callback);
-		glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+		//glfwSetFramebufferSizeCallback(window, OGL3_SYS::framebuffer_size_callback);
+		//glfwSetWindowFocusCallback(window, OGL3_SYS::window_focus_callback);
+		//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 		cout << "Callbacks set for window: " << WINDOW->Get_Window_Name() << endl;
 	}
+	
 }
 
 
@@ -172,23 +201,28 @@ void OGL3_SYS::window_close_callback(GLFWwindow* window) {
 	GFX_API_OBJ->Close_Window(WINDOW);
 	cout << "Leaving close callback!\n";
 }
+void OGL3_SYS::Bind_Window_Context(GFX_WINDOW* window) {
+	glfwMakeContextCurrent((GLFWwindow*)window->GPU_CONTEXT);
+}
 
 
-//RENDERING OPERATIONs
-
-void OGL3_SYS::Creation() {
+	//RENDERING OPERATIONs
+void OGL3_SYS::Bind_Renderer_Context() {
 	glfwMakeContextCurrent((GLFWwindow*)RENDERER->Renderer_Context);
-	//Start creation of Renderer resources (Draw Passes etc.)
-	glfwMakeContextCurrent((GLFWwindow*)ONSCREEN_Windows[0]->Get_Window_ID());
 }
 
 void OGL3_SYS::New_Frame() {
-	GLFWwindow* focused_window = glfwGetCurrentContext();
-	glfwMakeContextCurrent((GLFWwindow*)RENDERER->Renderer_Context);
-	//Render new frame!
-	glfwMakeContextCurrent(focused_window);
+	for (GFX_RenderGraph* RENDERGRAPH : BOUND_RenderGraphs) {
+		RENDERGRAPH->Update_Resources();
+	}
+	cout << "New frame resources set for bound RenderGraphs!\n";
 }
 
+void OGL3_SYS::Render_RenderGraph(GFX_RenderGraph* RenderGraph) {
+	RenderGraph->Run_RenderGraph();
+}
+
+//Add this code to RenderGraph!
 //Each window has Quad Mesh as VAO 1!
 void OGL3_SYS::Refresh_Windows() {
 	//Display G-Buffer Color Texture on focused window!
@@ -224,33 +258,17 @@ void OGL3_SYS::Refresh_Windows() {
 	}
 }
 
-
-
-
-void OGL3_SYS::Close_Window(GFX_WINDOW* window) {
-	//First, destroy window and its resources with glfwDestroyWindow
-	glfwDestroyWindow((GLFWwindow*)window->WINDOW);
-
-	//Then delete it from global GFX_WINDOW vector
-	int window_list_index;
-	for (int i = 0; i < ONSCREEN_Windows.size(); i++) {
-		if (window == ONSCREEN_Windows[i])
-			window_list_index = i;
-	}
-	ONSCREEN_Windows.erase(ONSCREEN_Windows.begin() + window_list_index);
-
-	//If there is no window, close application
-	if (ONSCREEN_Windows.size() == 0) {
-		Destroy_GFX_Resources();
-		glfwTerminate();
-	}
+void OGL3_SYS::Render_IMGUI() {
+	glfwMakeContextCurrent((GLFWwindow*)ONSCREEN_Windows[0]->GPU_CONTEXT);
+	IMGUI::IMGUI::Render_Frame();
+	IMGUI::IMGUI::Platform_Settings();
 }
 
 
 //Renderer Operations
 void OGL3_SYS::Swap_Buffers() {
 	for (GFX_WINDOW* window : ONSCREEN_Windows) {
-		GLFWwindow* window_id = (GLFWwindow*)window->WINDOW;
+		GLFWwindow* window_id = (GLFWwindow*)window->GPU_CONTEXT;
 		glfwSwapBuffers(window_id);
 	}
 }
@@ -323,8 +341,50 @@ void OGL3_SYS::Destroy_GFX_Resources() {
 		delete monitor;
 	}
 	for (GFX_WINDOW* window : ONSCREEN_Windows) {
+		Close_Window(window);
 		delete window;
 	}
-	delete RENDERER;
-	delete this;
+	IMGUI::IMGUI::Destroy_IMGUI_Resources();
+	RENDERER->~GFX_Renderer();
+	glfwTerminate();
+}
+
+void OGL3_SYS::Load_GFX_Files() {
+	cout << "ERROR: Define how to load and compile GFX_Files!\n";
+	cout << "We are loading after initializing the Renderer, because we want to compile everything at start!\n";
+	TuranAPI::Breakpoint();
+}
+
+
+
+void OGL3_SYS::Show_Texture_on_Window(TuranAPI::File_System::Texture_Resource* TEXTURE) {
+	glfwMakeContextCurrent((GLFWwindow*)ONSCREEN_Windows[0]->GPU_CONTEXT);
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, TEXTURE->GL_ID, 0);
+
+}
+
+void OGL3_SYS::Check_GL_Errors(const string& status) {
+	int error = glGetError();
+	//If there is a error, first print the status!
+	if (error != NULL) {
+		cout << "In status: " << status << endl;
+	}
+	else {
+		return;
+	}
+
+	//Print the error!
+	if (error == GL_INVALID_OPERATION) {
+		cout << "Error: GL_INVALID_OPERATION!\n\n";
+	}
+	if (error == GL_INVALID_ENUM) {
+		cout << "Error: GL_INVALID_ENUM!\n\n";
+	}
+	if (error == GL_INVALID_VALUE) {
+		cout << "Error: GL_INVALID_VALUE!\n\n";
+	}
+	//I'm using NSight for graphic debugging for now, so I don't need this!
+	//But if I won't use NSight for a time, I should activate this see real-usage graphic bugs!
+	//SLEEP_THREAD(10);
 }

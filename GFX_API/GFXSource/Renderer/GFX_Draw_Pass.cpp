@@ -1,6 +1,6 @@
 #include "GFX_Draw_Pass.h"
 
-GFX_Draw_Pass::GFX_Draw_Pass() : FRAMEBUFFER(new GFX_Framebuffer) {
+GFX_Draw_Pass::GFX_Draw_Pass() : FRAMEBUFFER() {
 	//When a Draw Pass is created, add it to the Renderer's Draw Pass list
 	Draw_Passes.push_back(this);
 }

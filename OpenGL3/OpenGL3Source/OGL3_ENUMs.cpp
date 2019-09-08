@@ -4,6 +4,9 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
+#include "TuranAPI/API_includes.h"
+using namespace TuranAPI;
+
 int Find_Texture_Attachment_Type(GFX_ENUM attachment) {
 	switch (attachment) {
 	case GFX_TEXTURE_COLOR0_ATTACHMENT:
@@ -12,18 +15,19 @@ int Find_Texture_Attachment_Type(GFX_ENUM attachment) {
 		return GL_DEPTH_ATTACHMENT;
 
 	default:
-		cout << "Error: Intended Texture Attachment isn't supported for now\n";
+		cout << "Error: Intended Texture Attachment isn't supported by OpenGL3 for now\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
 
-int Find_Texture_Dimension(GFX_ENUM dimension) {
+int Find_Texture_Dimension(TuranAPI_ENUMs dimension) {
 	switch (dimension) {
-	case GFX_TEXTURE_2D:
+	case API_TEXTURE_2D:
 		return GL_TEXTURE_2D;
-
 	default:
-		cout << "Error: Intended Texture Dimension isn't supported for now\n";
+		cout << "Error: Intended Texture Dimension isn't supported by OpenGL3 for now\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
@@ -31,94 +35,90 @@ int Find_Texture_Dimension(GFX_ENUM dimension) {
 int Find_Texture_Format(GFX_ENUM format) {
 	switch (format) {
 	case GFX_COLORTEXTURE_FORMAT:
-		return GL_RGB;
+		return GL_RGBA;
 	case GFX_DEPTHTEXTURE_FORMAT:
 		return GL_DEPTH_COMPONENT;
-
 	default:
-		cout << "Error: Intended Texture Format isn't supported for now!\n";
+		cout << "Error: Intended Texture Format isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
 
-int Find_Texture_Channel_Type(GFX_ENUM texture_format) {
+int Find_RenderTarget_Channel_Type(GFX_ENUM texture_format) {
 	switch (texture_format) {
 	case GFX_COLORTEXTURE_FORMAT:
-		return GL_RGB;
+		return GL_RGBA;
 	case GFX_DEPTHTEXTURE_FORMAT:
 		return GL_DEPTH_COMPONENT;
-	case GFX_TEXTURE_RGB:
+	default:
+		cout << "Error: Intended texture format isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
+		return -1;
+	}
+}
+
+int Find_Texture_Channel_Type(TuranAPI::TuranAPI_ENUMs channel_type) {
+	switch (channel_type) {
+	case API_TEXTURE_RGB:
 		return GL_RGB;
-	case GFX_TEXTURE_RGBA:
+	case API_TEXTURE_RGBA:
 		return GL_RGBA;
-
 	default:
-		cout << "Error: Intended texture format isn't supported by Find_Texture_Channel_Type()\n";
+		cout << "Error: Intended texture channel type isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
 
-int Find_Texture_Value_Type(GFX_ENUM value_type) {
+int Find_Texture_Value_Type(TuranAPI_ENUMs value_type) {
 	switch (value_type) {
-	case GFX_UNSIGNED_BYTE:
+	case VAR_UBYTE8:
 		return GL_UNSIGNED_BYTE;
-	case GFX_FLOAT:
+	case VAR_BYTE8:
+		return GL_BYTE;
+	case VAR_UINT32:
+		return GL_UNSIGNED_INT;
+	case VAR_INT32:
+		return GL_INT;
+	case VAR_FLOAT32:
 		return GL_FLOAT;
-
 	default:
-		cout << "Error: Intended Texture Value Type isn't supported for now!\n";
+		cout << "Error: Intended Texture Value Type isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
 
-int Find_Texture_Wrapping(GFX_ENUM wrapping) {
+int Find_Texture_Wrapping(TuranAPI_ENUMs wrapping) {
 	switch (wrapping) {
-	case GFX_REPEAT:
+	case API_TEXTURE_REPEAT:
 		return GL_REPEAT;
-	case GFX_MIRRORED_REPEAT:
+	case API_TEXTURE_MIRRORED_REPEAT:
 		return GL_MIRRORED_REPEAT;
-	case GFX_CLAMP_TO_EDGE:
+	case API_TEXTURE_CLAMP_TO_EDGE:
 		return GL_CLAMP_TO_EDGE;
-
 	default:
-		cout << "Error: Unsupported wrapping type!\n";
+		cout << "Error: Intended Wrapping Type isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
 	}
 }
 
-int Find_Texture_Mipmap_Filtering(GFX_ENUM mipmap_filter) {
+int Find_Texture_Mipmap_Filtering(TuranAPI_ENUMs mipmap_filter) {
 	switch (mipmap_filter) {
-	case GFX_LINEAR_FROM_1MIP:
-		return GL_LINEAR_MIPMAP_NEAREST;
-	case GFX_LINEAR_FROM_2MIP:
+	case API_TEXTURE_LINEAR_FROM_1MIP:
+		return GL_LINEAR;
+	case API_TEXTURE_LINEAR_FROM_2MIP:
 		return GL_LINEAR_MIPMAP_LINEAR;
-	case GFX_NEAREST_FROM_1MIP:
-		return GL_NEAREST_MIPMAP_NEAREST;
-	case GFX_NEAREST_FROM_2MIP:
+	case API_TEXTURE_NEAREST_FROM_1MIP:
+		return GL_NEAREST;
+	case API_TEXTURE_NEAREST_FROM_2MIP:
 		return GL_NEAREST_MIPMAP_LINEAR;
-
 	default:
-		cout << "Error: Unsupported mipmap filtering type!\n";
+		cout << "Error: Intended Mipmap Filtering Type isn't supported by OpenGL3 for now!\n";
+		this_thread::sleep_for(chrono::seconds(5));
 		return -1;
-	}
-}
-
-void Check_OpenGL_Errors(string status) {
-	int error = glGetError();
-	//If there is a error, first print the status!
-	if (error != NULL) {
-		cout << "In status: " << status << endl;
-	}
-
-	//Print the error!
-	if (error == GL_INVALID_OPERATION) {
-		cout << "Error: GL_INVALID_OPERATION!\n\n";
-	}
-	if (error == GL_INVALID_ENUM) {
-		cout << "Error: GL_INVALID_ENUM!\n\n";
-	}
-	if (error == GL_INVALID_VALUE) {
-		cout << "Error: GL_INVALID_VALUE!\n\n";
 	}
 }
 

@@ -50,6 +50,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GFX_API\GFX_API.vcxproj">
+      <Project>{3859b6ef-aec4-48d8-b0bc-66b8d9f81b88}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\OpenGL3\OpenGL3.vcxproj">
+      <Project>{72926232-e64b-485e-9b9d-84ba815d0324}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TuranAPI\TuranAPI.vcxproj">
+      <Project>{914f0aa8-3d8f-44de-a2bf-a3a93b8a858e}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\TuranEngine\TuranEngine.vcxproj">
+      <Project>{2d4d9bd7-3cdd-4672-a2f5-2951457d4f0d}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

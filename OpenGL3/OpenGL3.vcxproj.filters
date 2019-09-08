@@ -21,55 +21,52 @@
     <ClInclude Include="OpenGL3Source\OGL3_ENUMs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_Draw_Pass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_Material.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_Renderer_Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_RenderGraph.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_Shader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGL3Source\Renderer\OGL3_Texture.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="OpenGL3Source\OpenGL3_Includes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL3Source\IMGUI\imgui_impl_glfw.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL3Source\IMGUI\imgui_impl_opengl3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL3Source\IMGUI\IMGUI_OGL3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL3Source\OGL3_Renderer_Core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="OpenGL3Source\OGL3_FileSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OpenGL3Source\glad.c">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="OpenGL3Source\OGL3_Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="OpenGL3Source\OGL3_ENUMs.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_Draw_Pass.cpp">
+    <ClCompile Include="OpenGL3Source\IMGUI\IMGUI_OGL3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_Material.cpp">
+    <ClCompile Include="OpenGL3Source\IMGUI\imgui_impl_glfw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_Renderer_Core.cpp">
+    <ClCompile Include="OpenGL3Source\IMGUI\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_RenderGraph.cpp">
+    <ClCompile Include="OpenGL3Source\glad.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_Shader.cpp">
+    <ClCompile Include="OpenGL3Source\OGL3_Renderer_Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGL3Source\Renderer\OGL3_Texture.cpp">
+    <ClCompile Include="OpenGL3Source\OGL3_FileSystem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GFX_ContentsList.gfxcont" />
   </ItemGroup>
 </Project>

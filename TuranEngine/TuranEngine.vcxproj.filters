@@ -15,42 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineSource\Engine\Controllers\Controller_Center.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Controllers\Gamepad_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Controllers\Keyboard_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Controllers\Mouse_Controller.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\EngineComponents\Camera.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\EngineComponents\EngineComponent.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_Data_Class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Meshes\Mesh_HEADER.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Meshes\MESH_OBJs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Meshes\Static_Model_Class.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EngineSource\Engine\Scene\Scene_Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EngineSource\Engine\ENGINE_HEADER.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -66,63 +30,31 @@
     <ClInclude Include="EngineSource\ENGINE_ENUMs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EngineSource\Engine\GameObject\GameObject.h">
+    <ClInclude Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.h">
+    <ClInclude Include="EngineSource\Graphics\RenderContext\Draw Passes\GBuffer_DrawPass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSource\Graphics\RenderContext\Draw Passes\Draw_Passes.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EngineSource\Engine\Controllers\Controller_Center.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Controllers\Gamepad_Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Controllers\Keyboard_Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Controllers\Mouse_Controller.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\EngineComponents\Camera.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\EngineComponents\Static_Model_Instance.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Meshes\Mesh_Data_Class.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Meshes\MESH_FILEs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Meshes\Static_Model_Class.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\Scene\Scene_Core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EngineSource\Graphics\SYSTEM_INSPECTOR.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="EngineSource\TuranEngine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EngineSource\Engine\EngineComponents\EngineComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EngineSource\Engine\GameObject\GameObject.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EngineSource\Graphics\RenderContext\Game_RenderGraph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSource\Graphics\RenderContext\Draw Passes\GBuffer_DrawPass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assimp.dll" />
     <None Include="nsight_profiler.cfg" />
-    <None Include="File_List.enginecont" />
   </ItemGroup>
 </Project>

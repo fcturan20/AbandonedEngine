@@ -21,6 +21,7 @@ public:
 	static GFX_API* GFX;
 
 	static void Start_Engine();
+	static void Take_Inputs();
 	static void Close_Engine(string reason);
 	static bool ShouldEngine_Close();
 	static string Why_Engine_Closed();

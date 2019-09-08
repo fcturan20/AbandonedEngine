@@ -1,6 +1,2 @@
 #pragma once
-#include <iostream>
-
-using namespace std;
-
-#include "EngineSource/TuranEngine.h"
+#include "TuranAPI/API_includes.h"

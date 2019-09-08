@@ -1,39 +1,57 @@
 #include "FileSystem_Core.h"
+//Data Formats created by Flatbuffers!
+#include <flatbuffers/flatbuffers.h>
+#include "DataFormats/GameResource_generated.h"
+
+#include "TuranAPI/Profiler/Profiler_Core.h"
+
 
 using namespace TuranAPI::File_System;
-FileSystem* FileSystem::SELF;
 unsigned int FileSystem::LAST_ID;
-string FileSystem::GlobalFileList_PATH = "File_List.enginecont";
-//Don't use this, instantinating this class doesn't do anyting!
-FileSystem::FileSystem(){}
 
 
-//FileList namespace
-using namespace Editor;
+void Save_a_MaterialType_toDisk(Resource_Type* Material_Type_Data);
+void Save_a_MaterialInst_toDisk(Resource_Type* Material_Inst_Data);
+void Save_a_StaticModel_toDisk(Resource_Type* Model_Data);
+void Save_a_Texture_toDisk(Resource_Type* Texture_Data);
+void Save_a_Scene_toDisk(Resource_Type* Scene_Data);
+void Save_a_FileList_toDisk(Resource_Type* FileList_Data);
 
-//Read File_List.enginecont to load the project!
-void FileSystem::Start_FileSystem() {
-	void* File_List_Data = nullptr;
-	unsigned int data_size;
-	File_List_Data = Read_BinaryFile(GlobalFileList_PATH);
 
-	//If File_List.enginecont isn't found, require user to give the correct path until he gives an available File_List.bin path!
-	while (File_List_Data == nullptr) {
-		cout << "File_List.enginecont couldn't be found, please enter the location:";
-		GlobalFileList_PATH = "";
-		cin >> GlobalFileList_PATH;
-		File_List_Data = Read_BinaryFile(GlobalFileList_PATH);
+string FileSystem::Read_TextFile(string path) {
+	const char* path_c_str = path.c_str();
+	ifstream textfile;
+	textfile.exceptions(ifstream::failbit | ifstream::badbit);
+	try
+	{
+		textfile.open(path_c_str);
+		stringstream string_data;
+		string_data << textfile.rdbuf();
+		textfile.close();
+		return string_data.str();
+	}
+	catch (ifstream::failure error)
+	{
+		cout << "Error: Text file couldn't read: " << path << endl;
+		return "";
 	}
 }
 
 //If read fails, data_ptr is set to nullptr!
-void* FileSystem::Read_BinaryFile(string path) {
+void* FileSystem::Read_BinaryFile(string path, unsigned int& size) {
 	std::ifstream Binary_File;
-	Binary_File.open(path, ios::binary | ios::in);
+	Binary_File.open(path, ios::binary | ios::in | ios::ate);
 	if (!(Binary_File.is_open())) {
 		cout << "There is no such file: " << path << endl;
 		return nullptr;
 	}
+
+	/*
+	int begin = Binary_File.tellg();
+	Binary_File.seekg(0, ios::end);
+	int end = Binary_File.tellg();
+	size = end - begin;
+	cout << "Size in Reading: " << size << endl;*/
 
 	Binary_File.seekg(0, ios::end);
 	int length = Binary_File.tellg();
@@ -41,6 +59,7 @@ void* FileSystem::Read_BinaryFile(string path) {
 	char* read_data = new char[length];
 	Binary_File.read(read_data, length);
 	Binary_File.close();
+	size = length;
 	return read_data;
 }
 
@@ -69,94 +88,71 @@ void FileSystem::Overwrite_BinaryFile(string path, void* data, unsigned int size
 		return;
 	}
 
+	if (data == nullptr) {
+		cout << "data is nullptr!\n";
+	}
+	if (size == 0) {
+		cout << "data size is 0!\n";
+	}
 	//Write to a file and finish all of the operation!
 	Output_File.write((const char*)data, size);
 	Output_File.close();
 	cout << path << " is outputted successfully!\n";
 }
 
-void FileSystem::Load_Resources(void* filelist_data) {
-	auto File_List = FileList::GetFileList(filelist_data);
-	auto File_Vector = File_List->FILE_LIST();
-	LAST_ID = File_List->LAST_ID();
-
-	//For each file that is in File_List.enginecont!
-	for (unsigned int i = 0; i < File_Vector->Length(); i++) {
-		auto FILE = File_Vector->Get(i);
-		const char* PATH = FILE->PATH()->c_str();
-		auto TYPE = FILE->TYPE();
-		auto ID = FILE->ID();
-
-		void* data = nullptr;
-		data = Read_BinaryFile(PATH);
-
-		//If compiled resource isn't found!
-		if (data == nullptr) {
-			cout << "Resource isn't found in path: " << PATH << endl;
-			continue;
-		}
-
-
-		Resource_File* file = new Resource_File(PATH, TYPE, ID);
-
-
-		//Create Scene* here, because Scene* should be created at last
-		//If the resource is valid!
-		switch (TYPE) {
-		case FileList::File_Type_Static_Model:
-			Load_Model(data, ID);
-
-			//Add here a call to Mesh_Loader!
-			break;
-		case FileList::File_Type_Scene:
-			cout << "There is a scene!\n";
-
-			//Initialize the Scene* pointer that is defined above!
-		}
-	}
-
-	auto NANOSUIT_FILE = File_Vector->Get(0);
-	cout << "First File's path is: " << NANOSUIT_FILE->PATH()->c_str() << endl;
+void FileSystem::Delete_File(string path) {
+	std::remove(path.c_str());
 }
 
 
-void FileSystem::Update_GlobalResourceList() {
-	cout << "Submitting the changes of Resource File class to disk!\n";
-	cout << "This means, new important resources is being saved to File_List.enginecont!\n";
 
-	//Create a flatbufferbuilder and FileList to build the data!
-	flatbuffers::FlatBufferBuilder builder(1024);
-	FileList::FileListBuilder file_list_builder(builder);
-
-	//Read each Resource_File struct and create a File struct for each of them!
-	//Store each created File struct in a vector to set FileList's vector!
-	vector<flatbuffers::Offset<Editor::FileList::File>> resources;
-	for (Resource_File* RESOURCE : Resource_File::ALL_RESOURCEs) {
-		FileList::FileBuilder file_build(builder);
-		file_build.add_PATH(builder.CreateString(RESOURCE->PATH));
-		file_build.add_TYPE(RESOURCE->TYPE);
-		file_build.add_ID(RESOURCE->ID);
-		auto finished_file = file_build.Finish();
-		resources.push_back(finished_file);
-	}
-	auto finished_vector = builder.CreateVector(resources);
-
-	//Create, initialize and finish editing the File_List!
-	file_list_builder.add_FILE_LIST(finished_vector);
-	file_list_builder.add_LAST_ID(LAST_ID);
-	auto finished_file_list = file_list_builder.Finish();
-	builder.Finish(finished_file_list);
-
-	//Get data pointer and data size from builder!
-	void* data = builder.GetBufferPointer();
-	unsigned int data_size = builder.GetSize();
-
-	//Overwrite the File_List with new File_List!
-	Overwrite_BinaryFile(GlobalFileList_PATH, data, data_size);
-}
 
 //There should be smart things, but I don't have time for that!
 //Every imported resource will have ID that isn't used before!
 unsigned int FileSystem::Create_Resource_ID() {
-	return LAST_ID + 1;
+	LAST_ID += 1;
+	return LAST_ID;
 }
+
+
+void FileSystem::Write_a_Resource_toDisk(Resource_Type* resource_data) {
+	resource_data->ID = Create_Resource_ID();
+
+	//Model Proccess
+	switch (resource_data->Get_Resource_Type()) {
+	case STATIC_MODEL_RESOURCE:
+		cout << "Compiles a Static_Model Flatbuffer data!\n";
+		Save_a_StaticModel_toDisk(resource_data);
+		break;
+	case MATERIAL_TYPE_RESOURCE:
+		cout << "Compiles a Material_Type Flatbuffer data!\n";
+		Save_a_MaterialType_toDisk(resource_data);
+		break;
+	case MATERIAL_INSTANCE_RESOURCE:
+		cout << "Compiles a Material_Instance Flatbuffer data!\n";
+		Save_a_MaterialInst_toDisk(resource_data);
+		break;
+	case TEXTURE_RESOURCE:
+		cout << "Compiles a Texture Flatbuffer data!\n";
+		Save_a_Texture_toDisk(resource_data);
+		break;
+	case FILE_LIST_RESOURCE:
+		cout << "Compiles a FileList Flatbuffer data!\n";
+		Save_a_FileList_toDisk(resource_data);
+		break;
+	case SCENE_RESOURCE:
+		cout << "Compiles a Scene Flatbuffer data!\n";
+		Save_a_Scene_toDisk(resource_data);
+		break;
+	default:
+		cout << "Error: This data type can't be saved to disk!\n";
+		TuranAPI::Breakpoint();
+	}
+}
+
+
+unsigned int FileSystem::Get_LAST_ID() {
+	return LAST_ID;
+}
+
+
