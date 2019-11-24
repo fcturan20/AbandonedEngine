@@ -20,13 +20,14 @@ void Editor_FileSystem::Start_EditorFileSystem() {
 }
 
 void Editor_FileSystem::Load_GameContents_fromDisk() {
-	cout << "Game Contents are being loaded now!\n";
-	TuranAPI::Profiler::Profiler_Core::Start_Timing();
+	TuranAPI::Profiler::Begin_Recording_Session("C:/dev/GameContentLoading_Profiling");
 
-	TuranAPI::File_System::FileSystem::Load_Resources_fromFileList(&GameContentList_onDisk);
-
-	cout << "Game Contents are loaded in " << TuranAPI::Profiler::Profiler_Core::Get_Timing_in_Seconds() << " seconds!\n";
-	TuranAPI::Profiler::Profiler_Core::End_Timing();
+	{
+		TuranAPI::Profiler::Profiled_Scope ProfilingScope("FirstScope");
+		cout << "Game Contents are being loaded now!\n";
+		TuranAPI::File_System::FileSystem::Load_Resources_fromFileList(&GameContentList_onDisk);
+	}
+	TuranAPI::Profiler::Stop_Recording_Session();
 	cout << "Game Contents loaded!\n";
 }
 

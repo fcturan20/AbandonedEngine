@@ -13,8 +13,8 @@ ResourceProperties_Window::ResourceProperties_Window(TuranAPI::File_System::Reso
 vector<string> UNIFORM_VAR_TYPE_NAMEs = { "Unsigned Integer 32-bit", "Integer 32-bit", "Float 32-bit", "Vec2 (2 float)", "Vec3 (3 float)", "Vec4 (4 float)", "Matrix 4x4", "Texture 2D" };
 string Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type);
 void Show_MaterialType_Properties(TuranAPI::File_System::Resource_Type* resource);
+void Show_Model_Properties(TuranAPI::File_System::Resource_Type* resource);
 void Show_MaterialInstance_Properties(TuranAPI::File_System::Resource_Type* resource);
-
 void Show_Texture_Properties(TuranAPI::File_System::Resource_Type* resource);
 
 void ResourceProperties_Window::Run_Window() {
@@ -35,6 +35,9 @@ void ResourceProperties_Window::Run_Window() {
 		break;
 	case TuranAPI::MATERIAL_INSTANCE_RESOURCE:
 		Show_MaterialInstance_Properties(RESOURCE);
+		break;
+	case TuranAPI::STATIC_MODEL_RESOURCE:
+		Show_Model_Properties(RESOURCE);
 		break;
 	default:
 		cout << "This type's properties can't be shown by Properties Window!\n";
@@ -99,6 +102,12 @@ void Show_Texture_Properties(TuranAPI::File_System::Resource_Type* resource) {
 	IMGUI::Display_Texture(&TEXTURE->GL_ID, 1024, 1024);
 }
 
+void Show_Model_Properties(TuranAPI::File_System::Resource_Type* resource) {
+	TuranAPI::File_System::Static_Model_Data* model_data_resource = (TuranAPI::File_System::Static_Model_Data*)resource;
+
+	IMGUI::Text("Model Name: " + model_data_resource->NAME);
+	IMGUI::Text("Mesh Number: " + to_string(model_data_resource->Get_Mesh_Number()));
+}
 
 string Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type) {
 	switch (uniform_var_type) {
@@ -122,6 +131,7 @@ string Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type) {
 		return "Error, Uniform_Var_Type isn't supported by Find_UNIFORM_VARTYPE_Name!\n";
 	}
 }
+
 
 
 
@@ -170,7 +180,6 @@ void Show_StaticModelComp_Properties(TuranAPI::Game_Object::GameComponent* Compo
 		}
 		IMGUI::End_Tree();
 	}
-
 
 }
 void Show_CameraComp_Properties(TuranAPI::Game_Object::GameComponent* Component) {

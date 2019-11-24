@@ -45,6 +45,8 @@ namespace TuranAPI {
 			static Resource_Type* Load_Texture(void* data, unsigned int id, const string& path);
 			static Resource_Type* Load_Scene(void* data, unsigned int id, const string& path);
 
+
+
 			static unsigned int Get_LAST_ID();
 
 			//Save a resource to disk! Any type is possible (GFX_Default, Engine_Default, User etc.)

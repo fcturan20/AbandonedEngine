@@ -38,11 +38,6 @@ unsigned int Static_Model_Data::Get_Mesh_Number() {
 Static_Mesh_Data* Static_Model_Data::Get_Mesh_byIndex(unsigned int index) {
 	return MESH_ARRAY_PTR[index];
 }
-void Static_Model_Data::Set_Mesh_Data(Static_Mesh_Data** mesh_array, unsigned int mesh_number) {
-	MESH_ARRAY_PTR = mesh_array;
-	MESH_NUMBER = mesh_number;
-
-}
 void Static_Model_Data::Set_ID_and_NAME(unsigned int id, string name) {
 	ID = id;
 	NAME = name;

@@ -46,6 +46,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)TuranAPI;$(SolutionDir)$(ProjectName)\EngineSource;$(SolutionDir)GFX_API;$(SolutionDir)OpenGL3;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WINDOWS10_FORENGINE;ENGINE_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>

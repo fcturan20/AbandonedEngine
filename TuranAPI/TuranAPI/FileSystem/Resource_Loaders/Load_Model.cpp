@@ -68,7 +68,6 @@ Resource_Type* FileSystem::Load_Model(void* data, unsigned int id, const string&
 		unsigned int total_size = 0;
 		total_size += mesh->VERTEX_NUMBER * ((sizeof(vec3) * 4) + sizeof(vec2));
 		total_size += mesh->INDICEs_LENGTH * sizeof(unsigned int);
-		cout << "Size in bytes: " << total_size << endl;
 	}
 	return model;
 }

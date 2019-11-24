@@ -54,18 +54,19 @@ void Model_Import_Window::Run_Window() {
 
 
 
+
+
 /*This functions loads models as merges every mesh that has same material index in .obj!
 So, we have to detect meshes that has same material index and create one mesh from them!
 Loading Scheme:
-1) First, create a vector to store all created Static Meshes! When a model loaded, created Static_Mesh*s are put into this vector!
-2) For each Mesh_File, do the things below!
-3) Read the file!
-4) Create a vector to store mesh indexes that has same material for every material of the model!
-5) Process every node in the model to put mesh indexes into proper meshlist defined above!
-6) When proccessing done, call Create_Meshes() and create one mesh for each material index!
-7) When Create_Meshes() finished, put created Static_Mesh*s into ALL_Static_Meshes
+1) Read the file!
+2) Create a vector to store mesh indexes that has same material for every material of the model!
+3) Process every node in the model to put mesh indexes into proper meshlist defined above!
+4) When proccessing done, call Create_Meshes() and create one mesh for each material index!
+5) When Create_Meshes() finished, put created Static_Mesh*s into ALL_Static_Meshes
 */
 
+/*
 Static_Model_Data* Load_Model(const aiScene* Scene, const vector<vector<unsigned int>>* MeshList_per_Material, string name, string Directory) {
 	unsigned int MESH_NUMBER = MeshList_per_Material->size();
 
@@ -199,7 +200,7 @@ Static_Model_Data* Load_Model(const aiScene* Scene, const vector<vector<unsigned
 			texture->HEIGHT = height;
 			material->Set_Uniform_Data("texture_diffuse", (void*)& texture->ID);
 		}
-		*/
+		
 		mesh_array[meshlist_index] = mesh_data;
 	}
 
@@ -217,6 +218,7 @@ Static_Model_Data* Load_Model(const aiScene* Scene, const vector<vector<unsigned
 }
 
 
+
 void Process_Node(const aiScene* Scene, aiNode* Node, vector<vector<unsigned int>>* mesh_indexes_per_material) {
 	for (unsigned int i = 0; i < (Node->mNumMeshes); i++) {
 		//Find mesh's material index and add mesh to its material's vector!
@@ -229,7 +231,99 @@ void Process_Node(const aiScene* Scene, aiNode* Node, vector<vector<unsigned int
 		//Process child nodes!
 		Process_Node(Scene, Node->mChildren[i], mesh_indexes_per_material);
 	}
+}*/
+
+Static_Mesh_Data* Load_MeshData(const aiMesh* data) {
+	Static_Mesh_Data* MESH = new Static_Mesh_Data;
+	MESH->Material_Index = data->mMaterialIndex;
+
+	//Vertex Positions
+	vec3* Positions = new vec3[data->mNumVertices];
+	for (unsigned int i = 0; i < data->mNumVertices; i++) {
+		Positions[i].x = data->mVertices[i].x;
+		Positions[i].y = data->mVertices[i].y;
+		Positions[i].z = data->mVertices[i].z;
+	}
+
+	//Vertex Normals
+	vec3* Normals = new vec3[data->mNumVertices];
+	for (unsigned int i = 0; i < data->mNumVertices; i++) {
+		Normals[i].x = data->mNormals[i].x;
+		Normals[i].y = data->mNormals[i].y;
+		Normals[i].z = data->mNormals[i].z;
+	}
+
+	//Tangents
+	vec3* Tangents = new vec3[data->mNumVertices];
+	for (unsigned int i = 0; i < data->mNumVertices; i++) {
+		Tangents[i].x = data->mTangents[i].x;
+		Tangents[i].y = data->mTangents[i].y;
+		Tangents[i].z = data->mTangents[i].z;
+	}
+
+	//Bitangents
+	vec3* Bitangents = new vec3[data->mNumVertices];
+	for (unsigned int i = 0; i < data->mNumVertices; i++) {
+		Bitangents[i].x = data->mBitangents[i].x;
+		Bitangents[i].y = data->mBitangents[i].y;
+		Bitangents[i].z = data->mBitangents[i].z;
+	}
+
+	//Texture Coordinates
+	if (data->HasTextureCoords(0)) {
+		vec2* TextCoords = new vec2[data->mNumVertices];
+		for (unsigned int i = 0; i < data->mNumVertices; i++) {
+			TextCoords[i].x = data->mTextureCoords[0][i].x;
+			TextCoords[i].y = data->mTextureCoords[0][i].y;
+		}
+		MESH->TEXTCOORDs = TextCoords;
+	}
+	else {
+		MESH->TEXTCOORDs = nullptr;
+	}
+	unsigned int* Indices = new unsigned int[data->mNumFaces * 3];
+	for (unsigned int i = 0; i < data->mNumFaces; i++) {
+		aiFace* FACE = &(data->mFaces[i]);
+		for (unsigned int t = 0; t < 3; t++) {
+			Indices[(i * 3) + t] = FACE->mIndices[t];
+		}
+	}
+	MESH->VERTEX_NUMBER = data->mNumVertices;
+	MESH->INDICEs_LENGTH = data->mNumFaces * 3;
+	MESH->POSITIONs = Positions;
+	MESH->NORMALs = Normals;
+	MESH->TANGENTs = Tangents;
+	MESH->BITANGENTs = Bitangents;
+	MESH->INDICEs = Indices;
+
+	return MESH;
 }
+
+//Loads the mesh parts to the vector!
+void Process_Node(const aiScene* Scene, aiNode* Node, vector<Static_Mesh_Data*>* Meshes) {
+	for (unsigned int i = 0; i < Node->mNumMeshes; i++) {
+		unsigned int Assimp_mesh_index = Node->mMeshes[i];
+		aiMesh* mesh = Scene->mMeshes[Assimp_mesh_index];
+		auto Mesh_Data = Load_MeshData(mesh);
+		Meshes->push_back(Mesh_Data);
+	}
+	for (unsigned int i = 0; i < Node->mNumChildren; i++) {
+		//Process child nodes!
+		Process_Node(Scene, Node->mChildren[i], Meshes);
+	}
+}
+
+Static_Model_Data* MergeMeshes_toModel(const aiScene* Scene, Static_Mesh_Data** MESH_DATAs, unsigned int MESH_NUMBER, string NAME, string DIRECTORY) {
+	Static_Model_Data* MODEL = new Static_Model_Data;
+	MODEL->NAME = NAME;
+	MODEL->PATH = DIRECTORY;
+
+	MODEL->MESH_ARRAY_PTR = MESH_DATAs;
+	MODEL->MESH_NUMBER = MESH_NUMBER;
+
+	return MODEL;
+}
+
 
 
 TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& path, const string* output_path, string* compilation_status) {
@@ -244,14 +338,15 @@ TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& p
 		return nullptr;
 	}
 
-	//Store Assimp mesh indexes per material to access and store vertex attributes later in Create_Meshes();
-	vector<vector<unsigned int>> MeshList_per_Material;
-	for (unsigned int i = 0; i < Scene->mNumMaterials; i++) {
-		MeshList_per_Material.push_back(vector<unsigned int>());
-	}
 
-	//Set per material mesh_list vector!
-	Process_Node(Scene, Scene->mRootNode, &MeshList_per_Material);
+	vector<Static_Mesh_Data*> MESH_DATAs;
+	Process_Node(Scene, Scene->mRootNode, &MESH_DATAs);
+
+	//Convert vector to array!
+	Static_Mesh_Data** MESHes = new Static_Mesh_Data*[MESH_DATAs.size()];
+	for (unsigned int i = 0; i < MESH_DATAs.size(); i++) {
+		MESHes[i] = MESH_DATAs[i];
+	}
 
 	//Include resource data format too! (name.obj, name.fbx etc.)
 	string PATH = *output_path + ".meshcont";
@@ -262,7 +357,8 @@ TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& p
 	string NAME = output_path->substr(output_path->find_last_of('/') + 1);
 	NAME = NAME.substr(0, NAME.find_last_of('.'));
 	//Store mesh parts in a Model!
-	Static_Model_Data* Loaded_Model = Load_Model(Scene, &MeshList_per_Material, NAME, Directory);
+	//Note: Now just merge all of the mesh parts in a model, no load operations!
+	Static_Model_Data* Loaded_Model = MergeMeshes_toModel(Scene, MESHes, MESH_DATAs.size(), NAME, Directory);
 
 	//Finalization
 	cout << "Compiled the model name: " << NAME << endl;

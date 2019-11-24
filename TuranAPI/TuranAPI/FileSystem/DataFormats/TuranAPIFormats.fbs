@@ -1,0 +1,28 @@
+
+//Defines data formats that TuranAPI uses!
+
+namespace TuranAPIFormats;
+
+
+table Profiled_Scope{
+    START_POINT: float;
+    END_POINT: float;
+    THREAD_ID: ubyte;
+    NAME: string;
+}
+
+table Profiling_Session{
+    Profiled_Scopes: [Profiled_Scope];
+}
+
+
+union Resource_Type{
+    Profiling: Profiling_Session
+}
+
+
+table Resource{
+    TYPE: Resource_Type;
+}
+
+root_type Resource;

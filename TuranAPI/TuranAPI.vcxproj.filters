@@ -99,6 +99,9 @@
     <ClInclude Include="TuranAPI\FileSystem\DataFormats\GameResource_generated.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TuranAPI\FileSystem\DataFormats\TuranAPIFormats_generated.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TuranAPI\FileSystem\Resource_Types\Model_Resource.cpp">
@@ -183,5 +186,6 @@
   <ItemGroup>
     <None Include="TuranAPI\FileSystem\DataFormats\flatc.exe" />
     <None Include="TuranAPI\FileSystem\DataFormats\GameResource.fbs" />
+    <None Include="TuranAPI\FileSystem\DataFormats\TuranAPIFormats.fbs" />
   </ItemGroup>
 </Project>

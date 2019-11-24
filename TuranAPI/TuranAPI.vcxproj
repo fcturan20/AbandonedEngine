@@ -45,12 +45,13 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WINDOWS10_FORENGINE;TURANAPI_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS10_FORENGINE;TURANAPI_BUILD;TURAN_PROFILE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <AdditionalIncludeDirectories>$(SolutionDir)$(ProjectName)</AdditionalIncludeDirectories>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -69,6 +70,7 @@ xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\T
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TuranAPI\FileSystem\DataFormats\GameResource_generated.h" />
+    <ClInclude Include="TuranAPI\FileSystem\DataFormats\TuranAPIFormats_generated.h" />
     <ClInclude Include="TuranAPI\FileSystem\Resource_Types\FileList_Resource.h" />
     <ClInclude Include="TuranAPI\FileSystem\Resource_Types\GameObjects\GameComponents\Camera_Component.h" />
     <ClInclude Include="TuranAPI\FileSystem\Resource_Types\GameObjects\GameComponents\GameComponent.h" />
@@ -126,6 +128,7 @@ xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\T
   <ItemGroup>
     <None Include="TuranAPI\FileSystem\DataFormats\flatc.exe" />
     <None Include="TuranAPI\FileSystem\DataFormats\GameResource.fbs" />
+    <None Include="TuranAPI\FileSystem\DataFormats\TuranAPIFormats.fbs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

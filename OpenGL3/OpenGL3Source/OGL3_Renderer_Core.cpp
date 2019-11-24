@@ -424,13 +424,11 @@ void OGL3_Renderer::Send_StaticModelDatas_to_GPU(vector<TuranAPI::File_System::S
 			glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, sizeof(vec3), (void*)(Positions_Size + TextCoords_Size + Normals_Size + Tangents_Size));
 
 
-			cout << "GPU Mesh Buffer is sent for Mesh: " << model_data->NAME << endl;
 			mesh_data->Set_GFXI_Mesh(gfx_mesh);
 			mesh_data->GFXI_MESH = gfx_mesh;
 			sent_mesh_number++;
 		}
 	}
-	cout << "Mesh number that is sent to GPU: " << sent_mesh_number << endl;
 }
 
 void Bind_Uniform(const unsigned int& PROGRAM_ID, const Material_Uniform* uniform);

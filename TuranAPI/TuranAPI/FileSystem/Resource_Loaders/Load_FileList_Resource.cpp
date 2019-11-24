@@ -6,12 +6,18 @@
 using namespace TuranAPI::File_System;
 GameContent::File_Type Convert_to_GameCont_Type(TuranAPI::TuranAPI_ENUMs resource_type);
 
-void FileSystem::Load_Resources_fromFileList(FileList_Resource* Empty_File_List) {
+void FileSystem::Load_Resources_fromFileList(FileList_Resource* FileList_Resource) {
 	void* File_List_Data = nullptr;
 	//No usage for now!
 	unsigned int data_size;
-	File_List_Data = FileSystem::Read_BinaryFile(Empty_File_List->PATH, data_size);
-
+	File_List_Data = FileSystem::Read_BinaryFile(FileList_Resource->PATH, data_size);
+	while (!File_List_Data) {
+		cout << "Please enter a new valid PATH: ";
+		string PATH;
+		cin >> PATH;
+		File_List_Data = FileSystem::Read_BinaryFile(PATH, data_size);
+		FileList_Resource->PATH = PATH;
+	}
 
 	auto RESOURCE_typeless = GameContent::GetResource(File_List_Data);
 	if (RESOURCE_typeless == nullptr) {
@@ -77,7 +83,7 @@ void FileSystem::Load_Resources_fromFileList(FileList_Resource* Empty_File_List)
 			TuranAPI::Breakpoint();
 			return;
 		}
-		Empty_File_List->Get_ContentListVector()->push_back(loaded_resource);
+		FileList_Resource->Get_ContentListVector()->push_back(loaded_resource);
 	}
 
 	if (Scene_data == nullptr) {
@@ -86,7 +92,7 @@ void FileSystem::Load_Resources_fromFileList(FileList_Resource* Empty_File_List)
 	else {
 		//Load the scene last!
 		Scene_Resource* SCENE = (Scene_Resource*)FileSystem::Load_Scene(Scene_data, Scene_ID, Scene_PATH);
-		Empty_File_List->Get_ContentListVector()->push_back(SCENE);
+		FileList_Resource->Get_ContentListVector()->push_back(SCENE);
 	}
 }
 

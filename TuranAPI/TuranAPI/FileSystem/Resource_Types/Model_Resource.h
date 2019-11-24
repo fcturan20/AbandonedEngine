@@ -32,11 +32,11 @@ namespace TuranAPI {
 		//Non-animated model data!
 		//Stores only pointers for the contained Meshes' vertex attribute datas!
 		class TURANAPI Static_Model_Data : public Resource_Type {
-
+		public:
 			//Meshes will be stored as pointers in an array, so point to that "Pointer Array"
 			Static_Mesh_Data** MESH_ARRAY_PTR = nullptr;
 			unsigned int MESH_NUMBER = 0;
-		public:
+
 			static vector<Static_Model_Data*> ALL_MODEL_DATAs;
 			static Static_Model_Data* Find_Model_byID(unsigned int ID);
 
@@ -45,7 +45,6 @@ namespace TuranAPI {
 
 			virtual TuranAPI::TuranAPI_ENUMs Get_Resource_Type();
 			Static_Model_Data(Static_Mesh_Data** mesh_array, unsigned int mesh_number, unsigned int id, string name);
-			void Set_Mesh_Data(Static_Mesh_Data** mesh_array, unsigned int mesh_number);
 			void Set_ID_and_NAME(unsigned int id, string name);
 			Static_Model_Data();
 		};

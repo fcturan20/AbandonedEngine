@@ -46,6 +46,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)TuranAPI;$(SolutionDir)GFX_API;$(SolutionDir)OpenGL3;$(SolutionDir)$(ProjectName);$(SolutionDir)TuranEngine</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WINDOWS10_FORENGINE;EDITOR_BUILD;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
