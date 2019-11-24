@@ -13,6 +13,7 @@ Game: An empty project, just to remind myself that I want to make a Game Engine.
 ## TuranAPI functionalities:
 1) A FileSystem is created in TuranAPI::File_System namespace. This system uses Flatbuffer infrastructure to allow users to create efficient binary and JSON files. Only binary is supported for now, but when most of the UI is done, it will be supported. 
 2) Dear IMGUI is entegrated to the TuranAPI to allow all of the applications to have IMGUI interface. But a GFX_IMGUI has to be provided to render IMGUI, don't forget that.
+3) A profiling system is created to profile functions and scopes. This is not finished or debugged and also need a monitor window to visualize the data.
 	File System and Flatbuffer functionalities:
 1) FileSystem has file I/O operations, binary game resource (Scene, Model, Material Type, Texture etc.) read/write operations and GameComponent system.
 2) This class uses Google Flatbuffer API because Flatbuffer is a light-weight, easy to use, no parsing needed data storage API. 
