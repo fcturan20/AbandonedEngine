@@ -10,14 +10,17 @@ namespace TuranAPI {
 		{
 		protected:
 			friend class FileSystem;
+			Resource_Type(IAllocator* Allocator_ = LASTUSEDALLOCATOR);
 		public:
-			string PATH;
+			String PATH;
 			unsigned int ID;
+			IAllocator* Allocator;
 			//Name to show in Content Browser
-			string NAME;
+			String NAME;
 
 			unsigned int Get_ID();
 			virtual TuranAPI_ENUMs Get_Resource_Type() = 0;
+			virtual bool Verify_Resource_Data() = 0;
 		};
 	}
 }

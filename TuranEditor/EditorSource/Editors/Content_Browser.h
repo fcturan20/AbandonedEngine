@@ -4,7 +4,7 @@
 
 
 class GameContent_Browser : public TuranAPI::IMGUI::IMGUI_WINDOW{
-	vector<bool> GameContentList_CheckList;
+	Vector<bool> GameContentList_CheckList;
 	bool GameContent_EditMode = false;
 public:
 	GameContent_Browser();
@@ -12,7 +12,7 @@ public:
 };
 
 class GFX_Content_Browser : public TuranAPI::IMGUI::IMGUI_WINDOW {
-	vector<bool> GFXContentList_CheckList;
+	Vector<bool> GFXContentList_CheckList;
 	bool GFXContent_EditMode = false;
 public:
 	GFX_Content_Browser();

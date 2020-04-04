@@ -6,11 +6,12 @@ namespace TuranAPI {
 	namespace File_System {
 
 		class TURANAPI FileList_Resource : public Resource_Type {
-			vector<TuranAPI::File_System::Resource_Type*> All_Resources;
+			Vector<Resource_Type*> ContentListVector;
 		public:
-			FileList_Resource(const string& path);
+			FileList_Resource(const String& path);
 			virtual TuranAPI::TuranAPI_ENUMs Get_Resource_Type() override;
-			vector<Resource_Type*>* Get_ContentListVector();
+			Vector<Resource_Type*>* Get_ContentListVector();
+			virtual bool Verify_Resource_Data();
 		};
 
 	}

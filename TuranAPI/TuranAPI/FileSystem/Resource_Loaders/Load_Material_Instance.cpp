@@ -2,56 +2,43 @@
 //Data Formats created by Flatbuffers!
 #include <flatbuffers/flatbuffers.h>
 #include "TuranAPI/FileSystem/DataFormats/GameResource_generated.h"
+#include <string>
+#include <vector>
 
 using namespace TuranAPI::File_System;
 Material_Type_Resource* Find_MaterialType_byID(unsigned int ID);
 TuranAPI::TuranAPI_ENUMs Convert_to_TuranAPIEnums_UniformVarType(GameContent::MATERIAL_INSTANCE_UNIFORM uniform_var_type);
-string Get_UniformName_fromFlatbuffer(const GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE* flatbuffer_uniform, TuranAPI::TuranAPI_ENUMs uniform_var_type);
-
-//Output Path should be Directory + Name. Like "C:/dev/Content/First". Every Material Instance has .matinstcont extension!
-TuranAPI::File_System::Material_Instance* FileSystem::Create_Instance_ofMaterialType(TuranAPI::File_System::Material_Type_Resource* material_type, const string& output_path) {
-	Material_Instance* MATERIAL_INSTANCE = new Material_Instance;
-	MATERIAL_INSTANCE->ID = FileSystem::Create_Resource_ID();
-	MATERIAL_INSTANCE->Material_Type = material_type;
-	string NAME = output_path.substr(output_path.find_last_of('/') + 1);
-	NAME = NAME.substr(0, output_path.find_last_of('.'));
-	MATERIAL_INSTANCE->NAME = NAME;
-	for (Material_Uniform uniform : material_type->UNIFORMs) {
-		MATERIAL_INSTANCE->UNIFORM_LIST.push_back(Material_Uniform(uniform));
-	}
-	string PATH = output_path + ".matinstcont";
-	cout << "Path of Material Instance is: " << PATH << endl;
-	MATERIAL_INSTANCE->PATH = PATH;
-	return MATERIAL_INSTANCE;
-}
+String Get_UniformName_fromFlatbuffer(const GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE* flatbuffer_uniform, TuranAPI::TuranAPI_ENUMs uniform_var_type);
 
 
-Resource_Type* FileSystem::Load_Material_Inst(void* data, unsigned int id, const string& path) {
+
+Resource_Type* FileSystem::Load_Material_Inst(void* data, unsigned int id, const char* path, IAllocator* Allocator) {
 	auto RESOURCE_typeless = GameContent::GetResource(data);
 	if (RESOURCE_typeless == nullptr) {
-		cout << "Error: Loading failed! Material Instance isn't a valid resource!\n";
+		std::cout << "Error: Loading failed! Material Instance isn't a valid resource!\n";
 		TuranAPI::Breakpoint();
 		return nullptr;
 	}
-	cout << "Loading Material Instance (Shader Stage) ID: " << id << endl;
+	std::cout << "Loading Material Instance (Shader Stage) ID: " << id << std::endl;
 	auto RESOURCE = RESOURCE_typeless->TYPE_as_Material_Instance();
 	if (!RESOURCE) {
-		cout << "Error: Loading failed! Material Instance isn't verified as Material Instance Type!\n";
+		std::cout << "Error: Loading failed! Material Instance isn't verified as Material Instance Type!\n";
 		TuranAPI::Breakpoint();
 		return nullptr;
 	}
 	//If application arrives here, loading the file is successful!
 
-	if (id > LAST_ID) {
-		LAST_ID = id;
+	if (id > SELF->LAST_ID) {
+		SELF->LAST_ID = id;
 	}
 	Material_Instance* MaterialInst = new Material_Instance;
 	MaterialInst->Material_Type = Find_MaterialType_byID(RESOURCE->MATERIAL_TYPE_ID());
 	MaterialInst->ID = id;
 	MaterialInst->PATH = path;
-	string NAME = path.substr(path.find_last_of('/') + 1);
+	std::string NAME = path;
+	NAME = NAME.substr(NAME.find_last_of('/') + 1);
 	NAME = NAME.substr(0, NAME.find_last_of('.'));
-	MaterialInst->NAME = NAME;
+	MaterialInst->NAME = NAME.c_str();
 	for (unsigned int i = 0; i < RESOURCE->UNIFORMs()->Length(); i++) {
 		Material_Uniform uniform;
 		auto UNIFORM_typeless = RESOURCE->UNIFORMs()->Get(i);
@@ -71,10 +58,11 @@ void Save_a_MaterialInst_toDisk(Resource_Type* Material_Inst_Data) {
 	Material_Instance* MATERIAL_INSTANCE = (TuranAPI::File_System::Material_Instance*)Material_Inst_Data;
 	flatbuffers::FlatBufferBuilder builder(1024);
 
-	vector<flatbuffers::Offset<GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE>> MATERIAL_UNIFORMs;
+	std::vector<flatbuffers::Offset<GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE>> MATERIAL_UNIFORMs;
 	//Add uniforms to Flatbuffer data!
-	for (Material_Uniform material_uniform : MATERIAL_INSTANCE->UNIFORM_LIST) {
-		cout << "Uniform is being proccessed: " << material_uniform.VARIABLE_NAME << endl;
+	for (std::size_t i = 0; i < MATERIAL_INSTANCE->UNIFORM_LIST.size(); i++) {
+		Material_Uniform& material_uniform = MATERIAL_INSTANCE->UNIFORM_LIST[i];
+		std::cout << "Uniform is being proccessed: " << material_uniform.VARIABLE_NAME << std::endl;
 		MATERIAL_UNIFORMs.push_back(
 			GameContent::CreateMATERIAL_INSTANCE_UNIFORM_TABLE(builder,
 				Convert_to_Flatbufer_Uniform_Type(material_uniform.VARIABLE_TYPE),
@@ -90,30 +78,18 @@ void Save_a_MaterialInst_toDisk(Resource_Type* Material_Inst_Data) {
 
 	unsigned int data_size = builder.GetSize();
 
-	cout << "Compiled Material Instance Resource to Flatbuffer type!\n";
+	std::cout << "Compiled Material Instance Resource to Flatbuffer type!\n";
 	void* data_ptr = builder.GetBufferPointer();
 
 	//Check if the data is complete!
 	flatbuffers::Verifier verifier((uint8_t*)data_ptr, data_size);
 	if (!GameContent::VerifyResourceBuffer(verifier)) {
-		cout << "Data isn't verified for name: " << MATERIAL_INSTANCE->NAME << endl;
+		std::cout << "Data isn't verified for name: " << MATERIAL_INSTANCE->NAME << std::endl;
 		assert(false && "Error while compiling data to disk!");
 	}
 
-	cout << "Exporting resource as a .matinstcont: " << MATERIAL_INSTANCE->PATH << endl;
+	std::cout << "Exporting resource as a .matinstcont: " << MATERIAL_INSTANCE->PATH << std::endl;
 	FileSystem::Overwrite_BinaryFile(MATERIAL_INSTANCE->PATH, data_ptr, data_size);
 
-	cout << "Resource is successfully added to the Content_List.enginecont\n";
-}
-
-Material_Type_Resource* Find_MaterialType_byID(unsigned int ID) {
-	for (unsigned int i = 0; i < Material_Type_Resource::ALL_MATERIAL_TYPEs.size(); i++) {
-		Material_Type_Resource* MatInst = Material_Type_Resource::ALL_MATERIAL_TYPEs[i];
-		if (ID == MatInst->ID) {
-			return MatInst;
-		}
-	}
-	cout << "Error: Material Type isn't found for Material Instance!\n";
-	TuranAPI::Breakpoint();
-	return nullptr;
+	std::cout << "Resource is successfully added to the Content_List.enginecont\n";
 }

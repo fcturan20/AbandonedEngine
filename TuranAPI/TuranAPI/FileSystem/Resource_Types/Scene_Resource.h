@@ -10,10 +10,13 @@ namespace TuranAPI {
 
 		class TURANAPI Scene_Resource : public TuranAPI::File_System::Resource_Type {
 		public:
-			virtual TuranAPI::TuranAPI_ENUMs Get_Resource_Type();
-			vector<Game_Object::GameComponent*> ADDED_COMPONENTs;
+			Vector<Scene_Resource*> ALL_SCENEs;
 
-			static Scene_Resource* SCENE;
+			Scene_Resource();
+			virtual TuranAPI::TuranAPI_ENUMs Get_Resource_Type();
+			virtual bool Verify_Resource_Data();
+			Vector<Game_Object::GameComponent*> ADDED_COMPONENTs;
+
 		};
 	}
 }

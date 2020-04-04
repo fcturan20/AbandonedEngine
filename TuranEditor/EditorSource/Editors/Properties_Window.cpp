@@ -1,17 +1,16 @@
 #include "Properties_Window.h"
-#include "TuranAPI/API_IMGUI.h"
-#include "TuranAPI/API_FileSystem.h"
+#include <string>
 
 using namespace TuranAPI::Game_Object;
 using namespace TuranAPI::IMGUI;
 using namespace TuranAPI::File_System;
 
-ResourceProperties_Window::ResourceProperties_Window(TuranAPI::File_System::Resource_Type* resource) : IMGUI_WINDOW("Properties") {
+ResourceProperties_Window::ResourceProperties_Window(TuranAPI::File_System::Resource_Type* resource) : IMGUI_WINDOW(resource->NAME) {
 	RESOURCE = resource;
 }
-
-vector<string> UNIFORM_VAR_TYPE_NAMEs = { "Unsigned Integer 32-bit", "Integer 32-bit", "Float 32-bit", "Vec2 (2 float)", "Vec3 (3 float)", "Vec4 (4 float)", "Matrix 4x4", "Texture 2D" };
-string Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type);
+std::initializer_list<const char*> list{ "Unsigned Integer 32-bit", "Integer 32-bit", "Float 32-bit", "Vec2 (2 float)", "Vec3 (3 float)", "Vec4 (4 float)", "Matrix 4x4", "Texture 2D" };
+static Vector<const char*> UNIFORM_VAR_TYPE_NAMEs(LASTUSEDALLOCATOR, 0, list);
+const char* Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type);
 void Show_MaterialType_Properties(TuranAPI::File_System::Resource_Type* resource);
 void Show_Model_Properties(TuranAPI::File_System::Resource_Type* resource);
 void Show_MaterialInstance_Properties(TuranAPI::File_System::Resource_Type* resource);
@@ -22,28 +21,27 @@ void ResourceProperties_Window::Run_Window() {
 		delete this;
 		return;
 	}
-	if (!IMGUI::Create_Window("Properties", Is_Window_Open, false)) {
+	if (!IMGUI::Create_Window(Window_Name, Is_Window_Open, false)) {
 		IMGUI::End_Window();
 		return;
 	}
 	switch (RESOURCE->Get_Resource_Type()) {
-	case TuranAPI::MATERIAL_TYPE_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::MATERIAL_TYPE_RESOURCE:
 		Show_MaterialType_Properties(RESOURCE);
 		break;
-	case TuranAPI::TEXTURE_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::TEXTURE_RESOURCE:
 		Show_Texture_Properties(RESOURCE);
 		break;
-	case TuranAPI::MATERIAL_INSTANCE_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::MATERIAL_INSTANCE_RESOURCE:
 		Show_MaterialInstance_Properties(RESOURCE);
 		break;
-	case TuranAPI::STATIC_MODEL_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::STATIC_MODEL_RESOURCE:
 		Show_Model_Properties(RESOURCE);
 		break;
 	default:
-		cout << "This type's properties can't be shown by Properties Window!\n";
-		this_thread::sleep_for(chrono::seconds(10));
+		std::cout << "This type's properties can't be shown by Properties Window!\n";
+		SLEEP_THREAD(10);
 	}
-
 	IMGUI::End_Window();
 }
 
@@ -61,9 +59,9 @@ void Show_MaterialType_Properties(TuranAPI::File_System::Resource_Type* resource
 		for (unsigned int i = 0; i < material_type_resource->UNIFORMs.size(); i++) {
 			TuranAPI::File_System::Material_Uniform* UNIFORM = &material_type_resource->UNIFORMs[i];
 
-			if (IMGUI::IMGUI::Begin_Tree(to_string(i))) {
+			if (IMGUI::IMGUI::Begin_Tree(std::to_string(i).c_str())) {
 				IMGUI::IMGUI::Text("Uniform Name: " + UNIFORM->VARIABLE_NAME);
-				IMGUI::IMGUI::Text("Uniform Variable Type: " + Find_UNIFORM_VARTYPE_Name(UNIFORM->VARIABLE_TYPE));
+				IMGUI::IMGUI::Text(("Uniform Variable Type: " + std::string(Find_UNIFORM_VARTYPE_Name(UNIFORM->VARIABLE_TYPE))).c_str());
 				IMGUI::IMGUI::End_Tree();
 			}
 		}
@@ -86,9 +84,13 @@ void Show_MaterialInstance_Properties(TuranAPI::File_System::Resource_Type* reso
 		for (unsigned int i = 0; i < material_instance_resource->UNIFORM_LIST.size(); i++) {
 			TuranAPI::File_System::Material_Uniform* UNIFORM = &material_instance_resource->UNIFORM_LIST[i];
 
-			if (IMGUI::IMGUI::Begin_Tree(to_string(i))) {
+			if (IMGUI::IMGUI::Begin_Tree(std::to_string(i).c_str())) {
 				IMGUI::IMGUI::Text("Uniform Name: " + UNIFORM->VARIABLE_NAME);
-				IMGUI::IMGUI::Text("Uniform Variable Type: " + Find_UNIFORM_VARTYPE_Name(UNIFORM->VARIABLE_TYPE));
+				IMGUI::IMGUI::Text(("Uniform Variable Type: " + std::string(Find_UNIFORM_VARTYPE_Name(UNIFORM->VARIABLE_TYPE))).c_str());
+				if (UNIFORM->VARIABLE_TYPE == TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D
+					&& UNIFORM->DATA) {
+						IMGUI::IMGUI::Text("Texture ID: " + *(unsigned int*)UNIFORM->DATA);
+				}
 				IMGUI::IMGUI::End_Tree();
 			}
 		}
@@ -99,33 +101,33 @@ void Show_MaterialInstance_Properties(TuranAPI::File_System::Resource_Type* reso
 
 void Show_Texture_Properties(TuranAPI::File_System::Resource_Type* resource) {
 	TuranAPI::File_System::Texture_Resource* TEXTURE = (TuranAPI::File_System::Texture_Resource*)resource;
-	IMGUI::Display_Texture(&TEXTURE->GL_ID, 1024, 1024);
+	IMGUI::Display_Texture(&TEXTURE->GL_STRUCT, 1024, 1024);
 }
 
 void Show_Model_Properties(TuranAPI::File_System::Resource_Type* resource) {
 	TuranAPI::File_System::Static_Model_Data* model_data_resource = (TuranAPI::File_System::Static_Model_Data*)resource;
 
 	IMGUI::Text("Model Name: " + model_data_resource->NAME);
-	IMGUI::Text("Mesh Number: " + to_string(model_data_resource->Get_Mesh_Number()));
+	IMGUI::Text(("Mesh Number: " + std::to_string(model_data_resource->Get_Mesh_Number())).c_str());
 }
 
-string Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type) {
+const char* Find_UNIFORM_VARTYPE_Name(TuranAPI::TuranAPI_ENUMs uniform_var_type) {
 	switch (uniform_var_type) {
-	case TuranAPI::VAR_UINT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_UINT32:
 		return UNIFORM_VAR_TYPE_NAMEs[0];
-	case TuranAPI::VAR_INT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_INT32:
 		return UNIFORM_VAR_TYPE_NAMEs[1];
-	case TuranAPI::VAR_FLOAT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_FLOAT32:
 		return UNIFORM_VAR_TYPE_NAMEs[2];
-	case TuranAPI::VAR_VEC2:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC2:
 		return UNIFORM_VAR_TYPE_NAMEs[3];
-	case TuranAPI::VAR_VEC3:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC3:
 		return UNIFORM_VAR_TYPE_NAMEs[4];
-	case TuranAPI::VAR_VEC4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC4:
 		return UNIFORM_VAR_TYPE_NAMEs[5];
-	case TuranAPI::VAR_MAT4x4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_MAT4x4:
 		return UNIFORM_VAR_TYPE_NAMEs[6];
-	case TuranAPI::API_TEXTURE_2D:
+	case TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D:
 		return UNIFORM_VAR_TYPE_NAMEs[7];
 	default:
 		return "Error, Uniform_Var_Type isn't supported by Find_UNIFORM_VARTYPE_Name!\n";
@@ -141,24 +143,23 @@ void Show_CameraComp_Properties(TuranAPI::Game_Object::GameComponent* Component)
 
 GameComponentProperties_Window::GameComponentProperties_Window(TuranAPI::Game_Object::GameComponent* gamecomponent) : IMGUI_WINDOW("Game Component Properties"), GAMECOMPONENT(gamecomponent) {}
 void GameComponentProperties_Window::Run_Window() {
-	
 	if (!Is_Window_Open) {
 		delete this;
 		return;
 	}
-	if (!IMGUI::Create_Window("Properties", Is_Window_Open, false)) {
+	if (!IMGUI::Create_Window(Window_Name, Is_Window_Open, false)) {
 		IMGUI::End_Window();
 		return;
 	}
 	switch (GAMECOMPONENT->Get_Component_Type()) {
-	case TuranAPI::STATIC_MODEL_COMP:
+	case TuranAPI::TuranAPI_ENUMs::STATIC_MODEL_COMP:
 		Show_StaticModelComp_Properties(GAMECOMPONENT);
 		break;
-	case TuranAPI::CAMERA_COMP:
+	case TuranAPI::TuranAPI_ENUMs::CAMERA_COMP:
 		Show_CameraComp_Properties(GAMECOMPONENT);
 		break;
 	default:
-		cout << "ERROR: Intended Component Type isn't supported by Properties Window!\n";
+		std::cout << "ERROR: Intended Component Type isn't supported by Properties Window!\n";
 		TuranAPI::Breakpoint();
 	}
 
@@ -173,7 +174,7 @@ void Show_StaticModelComp_Properties(TuranAPI::Game_Object::GameComponent* Compo
 	if (IMGUI::Begin_Tree("Material Instances")) {
 		for (unsigned int i = 0; i < COMP->MATERIALs.size(); i++) {
 			Material_Instance* MatInst = COMP->MATERIALs[i];
-			if (IMGUI::Begin_Tree(to_string(i))) {
+			if (IMGUI::Begin_Tree(std::to_string(i).c_str())) {
 				IMGUI::Text(MatInst->NAME);
 				IMGUI::End_Tree();
 			}

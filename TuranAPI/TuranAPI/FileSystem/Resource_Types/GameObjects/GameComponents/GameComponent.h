@@ -16,7 +16,7 @@ namespace TuranAPI {
 
 			GameComponent();
 		public:
-			string NAME;
+			String NAME;
 
 			//Transport a component to a new position!
 			void Translate(vec3 new_position);

@@ -5,13 +5,14 @@
 
 using namespace TuranAPI::File_System;
 
+
 GameContent::GFX_APIs Convert_to_GameContent_GFXAPIs(TuranAPI::TuranAPI_ENUMs language) {
 	switch (language) {
-	case TuranAPI::OPENGL3:
+	case TuranAPI::TuranAPI_ENUMs::OPENGL4:
 		return GameContent::GFX_APIs_OPENGL3;
 	default:
-		cout << "Material Type's GFX_API can't be converted to File_List::GFX_APIs! OpenGL 3 is returned!\n";
-		this_thread::sleep_for(chrono::seconds(5));
+		std::cout << "Material Type's GFX_API can't be converted to File_List::GFX_APIs! OpenGL 3 is returned!\n";
+		std::this_thread::sleep_for(std::chrono::seconds(5));
 		return GameContent::GFX_APIs_OPENGL3;
 	}
 }
@@ -19,84 +20,95 @@ GameContent::GFX_APIs Convert_to_GameContent_GFXAPIs(TuranAPI::TuranAPI_ENUMs la
 TuranAPI::TuranAPI_ENUMs Convert_to_TuranAPIEnums_GFXAPIs(GameContent::GFX_APIs language) {
 	switch (language) {
 	case GameContent::GFX_APIs_OPENGL3:
-		return TuranAPI::OPENGL3;
+		return TuranAPI::TuranAPI_ENUMs::OPENGL4;
 	default:
-		cout << "Material Type file's type can't be converted to TuranAPIEnums!\n";
-		return TuranAPI::TURAN_NULL;
+		std::cout << "Material Type file's type can't be converted to TuranAPIEnums!\n";
+		return TuranAPI::TuranAPI_ENUMs::TURAN_NULL;
 	}
+}
+
+Material_Type_Resource* Find_MaterialType_byID(unsigned int ID) {
+	/*
+	for (unsigned int i = 0; i < Material_Type_Resource::ALL_MATERIALTYPEs.size(); i++) {
+		Material_Type_Resource* material_type = Material_Type_Resource::ALL_MATERIALTYPEs[i];
+		if (material_type->Get_ID() == ID) {
+			return material_type;
+		}
+	}*/
+	return nullptr;
 }
 
 TuranAPI::TuranAPI_ENUMs Convert_to_TuranAPIEnums_UniformVarType(GameContent::MATERIAL_INSTANCE_UNIFORM uniform_var_type) {
 	switch (uniform_var_type) {
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_UINT32:
-		return TuranAPI::VAR_UINT32;
+		return TuranAPI::TuranAPI_ENUMs::VAR_UINT32;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_INT32:
-		return TuranAPI::VAR_INT32;
+		return TuranAPI::TuranAPI_ENUMs::VAR_INT32;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_FLOAT:
-		return TuranAPI::VAR_FLOAT32;
+		return TuranAPI::TuranAPI_ENUMs::VAR_FLOAT32;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_VEC2:
-		return TuranAPI::VAR_VEC2;
+		return TuranAPI::TuranAPI_ENUMs::VAR_VEC2;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_VEC3:
-		return TuranAPI::VAR_VEC3;
+		return TuranAPI::TuranAPI_ENUMs::VAR_VEC3;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_VEC4:
-		return TuranAPI::VAR_VEC4;
+		return TuranAPI::TuranAPI_ENUMs::VAR_VEC4;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_Mat4x4:
-		return TuranAPI::VAR_MAT4x4;
+		return TuranAPI::TuranAPI_ENUMs::VAR_MAT4x4;
 	case GameContent::MATERIAL_INSTANCE_UNIFORM_TEXTURE2D:
-		return TuranAPI::API_TEXTURE_2D;
+		return TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D;
 	default:
-		cout << "Error: Uniform Var type couldn't be converted to TuranAPIEnums in Convert_to_TuranAPIEnums_UniformVarType() in Load_Material_Type.cpp!\n";
-		this_thread::sleep_for(chrono::seconds(10));
+		std::cout << "Error: Uniform Var type couldn't be converted to TuranAPIEnums in Convert_to_TuranAPIEnums_UniformVarType() in Load_Material_Type.cpp!\n";
+		SLEEP_THREAD(10);
 	}
 }
 
-string Get_UniformName_fromFlatbuffer(const GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE* flatbuffer_uniform, TuranAPI::TuranAPI_ENUMs uniform_var_type) {
+String Get_UniformName_fromFlatbuffer(const GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE* flatbuffer_uniform, TuranAPI::TuranAPI_ENUMs uniform_var_type) {
 	switch (uniform_var_type) {
-	case TuranAPI::VAR_UINT32:
-		return flatbuffer_uniform->UNIFORM_as_UINT32()->NAME()->str();
-	case TuranAPI::VAR_INT32:
-		return flatbuffer_uniform->UNIFORM_as_INT32()->NAME()->str();
-	case TuranAPI::VAR_FLOAT32:
-		return flatbuffer_uniform->UNIFORM_as_FLOAT()->NAME()->str();
-	case TuranAPI::VAR_VEC2:
-		return flatbuffer_uniform->UNIFORM_as_VEC2()->NAME()->str();
-	case TuranAPI::VAR_VEC3:
-		return flatbuffer_uniform->UNIFORM_as_VEC3()->NAME()->str();
-	case TuranAPI::VAR_VEC4:
-		return flatbuffer_uniform->UNIFORM_as_VEC4()->NAME()->str();
-	case TuranAPI::VAR_MAT4x4:
-		return flatbuffer_uniform->UNIFORM_as_Mat4x4()->NAME()->str();
-	case TuranAPI::API_TEXTURE_2D:
-		return flatbuffer_uniform->UNIFORM_as_TEXTURE2D()->NAME()->str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_UINT32:
+		return flatbuffer_uniform->UNIFORM_as_UINT32()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_INT32:
+		return flatbuffer_uniform->UNIFORM_as_INT32()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_FLOAT32:
+		return flatbuffer_uniform->UNIFORM_as_FLOAT()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC2:
+		return flatbuffer_uniform->UNIFORM_as_VEC2()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC3:
+		return flatbuffer_uniform->UNIFORM_as_VEC3()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC4:
+		return flatbuffer_uniform->UNIFORM_as_VEC4()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::VAR_MAT4x4:
+		return flatbuffer_uniform->UNIFORM_as_Mat4x4()->NAME()->str().c_str();
+	case TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D:
+		return flatbuffer_uniform->UNIFORM_as_TEXTURE2D()->NAME()->str().c_str();
 	default:
-		cout << "Error: Uniform Var Type isn't supported in Get_UniformName_fromFlatbuffer() in Load_Material_Type.cpp!\n";
-		this_thread::sleep_for(chrono::seconds(10));
+		std::cout << "Error: Uniform Var Type isn't supported in Get_UniformName_fromFlatbuffer() in Load_Material_Type.cpp!\n";
+		SLEEP_THREAD(10);
 	}
 }
 
 //Load material resource from the data provided by FileList.enginecont
-Resource_Type* FileSystem::Load_Material_Type(void* data, unsigned int id, const string& path) {
+Resource_Type* FileSystem::Load_Material_Type(void* data, unsigned int id, const char* path, IAllocator* Allocator) {
 	auto RESOURCE_typeless = GameContent::GetResource(data);
 	if (RESOURCE_typeless == nullptr) {
-		cout << "Error: Loading failed! Material Type isn't a valid resource!\n";
+		std::cout << "Error: Loading failed! Material Type isn't a valid resource!\n";
 		return nullptr;
 	}
-	cout << "Loading Material Type (Shader Stage) ID: " << id << endl;
+	std::cout << "Loading Material Type (Shader Stage) ID: " << id << std::endl;
 	auto RESOURCE = RESOURCE_typeless->TYPE_as_Material_Type();
 
 	if (!RESOURCE) {
-		cout << "Type isn't Material Type, type definition is wrong!\n";
+		std::cout << "Type isn't Material Type, type definition is wrong!\n";
 		return nullptr;
 	}
-	if (id > LAST_ID) {
-		LAST_ID = id;
+	if (id > SELF->LAST_ID) {
+		SELF->LAST_ID = id;
 	}
 
 
 	Material_Type_Resource* material = new Material_Type_Resource;
 	material->GFX_API = Convert_to_TuranAPIEnums_GFXAPIs(RESOURCE->GFX_API());
-	material->VERTEX_SOURCE = RESOURCE->VERTEX_SHADER()->str();
-	material->FRAGMENT_SOURCE = RESOURCE->FRAGMENT_SHADER()->str();
+	material->VERTEX_SOURCE = RESOURCE->VERTEX_SHADER()->str().c_str();
+	material->FRAGMENT_SOURCE = RESOURCE->FRAGMENT_SHADER()->str().c_str();
 	material->PATH = path;
 	material->ID = id;
 
@@ -109,9 +121,10 @@ Resource_Type* FileSystem::Load_Material_Type(void* data, unsigned int id, const
 		material->UNIFORMs.push_back(uniform);
 	}
 
-	string NAME = path.substr(path.find_last_of('/') + 1);
+	std::string NAME = path;
+	NAME = NAME.substr(NAME.find_last_of('/') + 1);
 	NAME = NAME.substr(0, NAME.find_last_of('.'));
-	material->NAME = NAME;
+	material->NAME = NAME.c_str();
 	return material;
 }
 
@@ -126,10 +139,11 @@ void Save_a_MaterialType_toDisk(Resource_Type* Resource_Data) {
 	flatbuffers::FlatBufferBuilder builder(1024);
 
 
-	vector<flatbuffers::Offset<GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE>> MATERIAL_UNIFORMs;
+	std::vector<flatbuffers::Offset<GameContent::MATERIAL_INSTANCE_UNIFORM_TABLE>> MATERIAL_UNIFORMs;
 	//Add uniforms to Flatbuffer data!
-	for (Material_Uniform material_uniform : Material_Type->UNIFORMs) {
-		cout << "Uniform is being proccessed: " << material_uniform.VARIABLE_NAME << endl;
+	for (std::size_t i = 0; i < Material_Type->UNIFORMs.size(); i++) {
+		Material_Uniform& material_uniform = Material_Type->UNIFORMs[i];
+		std::cout << "Uniform is being proccessed: " << material_uniform.VARIABLE_NAME << std::endl;
 		MATERIAL_UNIFORMs.push_back(
 			GameContent::CreateMATERIAL_INSTANCE_UNIFORM_TABLE(builder, 
 				Convert_to_Flatbufer_Uniform_Type(material_uniform.VARIABLE_TYPE), 
@@ -149,43 +163,43 @@ void Save_a_MaterialType_toDisk(Resource_Type* Resource_Data) {
 
 	unsigned int data_size = builder.GetSize();
 
-	cout << "Compiled Material Type Resource to Flatbuffer type!\n";
+	std::cout << "Compiled Material Type Resource to Flatbuffer type!\n";
 	void* data_ptr = builder.GetBufferPointer();
 
 	//Check if the data is complete!
 	flatbuffers::Verifier verifier((uint8_t*)data_ptr, data_size);
 	if (!GameContent::VerifyResourceBuffer(verifier)) {
-		cout << "Data isn't verified for name: " << Material_Type->NAME << endl;
+		std::cout << "Data isn't verified for name: " << Material_Type->NAME << std::endl;
 		assert(false && "Error while compiling data to disk!");
 	}
 
-	cout << "Exporting resource as a .mattypecont: " << Resource_Data->PATH << endl;
+	std::cout << "Exporting resource as a .mattypecont: " << Resource_Data->PATH << std::endl;
 	FileSystem::Overwrite_BinaryFile(Resource_Data->PATH, data_ptr, data_size);
 
-	cout << "Resource is successfully added to the Content_List.enginecont\n";
+	std::cout << "Resource is successfully added to the Content_List.enginecont\n";
 }
 
 GameContent::MATERIAL_INSTANCE_UNIFORM Convert_to_Flatbufer_Uniform_Type(TuranAPI::TuranAPI_ENUMs uniform_type) {
 	switch (uniform_type) {
-	case TuranAPI::VAR_UINT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_UINT32:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_UINT32;
-	case TuranAPI::VAR_INT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_INT32:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_INT32;
-	case TuranAPI::VAR_FLOAT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_FLOAT32:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_FLOAT;
-	case TuranAPI::VAR_VEC2:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC2:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_VEC2;
-	case TuranAPI::VAR_VEC3:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC3:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_VEC3;
-	case TuranAPI::VAR_VEC4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC4:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_VEC4;
-	case TuranAPI::VAR_MAT4x4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_MAT4x4:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_Mat4x4;
-	case TuranAPI::API_TEXTURE_2D:
+	case TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D:
 		return GameContent::MATERIAL_INSTANCE_UNIFORM_TEXTURE2D;
 	default:
-		cout << "There is a problem with Convert_to_Flatbuffer_Uniform_Type!\n";
-		this_thread::sleep_for(chrono::seconds(10));
+		std::cout << "There is a problem with Convert_to_Flatbuffer_Uniform_Type!\n";
+		std::this_thread::sleep_for(std::chrono::seconds(10));
 	}
 }
 
@@ -193,24 +207,24 @@ GameContent::MATERIAL_INSTANCE_UNIFORM Convert_to_Flatbufer_Uniform_Type(TuranAP
 flatbuffers::Offset<void> Create_a_Uniform(flatbuffers::FlatBufferBuilder* builder, const Material_Uniform* material_uniform) {
 	auto UNIFORM_NAME = builder->CreateString(material_uniform->VARIABLE_NAME);
 	switch (material_uniform->VARIABLE_TYPE) {
-	case TuranAPI::VAR_UINT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_UINT32:
 		return GameContent::CreateUNIFORM_UINT32(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_INT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_INT32:
 		return GameContent::CreateUNIFORM_UINT32(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_FLOAT32:
+	case TuranAPI::TuranAPI_ENUMs::VAR_FLOAT32:
 		return GameContent::CreateUNIFORM_FLOAT(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_VEC2:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC2:
 		return GameContent::CreateUNIFORM_VEC2(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_VEC3:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC3:
 		return GameContent::CreateUNIFORM_VEC3(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_VEC4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_VEC4:
 		return GameContent::CreateUNIFORM_VEC4(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::VAR_MAT4x4:
+	case TuranAPI::TuranAPI_ENUMs::VAR_MAT4x4:
 		return GameContent::CreateUNIFORM_MAT4x4(*builder, UNIFORM_NAME).Union();
-	case TuranAPI::API_TEXTURE_2D:
+	case TuranAPI::TuranAPI_ENUMs::API_TEXTURE_2D:
 		return GameContent::CreateUNIFORM_TEXTURE2D(*builder, UNIFORM_NAME).Union();
 	default:
-		cout << "There is a problem in Create_a_Uniform!\n";
+		std::cout << "There is a problem in Create_a_Uniform!\n";
 		TuranAPI::Breakpoint();
 	}
 }

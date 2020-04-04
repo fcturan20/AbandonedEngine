@@ -2,7 +2,7 @@
 
 using namespace TuranAPI::Game_Object;
 
-StaticModel_Component::StaticModel_Component(TuranAPI::File_System::Static_Model_Data* model) {
+StaticModel_Component::StaticModel_Component(TuranAPI::File_System::Static_Model_Data* model) : MATERIALs(LASTUSEDALLOCATOR, 1, 1){
 	MODEL = model;
 
 	//Add a material instance for each mesh of the model!
@@ -12,5 +12,5 @@ StaticModel_Component::StaticModel_Component(TuranAPI::File_System::Static_Model
 }
 
 TuranAPI::TuranAPI_ENUMs StaticModel_Component::Get_Component_Type() {
-	return TuranAPI::STATIC_MODEL_COMP;
+	return TuranAPI::TuranAPI_ENUMs::STATIC_MODEL_COMP;
 }

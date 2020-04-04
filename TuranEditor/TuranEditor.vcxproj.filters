@@ -15,84 +15,27 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EditorSource\Editors\Content_Browser.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\Editors\Main_Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\Editors\Status_Window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="EditorSource\Editor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Material_Type_Loader.cpp">
+    <ClCompile Include="EditorSource\TuranAPI\MemoryManager_Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Model_Loader.cpp">
+    <ClCompile Include="EditorSource\TuranAPI\TSTL_Core.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\Texture_Loader.cpp">
+    <ClCompile Include="EditorSource\TuranAPI\Vector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="EditorSource\FileSystem\EditorFileSystem_Core.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\FileSystem\ResourceLoaders\MaterialInstance_Import.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\Editors\IMGUI_DEFAULT_WINDOWs.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\Editors\Scene_Editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="EditorSource\Editors\Properties_Window.cpp">
+    <ClCompile Include="EditorSource\Editor_Includes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EditorSource\Editors\Content_Browser.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\EDITORs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\Main_Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\Properties_Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\Status_Window.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="EditorSource\Editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="EditorSource\Editor_Includes.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Material_Type_Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Model_Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\Texture_Loader.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\FileSystem\EditorFileSystem_Core.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\FileSystem\ResourceLoaders\MaterialInstance_Import.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\IMGUI_DEFAULT_WINDOWs.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="EditorSource\Editors\Scene_Editor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

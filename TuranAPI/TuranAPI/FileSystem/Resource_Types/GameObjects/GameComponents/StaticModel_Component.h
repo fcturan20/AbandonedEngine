@@ -19,7 +19,7 @@ namespace TuranAPI {
 		public:
 			mat4 Model_Transform;
 			TuranAPI::File_System::Static_Model_Data* MODEL;
-			vector<TuranAPI::File_System::Material_Instance*> MATERIALs;
+			Vector<TuranAPI::File_System::Material_Instance*> MATERIALs;
 
 			StaticModel_Component(TuranAPI::File_System::Static_Model_Data* model);
 			virtual TuranAPI::TuranAPI_ENUMs Get_Component_Type() override;

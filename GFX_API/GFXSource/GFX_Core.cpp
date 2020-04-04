@@ -1,64 +1,52 @@
 #include "GFX_Core.h"
 
-vector<GFX_WINDOW*> GFX_API::ONSCREEN_Windows = vector<GFX_WINDOW*>();
-vector<GFX_MONITOR*> GFX_API::CONNECTED_Monitors = vector<GFX_MONITOR*>();
+#include "Renderer/GFX_APICommands.h"
+#include "GFX_FileSystem.h"
 
-vector<GFX_RenderGraph*> GFX_API::BOUND_RenderGraphs;
-GFX_API* GFX_API::GFX_API_OBJ = nullptr;
-GFX_Renderer* GFX_API::RENDERER = nullptr;
-unsigned int GFX_API::FOCUSED_WINDOW_index = 0;
-GFX_FileSystem* GFX_API::FileSystem = nullptr;
+namespace GFX_API {
 
-//WINDOW OPERATIONs
+	GFX_Core* GFX_Core::SELF = nullptr;
+	GFX_Core::GFX_Core() : ONSCREEN_Windows(LASTUSEDALLOCATOR, 1, 1), CONNECTED_Monitors(LASTUSEDALLOCATOR, 1, 1), RENDERER(nullptr), FOCUSED_WINDOW_index(0), DEVICE_GPUs(LASTUSEDALLOCATOR, 1, 1), GPU_TO_RENDER(nullptr) {
+		TuranAPI::LOG_STATUS("GFX Core systems are starting!");
 
-vector<const GFX_WINDOW*> GFX_API::Get_Window_List() {
-	vector<const GFX_WINDOW*> const_window_list;
-	for (GFX_WINDOW* window : ONSCREEN_Windows) {
-		const GFX_WINDOW* const_window = window;
-		const_window_list.push_back(const_window);
+		GFX = this;
+
+		TuranAPI::LOG_STATUS("GFX Core systems are started!");
 	}
-	return const_window_list;
-}
+	//WINDOW OPERATIONs
 
-GFX_WINDOW* GFX_API::Get_Window_byID(void* id) {
-	for (GFX_WINDOW* window : ONSCREEN_Windows) {
-		if (window->Get_Window_GPU_ContentID() == id) {
-			return window;
+	const Vector<WINDOW*>* GFX_Core::Get_Window_List() {
+		return &SELF->ONSCREEN_Windows;
+	}
+
+	MONITOR* GFX_Core::Create_MonitorOBJ(void* monitor, const char* name) { return new MONITOR(monitor, name); TuranAPI::LOG_STATUS("A monitor is added"); }
+	WINDOW* GFX_Core::Create_WindowOBJ(unsigned int width, unsigned int height, GFX_ENUM display_mode, MONITOR* display_monitor, unsigned int refresh_rate, const char* window_name, GFX_ENUM v_sync) {
+		return new WINDOW(width, height, display_mode, display_monitor, refresh_rate, window_name, v_sync); TuranAPI::LOG_STATUS("Window: ");
+	}
+
+	//RENDER OPERATIONs
+
+	//Start to record new frame's render calls, handle current resources and rendergraphs for new frame!
+	void GFX_Core::New_Frame() {
+		for (unsigned int i = 0; i < SELF->ONSCREEN_Windows.size(); i++) {
+			WINDOW* window = SELF->ONSCREEN_Windows[i];
+			//APICommander::SELF->Clear_WindowBuffer_Immediately(window, vec3(1));
 		}
+
+		SELF->RENDERER->New_Frame();
 	}
-	cout << "Error: Intended window couldn't be found!\n";
-	return nullptr;
-}
-
-void GFX_API::Bind_RenderGraph(GFX_RenderGraph* RenderGraph) {
-	BOUND_RenderGraphs.push_back(RenderGraph);
-}
-
-void GFX_API::Create_RenderGraph_Resources(GFX_RenderGraph* RenderGraph) {
-	//This loop checks if the 
-	for (GFX_RenderGraph* rendergraph : BOUND_RenderGraphs) {
-		if (rendergraph == RenderGraph) {
-			RenderGraph->Create_Resources();
-			return;
-		}
+	//Render the recorded render calls!
+	void GFX_Core::Render() { TuranAPI::LOG_NOTCODED("GFX_API::Render() isn't coded!", false); }
+	//Swap buffers of all windows to see latest changes of window contents!
+	void GFX_Core::Show_ThisFrame_onWindows() {
+		TuranAPI::LOG_NOTCODED("GFX_API::Render() isn't coded!", false);
 	}
 
-	cout << "Did you forget to bind RenderGraph: " << RenderGraph->NAME << "?";
-	SLEEP_THREAD(10);
-}
 
-void GFX_API::Render_ALL_RenderGraphs() {
-	for (GFX_RenderGraph* RENDERGRAPH : BOUND_RenderGraphs) {
-		RENDERGRAPH->Run_RenderGraph();
+	void Start_GFXDLL(TuranAPI::TAPI_Systems* TAPISystems) {
+		TuranAPI::MemoryManagement::TMemoryManager::SELF = &TAPISystems->MemoryManager;
+		TuranAPI::IMGUI::IMGUI_WindowManager::SELF = &TAPISystems->IMGUI_WindowSys;
+		TuranAPI::Logging::Logger::SELF = &TAPISystems->Log_Sys;
+		TuranAPI::File_System::FileSystem::SELF = TAPISystems->FileSys;
 	}
-}
-
-void GFX_API::Create_RenderGraphs() {
-	for (GFX_RenderGraph* RENDERGRAPH : BOUND_RenderGraphs) {
-		RENDERGRAPH->Create_Resources();
-	}
-}
-
-const vector<GFX_RenderGraph*>* GFX_API::Get_Bound_RenderGraphs() {
-	return &BOUND_RenderGraphs;
 }

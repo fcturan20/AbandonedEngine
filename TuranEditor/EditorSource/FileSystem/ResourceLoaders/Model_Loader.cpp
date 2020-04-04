@@ -12,7 +12,7 @@
 using namespace TuranAPI::File_System;
 using namespace TuranAPI::IMGUI;
 
-Model_Import_Window::Model_Import_Window(TuranAPI::File_System::FileList_Resource* filelist) : IMGUI_WINDOW("Model Import"), FILELIST(filelist) {}
+Model_Import_Window::Model_Import_Window(TuranAPI::File_System::FileSystem* filesystem) : IMGUI_WINDOW("Model Import"), FILESYSTEM(filesystem) {}
 
 void Model_Import_Window::Run_Window() {
 	if (!Is_Window_Open) {
@@ -26,14 +26,15 @@ void Model_Import_Window::Run_Window() {
 	IMGUI::Input_Text("File Path", &MODEL_IMPORT_PATH);
 	IMGUI::Input_Text("Output Folder", &OUTPUT_FOLDER);
 	IMGUI::Input_Text("Output Name", &OUTPUT_NAME);
-	string PATH = OUTPUT_FOLDER + OUTPUT_NAME;
+	const char* PATH = Text_Add(OUTPUT_FOLDER, OUTPUT_NAME);
 	//If Input is written!
 	if (IMGUI::Button("Import")) {
-		string status;
+		String status;
 
 		//Check if this resource is already loaded to Content_List!
-		for (Resource_Type* RESOURCE : *FILELIST->Get_ContentListVector()) {
-			if (MODEL_IMPORT_PATH == RESOURCE->PATH) {
+		for (size_t i = 0; i < FILESYSTEM->Get_Const_FileListContentVector()->size(); i++) {
+			Resource_Type* RESOURCE = FILESYSTEM->Get_Const_FileListContentVector()->Get(i);
+			if (OUTPUT_NAME == RESOURCE->NAME) {
 				status = "Resource is already loaded and is in the Resource List!";
 				Status_Window* error_window = new Status_Window(status);
 				return;
@@ -41,11 +42,11 @@ void Model_Import_Window::Run_Window() {
 		}
 		//If application arrives here, Resource isn't loaded to Content_List before!
 
-		Resource_Type* imported_resource = Model_Loader::Import_Model(MODEL_IMPORT_PATH, &PATH, &status);
+		Resource_Type* imported_resource = Model_Loader::Import_Model(MODEL_IMPORT_PATH, PATH, &status);
+		delete PATH;
 		Status_Window* error_window = new Status_Window(status);
 		if (imported_resource) {
-			FILELIST->Get_ContentListVector()->push_back(imported_resource);
-			TuranAPI::File_System::FileSystem::Write_a_Resource_toDisk(FILELIST);
+			FILESYSTEM->Add_Content_toFileList(imported_resource);
 		}
 	}
 
@@ -300,7 +301,7 @@ Static_Mesh_Data* Load_MeshData(const aiMesh* data) {
 }
 
 //Loads the mesh parts to the vector!
-void Process_Node(const aiScene* Scene, aiNode* Node, vector<Static_Mesh_Data*>* Meshes) {
+void Process_Node(const aiScene* Scene, aiNode* Node, Vector<Static_Mesh_Data*>* Meshes) {
 	for (unsigned int i = 0; i < Node->mNumMeshes; i++) {
 		unsigned int Assimp_mesh_index = Node->mMeshes[i];
 		aiMesh* mesh = Scene->mMeshes[Assimp_mesh_index];
@@ -313,7 +314,7 @@ void Process_Node(const aiScene* Scene, aiNode* Node, vector<Static_Mesh_Data*>*
 	}
 }
 
-Static_Model_Data* MergeMeshes_toModel(const aiScene* Scene, Static_Mesh_Data** MESH_DATAs, unsigned int MESH_NUMBER, string NAME, string DIRECTORY) {
+Static_Model_Data* MergeMeshes_toModel(const aiScene* Scene, Static_Mesh_Data** MESH_DATAs, unsigned int MESH_NUMBER, const char* NAME, const char* DIRECTORY) {
 	Static_Model_Data* MODEL = new Static_Model_Data;
 	MODEL->NAME = NAME;
 	MODEL->PATH = DIRECTORY;
@@ -325,8 +326,8 @@ Static_Model_Data* MergeMeshes_toModel(const aiScene* Scene, Static_Mesh_Data** 
 }
 
 
-
-TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& path, const string* output_path, string* compilation_status) {
+//Loads a model from a understandable format (OBJ, FBX...) for Asset Importer and Verifies Data.
+TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const char* path, const char* output_path, String* compilation_status) {
 	Assimp::Importer import;
 	const aiScene* Scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals | aiProcess_CalcTangentSpace
 		| aiProcess_JoinIdenticalVertices | aiProcess_ValidateDataStructure | aiProcess_ImproveCacheLocality | aiProcess_FindInvalidData | aiProcess_RemoveRedundantMaterials
@@ -334,12 +335,14 @@ TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& p
 
 	//Check if scene reading errors!
 	if (!Scene || Scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !Scene->mRootNode) {
-		*compilation_status = "Failed on Loading Mesh with Assimp; " + (string)import.GetErrorString();
+		char* STATUS = Text_Add("Failed on Loading Mesh with Assimp; ", import.GetErrorString());
+		*compilation_status = STATUS;
+		delete STATUS;
 		return nullptr;
 	}
 
 
-	vector<Static_Mesh_Data*> MESH_DATAs;
+	Vector<Static_Mesh_Data*> MESH_DATAs(LASTUSEDALLOCATOR, 2, 6);
 	Process_Node(Scene, Scene->mRootNode, &MESH_DATAs);
 
 	//Convert vector to array!
@@ -349,25 +352,35 @@ TuranAPI::File_System::Resource_Type* Model_Loader::Import_Model(const string& p
 	}
 
 	//Include resource data format too! (name.obj, name.fbx etc.)
-	string PATH = *output_path + ".meshcont";
+	const char* PATH = Text_Add(output_path,".meshcont");
 
 	//Find directory to load textures!
-	string Directory = path.substr(0, path.find_last_of('/'));
+	std::string Directory = path;
+	Directory = Directory.substr(0, Directory.find_last_of('/'));
 
-	string NAME = output_path->substr(output_path->find_last_of('/') + 1);
+	std::string NAME = output_path;
+	NAME = NAME.substr(NAME.find_last_of('/') + 1);
 	NAME = NAME.substr(0, NAME.find_last_of('.'));
 	//Store mesh parts in a Model!
 	//Note: Now just merge all of the mesh parts in a model, no load operations!
-	Static_Model_Data* Loaded_Model = MergeMeshes_toModel(Scene, MESHes, MESH_DATAs.size(), NAME, Directory);
+	Static_Model_Data* Loaded_Model = MergeMeshes_toModel(Scene, MESHes, MESH_DATAs.size(), NAME.c_str(), Directory.c_str());
 
 	//Finalization
-	cout << "Compiled the model name: " << NAME << endl;
-	Loaded_Model->NAME = NAME;
+	std::cout << "Compiled the model name: " << NAME << std::endl;
+	Loaded_Model->NAME = NAME.c_str();
 	Loaded_Model->PATH = PATH;
+	delete PATH;
 
-	//ID generation is handled in
-	FileSystem::Write_a_Resource_toDisk(Loaded_Model);
-	
-	*compilation_status = "Successfully compiled and saved to disk!";;
-	return Loaded_Model;
+
+	if (Loaded_Model->Verify_Resource_Data()) {
+		//ID generation is handled while writing to a file!
+		FileSystem::Write_a_Resource_toDisk(Loaded_Model);
+
+		*compilation_status = "Successfully compiled and saved to disk!";
+		return Loaded_Model;
+	}
+	else {
+		*compilation_status = "Loaded model data isn't verified successfully!";
+		return nullptr;
+	}
 }

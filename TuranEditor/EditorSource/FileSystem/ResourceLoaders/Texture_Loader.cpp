@@ -1,7 +1,5 @@
 #include "Texture_Loader.h"
 #include "EditorSource/FileSystem/EditorFileSystem_Core.h"
-//To display import window
-#include "TuranAPI/API_IMGUI.h"
 //To show import status
 #include "EditorSource/Editors/Status_Window.h"
 #include "EditorSource/Editors/Properties_Window.h"
@@ -14,9 +12,9 @@ using namespace TuranAPI::IMGUI;
 //To import textures from 3rd party data formats
 #define STB_IMAGE_IMPLEMENTATION
 #include <stb_image.h>
+#include <string>
 
-
-Texture_Import_Window::Texture_Import_Window(TuranAPI::File_System::FileList_Resource* filelist) : IMGUI_WINDOW("Texture Import"), FILELIST(filelist){}
+Texture_Import_Window::Texture_Import_Window(TuranAPI::File_System::FileSystem* filesystem) : IMGUI_WINDOW("Texture Import"), FILESYSTEM(filesystem){}
 
 void Texture_Import_Window::Run_Window() {
 	if (!Is_Window_Open) {
@@ -27,16 +25,17 @@ void Texture_Import_Window::Run_Window() {
 		IMGUI::End_Window();
 	}
 
-	cout << "Texture Import screen is active!\n";
+	std::cout << "Texture Import screen is active!\n";
 	IMGUI::Input_Text("Texture Path", &TEXTURE_PATH);
 	IMGUI::Input_Text("Output Folder", &OUTPUT_FOLDER);
 	IMGUI::Input_Text("Output Name", &OUTPUT_NAME);
 	if (IMGUI::Button("Import")) {
-		string PATH = OUTPUT_FOLDER + OUTPUT_NAME;
-		string status;
+		const char* PATH = Text_Add(OUTPUT_FOLDER, OUTPUT_NAME);
+		String status;
 
 		//Check if this resource is already loaded to Content_List!
-		for (Resource_Type* RESOURCE : *FILELIST->Get_ContentListVector()) {
+		for (size_t i = 0; i < FILESYSTEM->Get_Const_FileListContentVector()->size(); i++) {
+			Resource_Type* RESOURCE = FILESYSTEM->Get_Const_FileListContentVector()->Get(i);
 			if (TEXTURE_PATH == RESOURCE->PATH) {
 				status = "Resource is already loaded and is in the Resource List!";
 				Status_Window* error_window = new Status_Window(status);
@@ -46,11 +45,11 @@ void Texture_Import_Window::Run_Window() {
 
 
 		//If application arrives here, Resource isn't loaded to Content_List before!
-		Resource_Type* imported_resource = Texture_Loader::Import_Texture(TEXTURE_PATH, &PATH, &status);
+		Resource_Type* imported_resource = Texture_Loader::Import_Texture(TEXTURE_PATH, PATH, &status);
+		delete PATH;
 		Status_Window* error_window = new Status_Window(status);
 		if (imported_resource) {
-			FILELIST->Get_ContentListVector()->push_back(imported_resource);
-			TuranAPI::File_System::FileSystem::Write_a_Resource_toDisk(FILELIST);
+			FILESYSTEM->Add_Content_toFileList(imported_resource);
 		}
 	}
 
@@ -59,11 +58,11 @@ void Texture_Import_Window::Run_Window() {
 
 
 //Output Path should be Directory + Name like "C:/dev/Content/FirstTexture". Every Texture has .texturecont extension!
-TuranAPI::File_System::Resource_Type* Texture_Loader::Import_Texture(const string& PATH, const string* output_path, string* compilation_status, const bool& flip_vertically, const TuranAPI::File_System::Texture_Properties& Properties) {
+TuranAPI::File_System::Resource_Type* Texture_Loader::Import_Texture(const char* PATH, const char* output_path, String* compilation_status, const bool& flip_vertically, const TuranAPI::File_System::Texture_Properties& Properties) {
 	TuranAPI::TuranAPI_ENUMs CHANNEL_TYPE;
 	int WIDTH, HEIGHT, CHANNELs;
 	stbi_set_flip_vertically_on_load(flip_vertically);
-	unsigned char* data = stbi_load(PATH.c_str(), &WIDTH, &HEIGHT, &CHANNELs, 0);
+	unsigned char* data = stbi_load(PATH, &WIDTH, &HEIGHT, &CHANNELs, 0);
 	if (data == nullptr) {
 		*compilation_status = "Texture isn't loaded from source! Data is nullptr!\n";
 		return nullptr;
@@ -73,10 +72,10 @@ TuranAPI::File_System::Resource_Type* Texture_Loader::Import_Texture(const strin
 		*compilation_status = "Loaded texture's channel number is 0! Nothing has happened!";
 		return nullptr;
 	case 3:
-		CHANNEL_TYPE = TuranAPI::API_TEXTURE_RGB;
+		CHANNEL_TYPE = TuranAPI::TuranAPI_ENUMs::API_TEXTURE_RGB;
 		break;
 	case 4:
-		CHANNEL_TYPE = TuranAPI::API_TEXTURE_RGBA;
+		CHANNEL_TYPE = TuranAPI::TuranAPI_ENUMs::API_TEXTURE_RGBA;
 		break;
 	default:
 		*compilation_status = "Loaded texture's channel type isn't supported for now! Channel number is: " + CHANNELs;
@@ -89,13 +88,15 @@ TuranAPI::File_System::Resource_Type* Texture_Loader::Import_Texture(const strin
 	texture_resource->WIDTH = WIDTH;
 	texture_resource->HEIGHT = HEIGHT;
 	texture_resource->Properties = Properties;
-	string NAME = output_path->substr(output_path->find_last_of('/') + 1);
+	std::string NAME = output_path;
+	NAME = NAME.substr(NAME.find_last_of('/') + 1);
 	NAME = NAME.substr(0, NAME.find_last_of('.'));
-	texture_resource->NAME = NAME;
-	string Compiled_PATH = *output_path + ".texturecont";
+	texture_resource->NAME = NAME.c_str();
+	const char* Compiled_PATH = Text_Add(output_path, ".texturecont");
 	texture_resource->PATH = Compiled_PATH;
+	delete Compiled_PATH;
 	texture_resource->DATA_SIZE = texture_resource->WIDTH * texture_resource->HEIGHT * CHANNELs;
-	texture_resource->GL_ID = 0;
+	texture_resource->GL_STRUCT = 0;
 
 
 	TuranAPI::File_System::FileSystem::Write_a_Resource_toDisk(texture_resource);

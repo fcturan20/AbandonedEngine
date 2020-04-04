@@ -1,5 +1,5 @@
 #pragma once
-#include "TuranAPI/API_includes.h"
+#include "TuranAPI/TuranAPI_Core.h"
 #include "GFX_ENUMs.h"
 
 #ifdef WINDOWS10_FORENGINE
@@ -11,3 +11,7 @@
 #else
 	#error GFX_API only support Windows 10 for now!
 #endif
+
+namespace GFX_API {
+	void GFXAPI Set_SystemPointers(TuranAPI::TAPI_Systems* Systems);
+}

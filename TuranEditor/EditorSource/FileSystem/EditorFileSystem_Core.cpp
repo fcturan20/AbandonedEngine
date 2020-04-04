@@ -6,37 +6,67 @@
 
 using namespace Editor::File_System;
 using namespace TuranAPI::File_System;
-string GameContentList_PATH = "C:/dev/TuranEngine/TuranEditor/File_List.enginecont";
+const char* GameContentList_PATH = "C:/dev/TuranEngine/TuranEditor/File_List.enginecont";
 
 TuranAPI::File_System::FileList_Resource Editor_FileSystem::GameContentList_onDisk(GameContentList_PATH);
 
-static Editor_FileSystem* SELF = nullptr;
+Editor_FileSystem* Editor_FileSystem::SELF = new Editor_FileSystem;
 GameContent::File_Type Convert_to_GameCont_Type(TuranAPI::TuranAPI_ENUMs resource_type);
 
 
 
+void Editor_FileSystem::Add_Content_toFileList(TuranAPI::File_System::Resource_Type* Resource) {
+	TuranAPI::LOG_STATUS("Adding a Game Content to List! Name: " + Resource->NAME + " ID: " + to_string(Resource->ID) + " PATH: " + Resource->PATH);
+	GameContentList_onDisk.Get_ContentListVector()->push_back(Resource);
+	FileSystem::Write_a_Resource_toDisk(&GameContentList_onDisk);
+	FileSystem::Write_a_Resource_toDisk(Resource);
+	TuranAPI::LOG_STATUS("Added the Game Content to List successfully!");
+}
+
+void Editor_FileSystem::Remove_Content_fromFileList(unsigned int index) {
+	TuranAPI::LOG_STATUS("Removing a Game Content from the List! List Index: " + to_string(index));
+
+	Resource_Type* Resource = ((*GameContentList_onDisk.Get_ContentListVector())[index]);
+
+	FileSystem::Delete_File(Resource->PATH);
+	//Clear all of the loaded resources from the memory
+	delete Resource;
+	Resource = nullptr;
+	GameContentList_onDisk.Get_ContentListVector()->erase(index);
+	Write_a_Resource_toDisk(&GameContentList_onDisk, true);
+
+	TuranAPI::LOG_STATUS("Removed the Game Content from the List successfully!");
+}
+
+const Vector<TuranAPI::File_System::Resource_Type*>* Editor_FileSystem::Get_Const_FileListContentVector() {
+	return GameContentList_onDisk.Get_ContentListVector();
+}
+
+unsigned int Editor_FileSystem::Get_LengthOf_FileListContentVector() {
+	return GameContentList_onDisk.Get_ContentListVector()->size();
+}
+
+
+
+
 void Editor_FileSystem::Start_EditorFileSystem() {
+	TuranAPI::LOG_STATUS("Starting the Editor FileSystem!");
 	SELF = new Editor_FileSystem;
 }
 
-void Editor_FileSystem::Load_GameContents_fromDisk() {
-	TuranAPI::Profiler::Begin_Recording_Session("C:/dev/GameContentLoading_Profiling");
-
-	{
-		TuranAPI::Profiler::Profiled_Scope ProfilingScope("FirstScope");
-		cout << "Game Contents are being loaded now!\n";
-		TuranAPI::File_System::FileSystem::Load_Resources_fromFileList(&GameContentList_onDisk);
-	}
-	TuranAPI::Profiler::Stop_Recording_Session();
-	cout << "Game Contents loaded!\n";
+void Editor_FileSystem::Load_FileListContents_fromDisk() {
+	TuranAPI::LOG_STATUS("Started to load Game Contents!");
+	TuranAPI::File_System::FileSystem::Load_Resources_fromFileList(&GameContentList_onDisk);
+	TuranAPI::LOG_STATUS("Finished loading Game Contents!");
 }
 
 
-void Editor_FileSystem::Clear_GlobalGameContentList() {
-	cout << "Clearing the Game Content List!\n";
+void Editor_FileSystem::Clear_FileListContents() {
+	TuranAPI::LOG_STATUS("Clearing the Game Contents!");
 
-	for (Resource_Type* RESOURCE : *GameContentList_onDisk.Get_ContentListVector()) {
-		string PATH = RESOURCE->PATH;
+	for (size_t i = 0; i < GameContentList_onDisk.Get_ContentListVector()->size(); i++) {
+		Resource_Type* RESOURCE = (*GameContentList_onDisk.Get_ContentListVector())[i];
+		const char* PATH = RESOURCE->PATH;
 
 		FileSystem::Delete_File(PATH);
 		//Clear all of the loaded resources from the memory
@@ -47,25 +77,26 @@ void Editor_FileSystem::Clear_GlobalGameContentList() {
 	GameContentList_onDisk.Get_ContentListVector()->clear();
 
 	FileSystem::Write_a_Resource_toDisk(&GameContentList_onDisk);
+	TuranAPI::LOG_STATUS("Cleared the Game Contents!");
 }
 
 GameContent::File_Type Convert_to_GameCont_Type(TuranAPI::TuranAPI_ENUMs resource_type) {
 	switch (resource_type) {
-	case TuranAPI::STATIC_MODEL_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::STATIC_MODEL_RESOURCE:
 		return GameContent::File_Type_Static_Model;
-	case TuranAPI::MATERIAL_TYPE_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::MATERIAL_TYPE_RESOURCE:
 		return GameContent::File_Type_Material_Type;
-	case TuranAPI::TEXTURE_RESOURCE:
+	case TuranAPI::TuranAPI_ENUMs::TEXTURE_RESOURCE:
 		return GameContent::File_Type_Texture;
 	default:
-		cout << "Error: Intended resource type isn't found in FileList!\n";
-		TuranAPI::Breakpoint();
+		TuranAPI::LOG_CRASHING("Intended resource type isn't found in FileList!");
 		return GameContent::File_Type_ERROR;
 	}
 }
 
-TuranAPI::File_System::Resource_Type* Editor_FileSystem::Get_GameContent_byName(string NAME) {
-	for (Resource_Type* RESOURCE : *GameContentList_onDisk.Get_ContentListVector()) {
+TuranAPI::File_System::Resource_Type* Editor_FileSystem::Get_GameContent_byName(const char* NAME) {
+	for (size_t i = 0; i < GameContentList_onDisk.Get_ContentListVector()->size(); i++) {
+		Resource_Type* RESOURCE = (*GameContentList_onDisk.Get_ContentListVector())[i];
 		if (RESOURCE->NAME == NAME) {
 			return RESOURCE;
 		}
@@ -73,13 +104,10 @@ TuranAPI::File_System::Resource_Type* Editor_FileSystem::Get_GameContent_byName(
 }
 
 TuranAPI::File_System::Resource_Type* Editor_FileSystem::Get_GameContent_byID(unsigned int ID) {
-	for (Resource_Type* RESOURCE : *GameContentList_onDisk.Get_ContentListVector()) {
+	for (size_t i = 0; i < GameContentList_onDisk.Get_ContentListVector()->size(); i++) {
+		Resource_Type* RESOURCE = (*GameContentList_onDisk.Get_ContentListVector())[i];
 		if (RESOURCE->ID == ID) {
 			return RESOURCE;
 		}
 	}
-}
-
-TuranAPI::File_System::FileList_Resource* Editor_FileSystem::Get_GameContentList() {
-	return &GameContentList_onDisk;
 }

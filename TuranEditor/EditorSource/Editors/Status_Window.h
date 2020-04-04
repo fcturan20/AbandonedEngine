@@ -5,9 +5,9 @@
 
 class Status_Window : public TuranAPI::IMGUI::IMGUI_WINDOW {
 public:
-	Status_Window(string error);
+	Status_Window(const char* error);
 	virtual void Run_Window();
 
-	string STATUS;
+	String STATUS;
 };
 

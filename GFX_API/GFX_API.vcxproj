@@ -41,7 +41,7 @@
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
-      <Optimization>MaxSpeed</Optimization>
+      <Optimization>Disabled</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
@@ -61,44 +61,45 @@
       <EnableUAC>false</EnableUAC>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\OpenGL3" /Y
-xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEngine" /Y
-xcopy "$(SolutionDir)bin\$(ProjectName)\$(ProjectName).dll" "$(SolutionDir)bin\TuranEditor" /Y</Command>
+      <Command>xcopy "$(SolutionDir)bin\GFX_API\GFX_API.dll" "$(SolutionDir)bin\Vulkan\" /Y
+xcopy "$(SolutionDir)bin\GFX_API\GFX_API.dll" "$(SolutionDir)bin\TuranEngine\" /Y
+xcopy "$(SolutionDir)bin\GFX_API\GFX_API.dll" "$(SolutionDir)bin\TuranEditor\" /Y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>
+      </Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="GFXSource\GFX_Core.h" />
-    <ClInclude Include="GFXSource\GFX_ENUMs.h" />
-    <ClInclude Include="GFXSource\GFX_FileSystem.h" />
-    <ClInclude Include="GFXSource\GFX_Includes.h" />
-    <ClInclude Include="GFXSource\GFX_Monitor.h" />
-    <ClInclude Include="GFXSource\GFX_Window.h" />
-    <ClInclude Include="GFXSource\Renderer\GFXI_Draw_Resource.h" />
-    <ClInclude Include="GFXSource\Renderer\GFXI_MESH_REPRESENTATION.h" />
-    <ClInclude Include="GFXSource\Renderer\GFXI_Render_Node.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_Draw_Pass.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_Framebuffer.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_Renderer.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_RenderGraph.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_Render_Target.h" />
-    <ClInclude Include="GFXSource\Renderer\GFX_Shader_Resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="GFXSource\GFX_Core.cpp" />
-    <ClCompile Include="GFXSource\GFX_FileSystem.cpp" />
-    <ClCompile Include="GFXSource\GFX_Monitor.cpp" />
-    <ClCompile Include="GFXSource\GFX_Window.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFXI_MESH_REPRESENTATION.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFX_Draw_Pass.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFX_Framebuffer.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFX_Renderer.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFX_RenderGraph.cpp" />
-    <ClCompile Include="GFXSource\Renderer\GFX_Render_Target.cpp" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\TuranAPI\TuranAPI.vcxproj">
       <Project>{914f0aa8-3d8f-44de-a2bf-a3a93b8a858e}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GFXSource\GFX_Core.cpp" />
+    <ClCompile Include="GFXSource\GFX_Display.cpp" />
+    <ClCompile Include="GFXSource\GFX_FileSystem.cpp" />
+    <ClCompile Include="GFXSource\GFX_Includes.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_APICommands.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_RenderCommands.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Renderer.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_RenderGraph.cpp" />
+    <ClCompile Include="GFXSource\Renderer\GFX_Resource.cpp" />
+    <ClCompile Include="GFXSource\TuranAPI\MemoryManager_Core.cpp" />
+    <ClCompile Include="GFXSource\TuranAPI\TSTL_Core.cpp" />
+    <ClCompile Include="GFXSource\TuranAPI\Vector.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GFXSource\GFX_Core.h" />
+    <ClInclude Include="GFXSource\GFX_Display.h" />
+    <ClInclude Include="GFXSource\GFX_ENUMs.h" />
+    <ClInclude Include="GFXSource\GFX_FileSystem.h" />
+    <ClInclude Include="GFXSource\GFX_Includes.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_APICommands.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_RenderCommands.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Renderer.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_RenderGraph.h" />
+    <ClInclude Include="GFXSource\Renderer\GFX_Resource.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
